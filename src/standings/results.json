@@ -1,0 +1,32 @@
+{
+  "s3": {
+    "nurburgring": {
+      "results": {
+        "xnpxbirdy": "24:34.567",
+        "bigtimebosco": "0.567",
+        "graeme": "0.567",
+        "inkubusjaymz": "0.567",
+        "atlas": "0.567",
+        "cousinbenson": "0.567",
+        "snicks": "0.567",
+        "diego": "0.567",
+        "michael": "0.567",
+        "kruthal": "0.567",
+        "eugenegoat": "0.567",
+        "cannonmandan": "0.567",
+        "wobbleboss": "0.567",
+        "roberts": "0.567",
+        "happybadger": "0.567",
+        "blyzr": "0.567",
+        "adam": "0.567",
+        "beaverdude": "0.567",
+        "harpr": "0.567",
+        "subhaac": "0.567"
+      },
+      "fastestLap": {
+        "racerId": "bigtimebosco",
+        "time": "1:01.23"
+      }
+    }
+  }
+}

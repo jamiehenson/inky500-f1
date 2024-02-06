@@ -1,0 +1,78 @@
+@import url(/node_modules/flag-icons/css/flag-icons.min.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .white-outline {
+    @apply rounded-xl outline-offset-8 outline-white/30 outline-2 outline
+  }
+}
+
+@font-face {
+  font-family: "Formula1";
+  src: url("Formula1-Regular-1.ttf")
+}
+
+@font-face {
+  font-family: "Formula1";
+  src: url("Formula1-Bold-4.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Formula1";
+  src: url("Formula1-Italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Formula1Wide";
+  src: url("Formula1-Wide.ttf");
+}
+
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --vt-bg: rgb(21, 20, 29);
+  --vt-bg-light: rgb(28, 30, 41);
+  --vt-white: rgb(255, 255, 255);
+  --vt-red: rgb(255, 24, 0);
+  --vt-grey: rgb(39, 38, 44);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--vt-white);
+  background: rgb(0, 177, 64);
+  line-height: 1.6;
+  font-family:
+    "Formula1",
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wide {
+  font-family: 'Formula1Wide';
+}

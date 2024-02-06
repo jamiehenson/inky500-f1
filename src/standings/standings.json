@@ -1,0 +1,48 @@
+{
+  "s3": {
+    "hungaroring": {
+      "xnpxbirdy": 61,
+      "bigtimebosco": 47,
+      "graeme": 45,
+      "inkubusjaymz": 45,
+      "atlas": 42,
+      "cousinbenson": 40,
+      "snicks": 35,
+      "diego": 31,
+      "michael": 30,
+      "kruthal": 28,
+      "eugenegoat": 14,
+      "cannonmandan": 14,
+      "wobbleboss": 7,
+      "roberts": 5,
+      "happybadger": 2,
+      "blyzr": 2,
+      "adam": 0,
+      "beaverdude": 0,
+      "harpr": 0,
+      "subhaac": 0
+    },
+    "nurburgring": {
+      "xnpxbirdy": 61,
+      "inkubusjaymz": 49,
+      "graeme": 48,
+      "bigtimebosco": 48,
+      "atlas": 42,
+      "cousinbenson": 40,
+      "snicks": 35,
+      "diego": 31,
+      "michael": 30,
+      "kruthal": 28,
+      "eugenegoat": 14,
+      "cannonmandan": 14,
+      "wobbleboss": 7,
+      "roberts": 5,
+      "happybadger": 2,
+      "blyzr": 2,
+      "adam": 0,
+      "beaverdude": 0,
+      "harpr": 0,
+      "subhaac": 0
+    }
+  }
+}
