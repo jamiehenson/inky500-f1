@@ -23,25 +23,24 @@
             'fi mr-3 rounded-sm -translate-y-px'
           ]"
         ></span
-        ><span class="italic text-xl text-gray-300"
+        ><span :class="[isRace ? 'text-xl' : 'text-2xl', 'italic  text-gray-300']"
           >{{ splitRacerName(result.racer)[0] }}&nbsp;</span
-        ><span class="italic text-2xl font-bold uppercase">
+        ><span :class="[isRace ? 'text-2xl' : 'text-3xl', 'italic  font-bold uppercase']">
           {{ splitRacerName(result.racer)[1] }}</span
         >
       </div>
     </div>
     <div class="flex-1 overflow-hidden">
       <div class="slide-in flex items-center text-red">
-        <img src="../assets/bmw.png" class="h-6 w-6 mr-3" /><span class="text-gray-300 uppercase">{{
-          result.racer.team
-        }}</span>
+        <img src="../assets/bmw.png" class="h-6 w-6 mr-3" /><span
+          :class="[!isRace ? 'text-2xl' : '', 'text-gray-300 uppercase']"
+          >{{ result.racer.team }}</span
+        >
       </div>
     </div>
     <div v-if="resultIsRace(result)" class="px-2 w-40 text-center italic overflow-hidden">
       <div class="slide-in">
-        <span class="text-gray-300 text-2xl"
-          >{{ index === 0 && pageNumber === 0 ? '' : '+' }}{{ result.time }}</span
-        >
+        <span class="text-gray-300 text-2xl">{{ timePrefix }}{{ result.time }}</span>
       </div>
     </div>
     <div v-if="resultIsRace(result)" class="px-2 w-24 text-right font-bold overflow-hidden">
@@ -51,7 +50,7 @@
     </div>
     <div v-if="resultIsStandings(result)" class="overflow-hidden">
       <div class="slide-in">
-        <span class="text-gray-300 text-2xl">{{ result.points }}</span>
+        <span class="text-gray-300 text-4xl">{{ result.points }}</span>
       </div>
     </div>
   </div>
@@ -79,7 +78,7 @@ if (fastestLap?.racer.name === result.racer.name) {
 const deltaClass = () => {
   if (resultIsStandings(result)) {
     return result.delta > 0
-      ? '-rotate-90 text-green-500'
+      ? '-rotate-90 text-green-700'
       : result.delta < 0
         ? 'rotate-90 text-red-500'
         : ''
@@ -95,6 +94,9 @@ const resultIsRace = (result: GeneralResult): result is RacerResult => {
 const resultIsStandings = (result: GeneralResult): result is StandingsResult => {
   return !isRace && (result as StandingsResult).position !== undefined
 }
+
+const timePrefix =
+  resultIsRace(result) && ((index === 0 && pageNumber === 0) || result.time === '-') ? '' : '+'
 </script>
 
 <style>

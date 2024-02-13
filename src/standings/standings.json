@@ -1,4 +1,6 @@
 {
+  "s1": {},
+  "s2": {},
   "s3": {
     "hungaroring": {
       "xnpxbirdy": 61,
@@ -23,19 +25,19 @@
       "subhaac": 0
     },
     "nurburgring": {
-      "xnpxbirdy": 61,
+      "xnpxbirdy": 70,
+      "bigtimebosco": 54,
+      "cousinbenson": 51,
+      "graeme": 50,
+      "atlas": 50,
       "inkubusjaymz": 49,
-      "graeme": 48,
-      "bigtimebosco": 48,
-      "atlas": 42,
-      "cousinbenson": 40,
-      "snicks": 35,
-      "diego": 31,
+      "snicks": 36,
+      "diego": 34,
+      "kruthal": 34,
       "michael": 30,
-      "kruthal": 28,
       "eugenegoat": 14,
       "cannonmandan": 14,
-      "wobbleboss": 7,
+      "wobbleboss": 9,
       "roberts": 5,
       "happybadger": 2,
       "blyzr": 2,

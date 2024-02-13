@@ -1,11 +1,17 @@
-import standings from './standings/results.json'
-import racers from './standings/racers.json'
+import racersData from './standings/racers.json'
+import trackData from './standings/tracks.json'
 
-export type SeasonName = 's3'
+export const seasons = ['s1', 's2', 's3'] as const
+export type SeasonName = (typeof seasons)[number]
 
-export type TrackName = keyof (typeof standings)[SeasonName]
+export const modes = ['demo', 'podium', 'race', 'standings'] as const
+export type ModeName = (typeof modes)[number]
 
-export type RacerName = keyof (typeof racers)[SeasonName]
+export const tracks = Object.keys(trackData)
+export type TrackName = keyof typeof trackData
+
+export const racers = Object.keys(racersData)
+export type RacerName = keyof typeof racersData
 
 export type Standings = {
   [key in SeasonName]: {
@@ -45,3 +51,21 @@ export type NumberObject = {
 }
 
 export type GeneralResult = RacerResult | StandingsResult
+
+export type RacerResults = {
+  [index in TrackName]: {
+    results: {
+      [index in RacerName]: string
+    }
+    fastestLap: {
+      racerId: RacerName
+      time: string
+    }
+  }
+}
+
+export type StandingsResults = {
+  [index in TrackName]: {
+    [index in RacerName]: number
+  }
+}

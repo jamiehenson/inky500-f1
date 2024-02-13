@@ -38,6 +38,7 @@
   --vt-white: rgb(255, 255, 255);
   --vt-red: rgb(255, 24, 0);
   --vt-grey: rgb(39, 38, 44);
+  --vt-green-screen: rgb(0, 177, 64);
 }
 
 *,
@@ -51,7 +52,7 @@
 body {
   min-height: 100vh;
   color: var(--vt-white);
-  background: rgb(0, 177, 64);
+  background: var(--vt-bg);
   line-height: 1.6;
   font-family:
     "Formula1",

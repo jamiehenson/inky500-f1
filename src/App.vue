@@ -1,14 +1,35 @@
 <script setup lang="ts">
+import Nav from './components/NavComponent.vue'
 import RaceResults from './components/RaceResults.vue'
 import './assets/base.css'
+import resultsData from './standings/results.json'
+import { useStagesStore } from './stores/stages'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
+import type { RacerResults } from './types'
+
+const { bgColor } = storeToRefs(useStagesStore())
+const { season, track } = storeToRefs(useStagesStore())
+
+const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)[track.value])
 </script>
 
 <template>
-  <header></header>
-
-  <main>
-    <div class="container mx-auto h-screen flex items-center justify-center flex-col p-3 min-w-fit">
-      <RaceResults />
-    </div>
-  </main>
+  <RouterView>
+    <header><Nav /></header>
+    <main>
+      <div
+        class="container transition-colors mx-auto h-screen flex items-center justify-center flex-col min-w-fit"
+      >
+        <RaceResults v-if="dataAvailable" />
+        <div v-else>No data</div>
+      </div>
+    </main>
+  </RouterView>
 </template>
+
+<style>
+.container {
+  background: v-bind(bgColor);
+}
+</style>

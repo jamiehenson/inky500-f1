@@ -1,5 +1,42 @@
 {
+  "brands": {
+    "name": "Brands Hatch",
+    "countryCode": "gb"
+  },
+  "monza": {
+    "name": "Monza",
+    "countryCode": "it"
+  },
+  "barcelona": {
+    "name": "Barcelona",
+    "countryCode": "es"
+  },
+  "zolder": {
+    "name": "Zolder",
+    "countryCode": "be"
+  },
+  "silverstone": {
+    "name": "Silverstone",
+    "countryCode": "gb"
+  },
+  "zandvoort": {
+    "name": "Zandvoort",
+    "countryCode": "nl"
+  },
+  "misano": {
+    "name": "Misano",
+    "countryCode": "it"
+  },
+  "hungaroring": {
+    "name": "Hungaroring",
+    "countryCode": "hu"
+  },
   "nurburgring": {
-    "name": "Nurburgring"
+    "name": "Nürburgring",
+    "countryCode": "de"
+  },
+  "spa": {
+    "name": "Spa Francorchamps",
+    "countryCode": "be"
   }
 }

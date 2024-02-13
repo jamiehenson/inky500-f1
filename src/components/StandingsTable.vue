@@ -3,9 +3,12 @@
     <FaderComponent />
     <PodiumCard v-if="isRace" :position="1" class="flex-1" />
     <div class="flex-[2_2_0%] p-5 flex flex-col standing-bg">
-      <h2 class="text-2xl font-bold uppercase mb-3">
-        Inky 500 Season {{ season.slice(1) }} - {{ trackName }} Grand Prix
-      </h2>
+      <div class="flex justify-between">
+        <h2 class="text-2xl font-bold uppercase mb-3">
+          Inky 500 Season {{ season.slice(1) }} - {{ trackName }} Grand Prix
+        </h2>
+        <div class="uppercase text-gray-300">Powered by Koozies</div>
+      </div>
       <h1 class="text-5xl uppercase font-bold text-gray-300">{{ title }}</h1>
       <div class="flex mb-1">
         <div class="flex-1"></div>

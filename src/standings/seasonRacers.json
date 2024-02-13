@@ -1,0 +1,91 @@
+{
+  "s1": {},
+  "s2": {},
+  "s3": {
+    "bigtimebosco": {
+      "team": "Scuderia Prongles",
+      "teamColor": "#FE63DC"
+    },
+    "eugenegoat": {
+      "team": "Eugene_Goat",
+      "teamColor": "#FB5A8C"
+    },
+    "diego": {
+      "team": "Bacon",
+      "teamColor": "white"
+    },
+    "inkubusjaymz": {
+      "team": "Team Inky500",
+      "teamColor": "#25C92B"
+    },
+    "graeme": {
+      "team": "Listerine BTEC BMW",
+      "teamColor": "#B0FADC"
+    },
+    "wobbleboss": {
+      "team": "Naoi Beatha",
+      "teamColor": "#E8F41E"
+    },
+    "snicks": {
+      "team": "Kvikklunsj",
+      "teamColor": "#F43D1E",
+      "countryCode": "no"
+    },
+    "kruthal": {
+      "team": "Kruthal",
+      "teamColor": "#4F4F4F"
+    },
+    "atlas": {
+      "team": "Synertec RT",
+      "teamColor": "#A90061"
+    },
+    "cousinbenson": {
+      "team": "Soylent Racing",
+      "teamColor": "#98CE39"
+    },
+    "xnpxbirdy": {
+      "team": "NPB",
+      "teamColor": "#646464"
+    },
+    "michael": {
+      "team": "Team Race Fastest",
+      "teamColor": "#33a4ff"
+    },
+    "cannonmandan": {
+      "team": "Danstappen Rises",
+      "teamColor": "cyan"
+    },
+    "roberts": {
+      "team": "DCRacing2",
+      "teamColor": "black"
+    },
+    "happybadger": {
+      "team": "Badgerwatch GP",
+      "teamColor": "cyan"
+    },
+    "blyzr": {
+      "team": "Blyzrossi",
+      "teamColor": "white"
+    },
+    "adam": {
+      "team": "Adam Goes Racing",
+      "teamColor": "green"
+    },
+    "beaverdude": {
+      "team": "Beaver",
+      "teamColor": "cyan"
+    },
+    "harpr": {
+      "team": "Hard Motorsport",
+      "teamColor": "#F94037"
+    },
+    "subhaac": {
+      "team": "BMW M2 CS",
+      "teamColor": "white"
+    },
+    "calamitysam": {
+      "team": "Calamity GP",
+      "teamColor": "black"
+    }
+  }
+}

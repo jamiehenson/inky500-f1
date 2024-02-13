@@ -1,5 +1,5 @@
 <template>
-  <div class="aspect-video h-full m-10 flex items-center object-contain">
+  <div class="aspect-video h-full m-6 mt-20 flex items-center object-contain p-3">
     <div
       :class="[
         'outer-wrapper h-full w-full white-outline select-none pointer-events-none overflow-hidden flex items-center bg-red-400',
@@ -30,26 +30,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, watch, onBeforeMount } from 'vue'
-import racersData from '../standings/racers.json'
+import { computed, watch, onBeforeMount } from 'vue'
 import resultsData from '../standings/results.json'
 import standingsData from '../standings/standings.json'
-import type { NumberObject, RacerName, TrackName } from '@/types'
+import type { NumberObject, RacerName, TrackName, RacerResults, StandingsResults } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
 import SectionIntro from './SectionIntro.vue'
 import RacePodium from './RacePodium.vue'
 import StandingsTable from './StandingsTable.vue'
+import { combinedRacer, lookupStage } from '@/utils'
 
 const stagesStore = useStagesStore()
-const { stage, season, track, results, fastestLap } = storeToRefs(stagesStore)
+const { stage, season, track, results, fastestLap, mode } = storeToRefs(stagesStore)
+const { advanceStage, setStage } = stagesStore
 
-const raceResults = computed(() =>
-  Object.entries(resultsData[season.value][track.value].results).map((entry) => ({
-    racer: racersData[season.value][entry[0] as RacerName],
-    time: entry[1]
-  }))
-)
+const raceResults = computed(() => {
+  const results = (resultsData[season.value] as RacerResults)[track.value].results
+
+  if (results) {
+    return Object.entries(results).map((entry) => ({
+      racer: combinedRacer(entry[0] as RacerName, season.value),
+      time: entry[1]
+    }))
+  } else {
+    return []
+  }
+})
 
 const sortAndFormatStandings = (data: NumberObject) => {
   let previousPoints = 0
@@ -68,7 +75,7 @@ const sortAndFormatStandings = (data: NumberObject) => {
       const position = index > 0 ? index + 1 - tieCount : 1
 
       return {
-        racer: racersData[season.value][entry[0] as RacerName],
+        racer: combinedRacer(entry[0] as RacerName, season.value),
         points: entry[1],
         position
       }
@@ -79,11 +86,15 @@ const standings = computed(() => {
   const raceKeys = Object.keys(standingsData[season.value])
   const firstRace = raceKeys.indexOf(track.value) === 0
 
-  const currentStandings = sortAndFormatStandings(standingsData[season.value][track.value])
+  const currentStandings = sortAndFormatStandings(
+    (standingsData[season.value] as StandingsResults)[track.value]
+  )
   const previousStandings = firstRace
     ? currentStandings
     : sortAndFormatStandings(
-        standingsData[season.value][raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName]
+        (standingsData[season.value] as StandingsResults)[
+          raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName
+        ]
       )
 
   return currentStandings.map((standing) => {
@@ -98,39 +109,49 @@ const standings = computed(() => {
   })
 })
 
+const timeouts: number[] = []
+const clearTimeouts = () => {
+  timeouts.forEach((timeout) => clearTimeout(timeout))
+}
+
 onBeforeMount(() => {
   results.value = raceResults.value
-  const { racerId, time } = resultsData[season.value][track.value].fastestLap
-  fastestLap.value = { racer: racersData[season.value][racerId as RacerName], time }
+  const { racerId, time } = (resultsData[season.value] as RacerResults)[track.value].fastestLap
+  fastestLap.value = { racer: combinedRacer(racerId as RacerName, season.value), time }
 })
 
-onMounted(() => {
-  if (stage.value === 'raceResultsIn') {
-    setTimeout(() => stagesStore.advanceStage(), 3000)
-  }
-})
-
-watch(stage, () => {
-  const determineDelay = () => {
-    switch (stage.value) {
-      case 'raceResultsOut':
-      case 'standingsOut':
-        return 1000
-      case 'standingsIn':
-        return 3000
-      case 'raceResultsPodium':
-        return 10000
-      case 'raceResultsClassification':
-      case 'standings':
-        return 10000 * Math.ceil(raceResults.value.length / 5)
+watch(
+  stage,
+  () => {
+    const determineDelay = () => {
+      switch (stage.value) {
+        case 'raceResultsOut':
+        case 'standingsOut':
+        case 'finished':
+          return 1000
+        case 'raceResultsIn':
+        case 'standingsIn':
+          return 3000
+        case 'raceResultsPodium':
+          return 10000
+        case 'raceResultsClassification':
+        case 'standings':
+          return 10000 * Math.ceil(raceResults.value.length / 5)
+      }
     }
-  }
 
-  const delay = determineDelay()
+    const delay = determineDelay()
 
-  if (delay) {
-    setTimeout(() => stagesStore.advanceStage(), delay)
-  }
+    if (mode.value === 'demo') {
+      timeouts.push(setTimeout(() => advanceStage(), delay))
+    }
+  },
+  { immediate: true }
+)
+
+watch(mode, () => {
+  setStage(lookupStage(mode.value))
+  clearTimeouts()
 })
 
 const animationClass = computed(() => {
