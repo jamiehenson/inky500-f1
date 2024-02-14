@@ -38,5 +38,33 @@
   "spa": {
     "name": "Spa Francorchamps",
     "countryCode": "be"
+  },
+  "algarve": {
+    "name": "Algarve",
+    "countryCode": "pt"
+  },
+  "donington": {
+    "name": "Donington",
+    "countryCode": "gb"
+  },
+  "hockenheim": {
+    "name": "Hockenheim",
+    "countryCode": "de"
+  },
+  "knockhill": {
+    "name": "Knockhill",
+    "countryCode": "gb-sct"
+  },
+  "lagunaseca": {
+    "name": "Laguna Seca",
+    "countryCode": "us"
+  },
+  "oultonpark": {
+    "name": "Oulton Park",
+    "countryCode": "gb"
+  },
+  "snetterton": {
+    "name": "Snetterton",
+    "countryCode": "gb"
   }
 }

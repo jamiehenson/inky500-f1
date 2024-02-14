@@ -1,7 +1,7 @@
 <template>
   <div class="race-results flex w-full h-full relative">
     <FaderComponent />
-    <PodiumCard v-if="isRace" :position="1" class="flex-1" />
+    <PodiumCard v-if="isRace" :position="1" class="flex-1" :results="results" />
     <div class="flex-[2_2_0%] p-5 flex flex-col standing-bg">
       <div class="flex justify-between">
         <h2 class="text-2xl font-bold uppercase mb-3">
@@ -72,7 +72,7 @@ import { storeToRefs } from 'pinia'
 import PodiumCard from './PodiumCard.vue'
 import FaderComponent from './FaderComponent.vue'
 import { chunkRacers, splitRacerName } from '@/utils'
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import type { GeneralResult } from '@/types'
 
@@ -89,15 +89,17 @@ const paginatedResults = chunkRacers(results, 5)
 const currentPage = ref(0)
 const isRace = mode === 'race'
 
-onMounted(() => {
-  setTimeout(() => currentPage.value++, 10000)
-})
-
-watch(currentPage, () => {
-  if (currentPage.value < paginatedResults.length - 1) {
-    setTimeout(() => currentPage.value++, 10000)
-  }
-})
+watch(
+  currentPage,
+  () => {
+    setTimeout(() => {
+      currentPage.value < paginatedResults.length - 1
+        ? currentPage.value++
+        : (currentPage.value = 0)
+    }, 10000)
+  },
+  { immediate: true }
+)
 </script>
 
 <style scoped>

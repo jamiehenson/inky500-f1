@@ -17,15 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { useStagesStore } from '@/stores/stages'
-import { storeToRefs } from 'pinia'
 import { splitRacerName } from '@/utils'
 
-const { position } = defineProps<{ position: number }>()
+const { position, results } = defineProps<{ position: number; results: any }>()
 
-const { results } = storeToRefs(useStagesStore())
-
-const racer = results.value[position - 1]?.racer
+const racer = results[position - 1]?.racer
 const teamColor = racer.teamColor
 const imageUrl = new URL(`../assets/discord/${racer.img ?? 'unknown'}.webp`, import.meta.url).href
 

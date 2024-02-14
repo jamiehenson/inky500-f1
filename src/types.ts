@@ -30,6 +30,7 @@ export type Racer = {
   name: string
   team: string
   teamColor: string
+  car: string
   img?: string
   countryCode?: string
 }

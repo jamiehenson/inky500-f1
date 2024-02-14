@@ -1,5 +1,5 @@
 <template>
-  <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg">
+  <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg" style="height: 60px">
     <div class="flex-1 flex items-center p-2">
       <button @click="goHome" class="font-bold ml-1">Inky 500</button>
       <div class="relative">
@@ -34,18 +34,20 @@
           }}<span :class="['fi-' + currentTrack.countryCode, 'fi rounded-sm mx-2']"></span> ▼
         </button>
         <div v-if="trackDropdownState" class="nav absolute p-3">
-          <div v-for="track in tracks" :key="track[1].name">
+          <div v-for="track in tracks" :key="trackData[track as TrackName].name">
             <button
               :class="[
-                trackDisabled(track[0] as TrackName)
+                trackDisabled(track as TrackName)
                   ? 'opacity-50 cursor-not-allowed'
                   : 'hover:bg-blue-800 transition-colors',
                 'bg-blue-900  px-3 py-1 rounded-xl whitespace-nowrap w-full my-1 flex justify-between items-center'
               ]"
-              @click="!trackDisabled(track[0] as TrackName) && setAndCloseTrack(track[0])"
+              @click="!trackDisabled(track as TrackName) && setAndCloseTrack(track)"
             >
-              {{ track[1].name
-              }}<span :class="['fi-' + track[1].countryCode, 'fi rounded-sm ml-2']"></span>
+              {{ trackData[track as TrackName].name
+              }}<span
+                :class="['fi-' + trackData[track as TrackName].countryCode, 'fi rounded-sm ml-2']"
+              ></span>
             </button>
           </div>
         </div>
@@ -97,7 +99,6 @@ import { useRouter } from 'vue-router'
 const stagesStore = useStagesStore()
 const { updateBgColor, updateTrack, updateMode, updateSeason } = stagesStore
 const { track, season, mode } = storeToRefs(stagesStore)
-const tracks = Object.entries(trackData)
 const router = useRouter()
 
 const seasonDropdownState = ref(false)
@@ -132,8 +133,13 @@ const setAndCloseMode = (mode: string) => {
   toggleModeState()
 }
 
-const setAndCloseSeason = (season: string) => {
+const setAndCloseSeason = (season: SeasonName) => {
   updateSeason(season as SeasonName)
+
+  const reversedTracks = tracks.value.reverse()
+  const validTrack = reversedTracks.find((track) => !trackDisabled(track as TrackName, season))
+  updateTrack(validTrack as TrackName)
+
   toggleSeasonState()
 }
 
@@ -147,8 +153,10 @@ const goHome = () => {
   router.push('/')
 }
 
+const tracks = computed(() => Object.keys(resultsData[season.value]))
 const currentTrack = computed(() => trackData[track.value])
-const trackDisabled = (track: TrackName) => !(resultsData[season.value] as RacerResults)[track]
+const trackDisabled = (track: TrackName, specificSeason?: SeasonName) =>
+  !(resultsData[specificSeason || season.value] as RacerResults)[track]
 
 const seasonDisabled = (season: SeasonName) =>
   Object.keys(resultsData[season] as RacerResults).length === 0

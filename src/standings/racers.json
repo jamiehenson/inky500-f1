@@ -63,7 +63,8 @@
   },
   "blyzr": {
     "name": "Blayze Reid",
-    "img": "blyzr"
+    "img": "blyzr",
+    "countryCode": "us"
   },
   "adam": {
     "name": "Adam",
@@ -84,5 +85,20 @@
   "calamitysam": {
     "name": "Calamity Sam",
     "img": "calamitysam"
+  },
+  "fletch": {
+    "name": "Fletch"
+  },
+  "minusinferno": {
+    "name": "MinusInferno"
+  },
+  "subbax": {
+    "name": "Subbax"
+  },
+  "preece": {
+    "name": "Josh Preece"
+  },
+  "unknown": {
+    "name": "Unknown"
   }
 }

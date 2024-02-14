@@ -1,5 +1,8 @@
 <template>
-  <div class="aspect-video h-full m-6 mt-20 flex items-center object-contain p-3">
+  <div
+    class="aspect-video flex items-center object-contain p-3 transition-transform overflow-x-hidden origin-top-left"
+    :style="`height: ${idealHeight}px; transform: scale(${scaleRatio}) translateX(${translateOffset}px)`"
+  >
     <div
       :class="[
         'outer-wrapper h-full w-full white-outline select-none pointer-events-none overflow-hidden flex items-center bg-red-400',
@@ -30,20 +33,35 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeMount } from 'vue'
+import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import resultsData from '../standings/results.json'
 import standingsData from '../standings/standings.json'
 import type { NumberObject, RacerName, TrackName, RacerResults, StandingsResults } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
+import { debounce } from 'vue-debounce'
 import SectionIntro from './SectionIntro.vue'
 import RacePodium from './RacePodium.vue'
 import StandingsTable from './StandingsTable.vue'
-import { combinedRacer, lookupStage } from '@/utils'
+import {
+  calculateScaleRatio,
+  calculateTranslateOffset,
+  combinedRacer,
+  lookupStage,
+  idealHeight
+} from '@/utils'
 
 const stagesStore = useStagesStore()
-const { stage, season, track, results, fastestLap, mode } = storeToRefs(stagesStore)
+const { stage, season, track, fastestLap, mode } = storeToRefs(stagesStore)
 const { advanceStage, setStage } = stagesStore
+
+const scaleRatio = ref(calculateScaleRatio())
+const translateOffset = ref(calculateTranslateOffset(scaleRatio.value))
+
+const updateScaleRatio = debounce(() => {
+  scaleRatio.value = calculateScaleRatio()
+  translateOffset.value = calculateTranslateOffset(scaleRatio.value)
+}, '200ms')
 
 const raceResults = computed(() => {
   const results = (resultsData[season.value] as RacerResults)[track.value].results
@@ -115,9 +133,16 @@ const clearTimeouts = () => {
 }
 
 onBeforeMount(() => {
-  results.value = raceResults.value
   const { racerId, time } = (resultsData[season.value] as RacerResults)[track.value].fastestLap
   fastestLap.value = { racer: combinedRacer(racerId as RacerName, season.value), time }
+})
+
+onMounted(() => {
+  window.addEventListener('resize', updateScaleRatio)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScaleRatio)
 })
 
 watch(

@@ -32,7 +32,7 @@
     </div>
     <div class="flex-1 overflow-hidden">
       <div class="slide-in flex items-center text-red">
-        <img src="../assets/bmw.png" class="h-6 w-6 mr-3" /><span
+        <img :src="getCarBadge(result.racer)" class="h-6 w-6 mr-3" /><span
           :class="[!isRace ? 'text-2xl' : '', 'text-gray-300 uppercase']"
           >{{ result.racer.team }}</span
         >
@@ -59,7 +59,7 @@
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
 import { splitRacerName } from '@/utils'
-import type { GeneralResult, RacerResult, StandingsResult } from '@/types'
+import type { GeneralResult, Racer, RacerResult, StandingsResult } from '@/types'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -97,6 +97,9 @@ const resultIsStandings = (result: GeneralResult): result is StandingsResult => 
 
 const timePrefix =
   resultIsRace(result) && ((index === 0 && pageNumber === 0) || result.time === '-') ? '' : '+'
+
+const getCarBadge = (racer: Racer) =>
+  new URL(`../assets/${racer.car ?? 'bmw'}.png`, import.meta.url).href
 </script>
 
 <style>

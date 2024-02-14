@@ -2018,6 +2018,11 @@ vite@^5.0.11:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vue-debounce@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/vue-debounce/-/vue-debounce-5.0.0.tgz#eeea0fa0911fa0629cfede763bcf427974b62934"
+  integrity sha512-heIPTbmFC6Hghhnwbfjw0nYRBYH+YFp/d9xGQ/rDRPUfU6NBIndbJz+i0pHVii4BXXRi1CaljT6H3fDSbbPMvg==
+
 vue-demi@>=0.14.5:
   version "0.14.7"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.14.7.tgz#8317536b3ef74c5b09f268f7782e70194567d8f2"

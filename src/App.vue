@@ -15,12 +15,10 @@ const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)
 </script>
 
 <template>
-  <RouterView>
+  <RouterView :key="$route.fullPath">
     <header><Nav /></header>
     <main>
-      <div
-        class="container transition-colors mx-auto h-screen flex items-center justify-center flex-col min-w-fit"
-      >
+      <div class="app transition-colors mx-auto h-screen pt-16 lg:pt-20">
         <RaceResults v-if="dataAvailable" />
         <div v-else>No data</div>
       </div>
@@ -29,7 +27,7 @@ const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)
 </template>
 
 <style>
-.container {
+.app {
   background: v-bind(bgColor);
 }
 </style>

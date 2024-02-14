@@ -19,7 +19,7 @@ export const combinedRacer = (racer: RacerName, season: SeasonName) => {
     ...racersData[racer as RacerName],
     ...(racerPresent
       ? (seasonRacersData[season] as Racers)[racer as RacerName]
-      : { team: '', teamColor: '' })
+      : { team: '', teamColor: '', car: '' })
   }
 }
 
@@ -34,4 +34,18 @@ export const lookupStage = (mode: ModeName) => {
     case 'demo':
       return 0
   }
+}
+
+export const idealHeight = 900
+export const idealWidth = idealHeight * (16 / 9)
+
+export const calculateScaleRatio = () => {
+  const y = (window.innerHeight - 100) / idealHeight
+  const x = window.innerWidth / idealWidth
+
+  return Math.min(y, x)
+}
+
+export const calculateTranslateOffset = (scaleRatio: number) => {
+  return (window.innerWidth - idealWidth * scaleRatio) / 2
 }

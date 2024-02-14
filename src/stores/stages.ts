@@ -29,7 +29,7 @@ export const useStagesStore = defineStore('stages', () => {
   const trackName = computed(() => tracks[track.value].name)
   const updateTrack = (trackName: TrackName) => {
     track.value = trackName
-    router.push(`/${season.value}/${trackName}`)
+    router.push(`/${season.value}/${trackName}/${mode.value}`)
   }
   const mode: Ref<ModeName> = ref((route.params.mode as ModeName) || 'demo')
   const updateMode = (modeName: ModeName) => {
@@ -50,7 +50,6 @@ export const useStagesStore = defineStore('stages', () => {
     stageIndex.value = stage
   }
 
-  const results: Ref<RacerResult[]> = ref([])
   const fastestLap: Ref<RacerResult | undefined> = ref()
 
   const bgColor = ref('rgb(21,20,29)')
@@ -75,7 +74,6 @@ export const useStagesStore = defineStore('stages', () => {
     updateSeason,
     track,
     trackName,
-    results,
     fastestLap,
     bgColor,
     updateBgColor,
