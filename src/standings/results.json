@@ -10,8 +10,44 @@
     "lagunaseca": null,
     "monza": null,
     "oultonpark": null,
-    "silverstone": null,
-    "snetterton": null,
+    "silverstone": {
+      "results": {
+        "cannonmandan": "29:25.957",
+        "bigtimebosco": "36.578",
+        "graeme": "7.429",
+        "blyzr": "1.193",
+        "kruthal": "23.200",
+        "inkubusjaymz": "0.183",
+        "atlas": "27.430",
+        "subbax": "58.030",
+        "eugenegoat": "DNF",
+        "snicks": "DNF",
+        "diego": "DNF"
+      },
+      "fastestLap": {
+        "racerId": "cannonmandan",
+        "time": "2:23.992"
+      }
+    },
+    "snetterton": {
+      "results": {
+        "atlas": "27:33.341",
+        "cannonmandan": "13.259",
+        "kruthal": "0.487",
+        "bigtimebosco": "7.282",
+        "inkubusjaymz": "1.403",
+        "eugenegoat": "7.138",
+        "graeme": "3.870",
+        "blyzr": "6.884",
+        "snicks": "1:10.715",
+        "diego": "11.851",
+        "subbax": "-"
+      },
+      "fastestLap": {
+        "racerId": "atlas",
+        "time": "1:54.887"
+      }
+    },
     "spa": {
       "results": {
         "atlas": "30:59.274",

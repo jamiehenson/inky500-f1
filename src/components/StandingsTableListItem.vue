@@ -96,7 +96,10 @@ const resultIsStandings = (result: GeneralResult): result is StandingsResult => 
 }
 
 const timePrefix =
-  resultIsRace(result) && ((index === 0 && pageNumber === 0) || result.time === '-') ? '' : '+'
+  resultIsRace(result) &&
+  ((index === 0 && pageNumber === 0) || result.time === '-' || result.time === 'DNF')
+    ? ''
+    : '+'
 
 const getCarBadge = (racer: Racer) =>
   new URL(`../assets/${racer.car ?? 'bmw'}.png`, import.meta.url).href
