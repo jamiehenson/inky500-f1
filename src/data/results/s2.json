@@ -6,8 +6,45 @@
   "hockenheim": null,
   "knockhill": null,
   "lagunaseca": null,
-  "monza": null,
-  "oultonpark": null,
+  "monza": {
+    "results": {
+      "cannonmandan": "32:23.633",
+      "kruthal": "8.356",
+      "eugenegoat": "11.287",
+      "inkubusjaymz": "4.744",
+      "bigtimebosco": "2.931",
+      "atlas": "1.133",
+      "graeme": "7.651",
+      "snicks": "47.398",
+      "diego": "?",
+      "fletch": "DNF",
+      "blyzr": "-",
+      "subbax": "-"
+    },
+    "fastestLap": {
+      "racerId": "cannonmandan",
+      "time": "1:59.030"
+    }
+  },
+  "oultonpark": {
+    "results": {
+      "atlas": "27:44.011",
+      "inkubusjaymz": "28.398",
+      "eugenegoat": "0.663",
+      "kruthal": "2.194",
+      "graeme": "1.439",
+      "cannonmandan": "2.749",
+      "bigtimebosco": "1.726",
+      "blyzr": "24.614",
+      "snicks": "33.994",
+      "diego": "11.717",
+      "subbax": "-"
+    },
+    "fastestLap": {
+      "racerId": "atlas",
+      "time": "1:41.364"
+    }
+  },
   "silverstone": {
     "results": {
       "cannonmandan": "29:25.957",
