@@ -18,7 +18,8 @@ export const useStagesStore = defineStore('stages', () => {
     'standingsIn',
     'standings',
     'standingsOut',
-    'finished'
+    'finished',
+    'noop'
   ]
 
   const season: Ref<SeasonName> = ref((route.params.season as SeasonName) || 's3')

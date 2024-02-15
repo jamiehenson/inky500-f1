@@ -152,7 +152,11 @@ onUnmounted(() => {
 
 watch(
   stage,
-  () => {
+  async (_, oldStage) => {
+    if (stage.value === 'noop' || oldStage === 'noop') {
+      return
+    }
+
     const determineDelay = () => {
       switch (stage.value) {
         case 'raceResultsOut':
@@ -185,7 +189,7 @@ watch(mode, () => {
 })
 
 watch([season, track], async () => {
-  setStage(7)
+  setStage(8)
   clearTimeouts()
   await nextTick()
   setStage(lookupStage(mode.value))

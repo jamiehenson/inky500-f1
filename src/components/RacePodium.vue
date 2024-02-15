@@ -11,8 +11,9 @@
 </template>
 
 <script setup lang="ts">
+import type { RacerResult } from '@/types'
 import FaderComponent from './FaderComponent.vue'
 import PodiumCard from './PodiumCard.vue'
 
-const { results } = defineProps<{ results: any }>()
+const { results } = defineProps<{ results: RacerResult[] }>()
 </script>

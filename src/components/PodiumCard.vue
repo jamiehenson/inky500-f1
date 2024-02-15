@@ -17,9 +17,10 @@
 </template>
 
 <script setup lang="ts">
+import type { RacerResult } from '@/types'
 import { splitRacerName } from '@/utils'
 
-const { position, results } = defineProps<{ position: number; results: any }>()
+const { position, results } = defineProps<{ position: number; results: RacerResult[] }>()
 
 const racer = results[position - 1]?.racer
 const teamColor = racer.teamColor
