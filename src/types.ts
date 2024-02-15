@@ -1,5 +1,5 @@
-import racersData from './standings/racers.json'
-import trackData from './standings/tracks.json'
+import racersData from './data/racers.json'
+import trackData from './data/tracks.json'
 
 export const seasons = ['s1', 's2', 's3'] as const
 export type SeasonName = (typeof seasons)[number]

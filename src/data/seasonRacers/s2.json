@@ -1,0 +1,67 @@
+{
+  "bigtimebosco": {
+    "team": "Renault Mégane",
+    "teamColor": "#FE63DC",
+    "car": "renault"
+  },
+  "eugenegoat": {
+    "team": "Renault Mégane",
+    "teamColor": "#FB5A8C",
+    "car": "renault"
+  },
+  "diego": {
+    "team": "Renault Mégane",
+    "teamColor": "white",
+    "car": "renault"
+  },
+  "inkubusjaymz": {
+    "team": "BMW 320TC",
+    "teamColor": "#25C92B",
+    "car": "bmw"
+  },
+  "graeme": {
+    "team": "BMW 320TC",
+    "teamColor": "#B0FADC",
+    "car": "bmw"
+  },
+  "snicks": {
+    "team": "Renault Mégane",
+    "teamColor": "#F43D1E",
+    "car": "renault"
+  },
+  "kruthal": {
+    "team": "Renault Mégane",
+    "teamColor": "#4F4F4F",
+    "car": "renault"
+  },
+  "atlas": {
+    "team": "Renault Mégane",
+    "teamColor": "#A90061",
+    "car": "renault"
+  },
+  "cannonmandan": {
+    "team": "BMW 320TC",
+    "teamColor": "cyan",
+    "car": "bmw"
+  },
+  "blyzr": {
+    "team": "Renault Mégane",
+    "teamColor": "white",
+    "car": "renault"
+  },
+  "fletch": {
+    "team": "Renault Mégane",
+    "teamColor": "white",
+    "car": "renault"
+  },
+  "minusinferno": {
+    "team": "Renault Mégane",
+    "teamColor": "white",
+    "car": "renault"
+  },
+  "subbax": {
+    "team": "Renault Mégane",
+    "teamColor": "white",
+    "car": "renault"
+  }
+}

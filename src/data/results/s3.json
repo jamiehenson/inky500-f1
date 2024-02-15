@@ -1,0 +1,256 @@
+{
+  "brands": {
+    "results": {
+      "graeme": "30:36.320",
+      "bigtimebosco": "14.482",
+      "kruthal": "12.904",
+      "atlas": "3.148",
+      "cannonmandan": "7.029",
+      "diego": "4.724",
+      "snicks": "15.363",
+      "inkubusjaymz": "9.338",
+      "blyzr": "1 lap",
+      "happybadger": "1 lap",
+      "adam": "1 lap",
+      "eugenegoat": "1 lap",
+      "michael": "-",
+      "xnpxbirdy": "-",
+      "wobbleboss": "-",
+      "cousinbenson": "-",
+      "roberts": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "cannonmandan",
+      "time": "BIG START"
+    }
+  },
+  "monza": {
+    "results": {
+      "xnpxbirdy": "30:26.680",
+      "bigtimebosco": "10.222",
+      "inkubusjaymz": "8.962",
+      "diego": "1.579",
+      "snicks": "3.758",
+      "graeme": "2.992",
+      "atlas": "10.725",
+      "kruthal": "4.414",
+      "eugenegoat": "31.446",
+      "cousinbenson": "36.960",
+      "cannonmandan": "-",
+      "blyzr": "-",
+      "happybadger": "-",
+      "adam": "-",
+      "michael": "-",
+      "wobbleboss": "-",
+      "roberts": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "cousinbenson",
+      "time": "TOO POWERFUL FOR VR"
+    }
+  },
+  "barcelona": {
+    "results": {
+      "inkubusjaymz": "30:56.719",
+      "eugenegoat": "16.572",
+      "graeme": "2.849",
+      "cannonmandan": "1.464",
+      "atlas": "0.541",
+      "cousinbenson": "3.182",
+      "snicks": "7.588",
+      "xnpxbirdy": "?",
+      "kruthal": "14.258",
+      "blyzr": "4.809",
+      "michael": "22.815",
+      "happybadger": "1 lap",
+      "diego": "1 lap",
+      "bigtimebosco": "-",
+      "adam": "-",
+      "wobbleboss": "-",
+      "roberts": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "unknown",
+      "time": "SHADOW REALM"
+    }
+  },
+  "zolder": {
+    "results": {
+      "xnpxbirdy": "30:11.212",
+      "inkubusjaymz": "17.133",
+      "michael": "1.256",
+      "graeme": "3.153",
+      "diego": "20.515",
+      "cousinbenson": "2.717",
+      "snicks": "1.691",
+      "kruthal": "7.130",
+      "roberts": "21.784",
+      "atlas": "16.789",
+      "preece": "1 lap",
+      "blyzr": "1 lap",
+      "eugenegoat": "2 laps",
+      "wobbleboss": "2 laps",
+      "cannonmandan": "-",
+      "happybadger": "-",
+      "bigtimebosco": "-",
+      "adam": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "unknown",
+      "time": "MR MYSTERY"
+    }
+  },
+  "silverstone": {
+    "results": {
+      "xnpxbirdy": "30:15.785",
+      "diego": "33.553",
+      "snicks": "4.852",
+      "michael": "20.580",
+      "bigtimebosco": "0.778",
+      "atlas": "1.790",
+      "cousinbenson": "4.647",
+      "roberts": "4.300",
+      "kruthal": "1 lap",
+      "inkubusjaymz": "1 lap",
+      "eugenegoat": "1 lap",
+      "subhaac": "1 lap",
+      "graeme": "1 lap",
+      "harpr": "2 laps",
+      "blyzr": "3 laps",
+      "wobbleboss": "-",
+      "cannonmandan": "-",
+      "happybadger": "-",
+      "adam": "-",
+      "beaverdude": "-"
+    },
+    "fastestLap": {
+      "racerId": "xnpxbirdy",
+      "time": "EL RAPIDO"
+    }
+  },
+  "zandvoort": {
+    "results": {
+      "cousinbenson": "30:40.809",
+      "xnpxbirdy": "5.040",
+      "bigtimebosco": "13.458",
+      "graeme": "17.562",
+      "inkubusjaymz": "1.264",
+      "atlas": "5.238",
+      "wobbleboss": "0.711",
+      "snicks": "1.605",
+      "eugenegoat": "21.221",
+      "diego": "1 lap",
+      "kruthal": "1 lap",
+      "michael": "2 laps",
+      "cannonmandan": "-",
+      "roberts": "-",
+      "happybadger": "-",
+      "blyzr": "-",
+      "adam": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "unknown",
+      "time": "MAX VERSTAPPEN"
+    }
+  },
+  "misano": {
+    "results": {
+      "cousinbenson": "30:10.878",
+      "xnpxbirdy": "0.551",
+      "atlas": "9.865",
+      "bigtimebosco": "0.472",
+      "kruthal": "8.676",
+      "diego": "1.590",
+      "michael": "4.230",
+      "inkubusjaymz": "7.103",
+      "snicks": "8.305",
+      "wobbleboss": "20.704",
+      "blyzr": "1.287",
+      "graeme": "103.169",
+      "eugenegoat": "1 lap",
+      "roberts": "-",
+      "cannonmandan": "-",
+      "happybadger": "-",
+      "adam": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "unknown",
+      "time": "BIG MAN"
+    }
+  },
+  "hungaroring": {
+    "results": {
+      "michael": "30:55:526",
+      "xnpxbirdy": "12.908",
+      "bigtimebosco": "0.845",
+      "graeme": "0.766",
+      "atlas": "2.165",
+      "inkubusjaymz": "0.701",
+      "kruthal": "7.993",
+      "snicks": "1 lap",
+      "wobbleboss": "1 lap",
+      "eugenegoat": "1 lap",
+      "diego": "1 lap",
+      "cousinbenson": "-",
+      "roberts": "-",
+      "cannonmandan": "-",
+      "happybadger": "-",
+      "blyzr": "-",
+      "adam": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "michael",
+      "time": "MOZA ARE PROUD"
+    }
+  },
+  "nurburgring": {
+    "results": {
+      "cousinbenson": "32:06.745",
+      "xnpxbirdy": "7.047",
+      "atlas": "2.201",
+      "bigtimebosco": "8.760",
+      "kruthal": "3.130",
+      "graeme": "10.549",
+      "inkubusjaymz": "0.140",
+      "diego": "5.744",
+      "wobbleboss": "1.569",
+      "snicks": "3.421",
+      "eugenegoat": "9.868",
+      "roberts": "1 lap",
+      "michael": "-",
+      "cannonmandan": "-",
+      "happybadger": "-",
+      "blyzr": "-",
+      "adam": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "cousinbenson",
+      "time": "BLOODY RAPID"
+    }
+  },
+  "spa": null
+}

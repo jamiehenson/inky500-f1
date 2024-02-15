@@ -1,6 +1,6 @@
 import type { GeneralResult, ModeName, Racer, RacerName, Racers, SeasonName } from './types'
-import racersData from './standings/racers.json'
-import seasonRacersData from './standings/seasonRacers.json'
+import racersData from './data/racers.json'
+import seasonRacersData from './data/seasonRacers'
 
 export const splitRacerName = (racer: Racer) => {
   const split = racer.name.split(' ')

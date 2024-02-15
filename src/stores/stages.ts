@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import tracks from '../standings/tracks.json'
+import tracks from '../data/tracks.json'
 import type { SeasonName, TrackName, RacerResult, ModeName } from '@/types'
 import type { Ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'

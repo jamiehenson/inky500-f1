@@ -89,8 +89,8 @@
 
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
-import trackData from '../standings/tracks.json'
-import resultsData from '../standings/results.json'
+import trackData from '../data/tracks.json'
+import resultsData from '../data/results'
 import type { ModeName, RacerResults, SeasonName, TrackName } from '@/types'
 import { seasons, modes } from '@/types'
 import { computed, ref } from 'vue'
@@ -98,7 +98,7 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
 const stagesStore = useStagesStore()
-const { updateBgColor, updateTrack, updateMode, updateSeason } = stagesStore
+const { updateTrack, updateMode, updateSeason } = stagesStore
 const { track, season, mode } = storeToRefs(stagesStore)
 const router = useRouter()
 

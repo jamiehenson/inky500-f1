@@ -37,8 +37,8 @@
 
 <script setup lang="ts">
 import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref, nextTick } from 'vue'
-import resultsData from '../standings/results.json'
-import standingsData from '../standings/standings.json'
+import resultsData from '../data/results'
+import standingsData from '../data/standings'
 import type { NumberObject, RacerName, TrackName, RacerResults, StandingsResults } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
