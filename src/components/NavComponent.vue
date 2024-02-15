@@ -73,7 +73,8 @@
       </div>
       <div></div>
     </div>
-    <div class="flex items-center p-2 border-l-2 border-gray-600">
+    <!-- Background changer for green screen needs -->
+    <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">
       <button
         class="rounded-full navy-toggle w-10 h-10 mr-3 border"
         @click="updateBgColor('blue')"
@@ -82,7 +83,7 @@
         class="rounded-full green-toggle w-10 h-10 border"
         @click="updateBgColor('green')"
       ></button>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -46,6 +46,5 @@ export const calculateScaleRatio = () => {
   return Math.min(y, x)
 }
 
-export const calculateTranslateOffset = (scaleRatio: number) => {
-  return (window.innerWidth - idealWidth * scaleRatio) / 2
-}
+export const calculateTranslateOffset = (scaleRatio: number) =>
+  (window.innerWidth - idealWidth * scaleRatio) / 2

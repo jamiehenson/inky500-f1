@@ -1,34 +1,35 @@
 <template>
-  <div
-    v-if="dataAvailable"
-    class="aspect-video flex items-center object-contain p-3 transition-transform overflow-x-hidden origin-top-left"
-    :style="`height: ${idealHeight}px; transform: scale(${scaleRatio}) translateX(${translateOffset}px)`"
-  >
+  <div v-if="dataAvailable" :style="`transform: translateX(${translateOffset}px)`">
     <div
-      :class="[
-        'outer-wrapper h-full w-full white-outline select-none pointer-events-none overflow-hidden flex items-center bg-red-400',
-        animationClass
-      ]"
+      class="aspect-video flex items-center object-contain p-3 overflow-x-hidden origin-top-left"
+      :style="`height: ${idealHeight}px; transform: scale(${scaleRatio})`"
     >
-      <SectionIntro v-if="stage === 'raceResultsIn'" heading="Race" sub-heading="Result" />
-      <RacePodium v-else-if="stage === 'raceResultsPodium'" :results="raceResults" />
-      <StandingsTable
-        v-else-if="stage === 'raceResultsClassification' || stage === 'raceResultsOut'"
-        title="Classification"
-        mode="race"
-        :results="raceResults"
-      />
-      <SectionIntro
-        v-else-if="stage === 'standingsIn'"
-        heading="Drivers'"
-        sub-heading="Championship"
-      />
-      <StandingsTable
-        v-else-if="stage === 'standings' || stage === 'standingsOut'"
-        title="Drivers' Championship"
-        mode="championship"
-        :results="standings"
-      />
+      <div
+        :class="[
+          'outer-wrapper h-full w-full white-outline select-none pointer-events-none overflow-hidden flex items-center bg-red-400',
+          animationClass
+        ]"
+      >
+        <SectionIntro v-if="stage === 'raceResultsIn'" heading="Race" sub-heading="Result" />
+        <RacePodium v-else-if="stage === 'raceResultsPodium'" :results="raceResults" />
+        <StandingsTable
+          v-else-if="stage === 'raceResultsClassification' || stage === 'raceResultsOut'"
+          title="Classification"
+          mode="race"
+          :results="raceResults"
+        />
+        <SectionIntro
+          v-else-if="stage === 'standingsIn'"
+          heading="Drivers'"
+          sub-heading="Championship"
+        />
+        <StandingsTable
+          v-else-if="stage === 'standings' || stage === 'standingsOut'"
+          title="Drivers' Championship"
+          mode="championship"
+          :results="standings"
+        />
+      </div>
     </div>
   </div>
   <div v-else>No data</div>
