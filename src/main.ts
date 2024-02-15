@@ -6,7 +6,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const app = createApp(App)
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [{ path: '/:season?/:track?/:mode?', component: App }]
 })
 
