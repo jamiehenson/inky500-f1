@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="dataAvailable"
     class="aspect-video flex items-center object-contain p-3 transition-transform overflow-x-hidden origin-top-left"
     :style="`height: ${idealHeight}px; transform: scale(${scaleRatio}) translateX(${translateOffset}px)`"
   >
@@ -30,10 +31,11 @@
       />
     </div>
   </div>
+  <div v-else>No data</div>
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref, nextTick } from 'vue'
 import resultsData from '../standings/results.json'
 import standingsData from '../standings/standings.json'
 import type { NumberObject, RacerName, TrackName, RacerResults, StandingsResults } from '@/types'
@@ -50,6 +52,8 @@ import {
   lookupStage,
   idealHeight
 } from '@/utils'
+
+const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)[track.value])
 
 const stagesStore = useStagesStore()
 const { stage, season, track, fastestLap, mode } = storeToRefs(stagesStore)
@@ -175,6 +179,14 @@ watch(
 )
 
 watch(mode, () => {
+  setStage(lookupStage(mode.value))
+  clearTimeouts()
+})
+
+watch([season, track], async () => {
+  setStage(7)
+  clearTimeouts()
+  await nextTick()
   setStage(lookupStage(mode.value))
   clearTimeouts()
 })

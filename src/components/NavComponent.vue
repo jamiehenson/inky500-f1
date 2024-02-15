@@ -136,7 +136,7 @@ const setAndCloseMode = (mode: string) => {
 const setAndCloseSeason = (season: SeasonName) => {
   updateSeason(season as SeasonName)
 
-  const reversedTracks = tracks.value.reverse()
+  const reversedTracks = [...tracks.value].reverse()
   const validTrack = reversedTracks.find((track) => !trackDisabled(track as TrackName, season))
   updateTrack(validTrack as TrackName)
 
