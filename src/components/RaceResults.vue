@@ -53,8 +53,10 @@ import {
   calculateTranslateOffset,
   combinedRacer,
   lookupStage,
-  idealHeight
+  idealHeight,
+  titleize
 } from '@/utils'
+import { useHead } from '@unhead/vue'
 
 const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)[track.value])
 
@@ -144,6 +146,39 @@ const timeouts: number[] = []
 const clearTimeouts = () => {
   timeouts.forEach((timeout) => clearTimeout(timeout))
 }
+
+const title = `Inky 500 | ${season.value.toUpperCase()} ${titleize(track.value)}`
+const description = `🥇 ${raceResults.value[0].racer.name} (${raceResults.value[0].time}), 🥈 ${raceResults.value[1].racer.name} (+${raceResults.value[1].time}), 🥉 ${raceResults.value[2].racer.name} (+${raceResults.value[2].time})`
+
+useHead({
+  title: `Inky 500 | ${season.value.toUpperCase()} ${titleize(track.value)}`,
+  meta: [
+    {
+      name: 'description',
+      content: description
+    },
+    {
+      property: 'og:description',
+      content: description
+    },
+    {
+      property: 'twitter:description',
+      content: description
+    },
+    {
+      name: 'title',
+      content: title
+    },
+    {
+      property: 'og:title',
+      content: title
+    },
+    {
+      property: 'twitter:title',
+      content: title
+    }
+  ]
+})
 
 onBeforeMount(() => {
   const { racerId, time } = (resultsData[season.value] as RacerResults)[track.value].fastestLap

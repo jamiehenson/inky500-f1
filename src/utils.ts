@@ -47,6 +47,12 @@ export const getLastValidTrack = (season: SeasonName) => {
   return reversedTracks.find((track) => !trackDisabled(track as TrackName, season))
 }
 
+export const titleize = (string: string) =>
+  string
+    .split(' ')
+    .map((part) => part[0].toUpperCase() + part.slice(1))
+    .join(' ')
+
 export const lookupStage = (mode: ModeName) => {
   switch (mode) {
     case 'podium':
