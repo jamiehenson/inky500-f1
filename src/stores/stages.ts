@@ -43,7 +43,7 @@ export const useStagesStore = defineStore('stages', () => {
   const stageIndex = ref(lookupStage(mode.value) ?? 0)
   const stage = computed(() => stages[stageIndex.value])
   const advanceStage = () => {
-    if (stageIndex.value < stages.length) {
+    if (stageIndex.value < stages.length - 2) {
       stageIndex.value++
     } else {
       stageIndex.value = 0
