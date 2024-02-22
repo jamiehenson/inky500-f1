@@ -1,10 +1,10 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import tracks from '../data/tracks.json'
-import type { SeasonName, TrackName, RacerResult, ModeName } from '@/types'
+import { type SeasonName, type TrackName, type RacerResult, type ModeName } from '@/types'
 import type { Ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { lookupStage } from '@/utils'
+import { getLastValidTrack, lookupStage, mostRecentSeason } from '@/utils'
 
 export const useStagesStore = defineStore('stages', () => {
   const router = useRouter()
@@ -22,11 +22,13 @@ export const useStagesStore = defineStore('stages', () => {
     'noop'
   ]
 
-  const season: Ref<SeasonName> = ref((route.params.season as SeasonName) || 's3')
+  const season: Ref<SeasonName> = ref((route.params.season as SeasonName) || mostRecentSeason)
   const updateSeason = (seasonName: SeasonName) => {
     season.value = seasonName
   }
-  const track: Ref<TrackName> = ref((route.params.track as TrackName) || 'nurburgring')
+  const track: Ref<TrackName> = ref(
+    (route.params.track as TrackName) || getLastValidTrack(mostRecentSeason)
+  )
   const trackName = computed(() => tracks[track.value].name)
   const updateTrack = (trackName: TrackName) => {
     track.value = trackName

@@ -17,6 +17,7 @@
           title="Classification"
           mode="race"
           :results="raceResults"
+          :isLastRace="isLastRace"
         />
         <SectionIntro
           v-else-if="stage === 'standingsIn'"
@@ -28,6 +29,7 @@
           title="Drivers' Championship"
           mode="championship"
           :results="standings"
+          :isLastRace="isLastRace"
         />
       </div>
     </div>
@@ -95,7 +97,11 @@ const sortAndFormatStandings = (data: NumberObject) => {
         tieCount = 0
       }
 
-      const position = index > 0 ? index + 1 - tieCount : 1
+      let position = index + 1
+
+      if (!isLastRace) {
+        position = index > 0 ? index + 1 - tieCount : 1
+      }
 
       return {
         racer: combinedRacer(entry[0] as RacerName, season.value),
@@ -131,6 +137,8 @@ const standings = computed(() => {
     }
   })
 })
+
+const isLastRace = () => Object.keys(standingsData[season.value]).slice(-1)[0] === track.value
 
 const timeouts: number[] = []
 const clearTimeouts = () => {

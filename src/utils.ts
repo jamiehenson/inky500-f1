@@ -1,6 +1,17 @@
-import type { GeneralResult, ModeName, Racer, RacerName, Racers, SeasonName } from './types'
+import {
+  seasons,
+  type GeneralResult,
+  type ModeName,
+  type Racer,
+  type RacerName,
+  type RacerResults,
+  type Racers,
+  type SeasonName,
+  type TrackName
+} from './types'
 import racersData from './data/racers.json'
 import seasonRacersData from './data/seasonRacers'
+import resultsData from './data/results'
 
 export const splitRacerName = (racer: Racer) => {
   const split = racer.name.split(' ')
@@ -21,6 +32,19 @@ export const combinedRacer = (racer: RacerName, season: SeasonName) => {
       ? (seasonRacersData[season] as Racers)[racer as RacerName]
       : { team: '', teamColor: '', car: '' })
   }
+}
+
+export const mostRecentSeason = seasons.slice(-1)[0]
+
+export const trackDisabled = (track: TrackName, season: SeasonName, specificSeason?: SeasonName) =>
+  !(resultsData[specificSeason || season] as RacerResults)[track]
+
+export const seasonDisabled = (season: SeasonName) =>
+  Object.keys(resultsData[season] as RacerResults).length === 0
+
+export const getLastValidTrack = (season: SeasonName) => {
+  const reversedTracks = [...Object.keys(resultsData[season])].reverse()
+  return reversedTracks.find((track) => !trackDisabled(track as TrackName, season))
 }
 
 export const lookupStage = (mode: ModeName) => {

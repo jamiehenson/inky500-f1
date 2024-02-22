@@ -37,12 +37,12 @@
           <div v-for="track in tracks" :key="trackData[track as TrackName].name">
             <button
               :class="[
-                trackDisabled(track as TrackName)
+                trackDisabled(track as TrackName, season)
                   ? 'opacity-50 cursor-not-allowed'
                   : 'hover:bg-blue-800 transition-colors',
                 'bg-blue-900  px-3 py-1 rounded-xl whitespace-nowrap w-full my-1 flex justify-between items-center'
               ]"
-              @click="!trackDisabled(track as TrackName) && setAndCloseTrack(track)"
+              @click="!trackDisabled(track as TrackName, season) && setAndCloseTrack(track)"
             >
               {{ trackData[track as TrackName].name
               }}<span
@@ -91,11 +91,12 @@
 import { useStagesStore } from '@/stores/stages'
 import trackData from '../data/tracks.json'
 import resultsData from '../data/results'
-import type { ModeName, RacerResults, SeasonName, TrackName } from '@/types'
+import type { ModeName, SeasonName, TrackName } from '@/types'
 import { seasons, modes } from '@/types'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { getLastValidTrack, trackDisabled, seasonDisabled, mostRecentSeason } from '@/utils'
 
 const stagesStore = useStagesStore()
 const { updateTrack, updateMode, updateSeason } = stagesStore
@@ -137,16 +138,14 @@ const setAndCloseMode = (mode: string) => {
 const setAndCloseSeason = (season: SeasonName) => {
   updateSeason(season as SeasonName)
 
-  const reversedTracks = [...tracks.value].reverse()
-  const validTrack = reversedTracks.find((track) => !trackDisabled(track as TrackName, season))
-  updateTrack(validTrack as TrackName)
+  updateTrack(getLastValidTrack(season) as TrackName)
 
   toggleSeasonState()
 }
 
 const goHome = () => {
-  updateSeason('s3')
-  updateTrack('nurburgring')
+  updateSeason(mostRecentSeason)
+  updateTrack((getLastValidTrack(mostRecentSeason) || 'nurburgring') as TrackName)
   updateMode('demo')
   seasonDropdownState.value = false
   trackDropdownState.value = false
@@ -156,11 +155,6 @@ const goHome = () => {
 
 const tracks = computed(() => Object.keys(resultsData[season.value]))
 const currentTrack = computed(() => trackData[track.value])
-const trackDisabled = (track: TrackName, specificSeason?: SeasonName) =>
-  !(resultsData[specificSeason || season.value] as RacerResults)[track]
-
-const seasonDisabled = (season: SeasonName) =>
-  Object.keys(resultsData[season] as RacerResults).length === 0
 </script>
 
 <style>

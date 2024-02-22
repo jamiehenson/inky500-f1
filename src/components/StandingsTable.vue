@@ -7,7 +7,7 @@
         <h2 class="text-2xl font-bold uppercase mb-3">
           Inky 500 Season {{ season.slice(1) }} - {{ trackName }} Grand Prix
         </h2>
-        <div class="uppercase text-gray-300">Powered by Koozies</div>
+        <div class="uppercase text-gray-300 text-right">Powered by Koozies</div>
       </div>
       <h1 class="text-5xl uppercase font-bold text-gray-300">{{ title }}</h1>
       <div class="flex mb-1">
@@ -33,6 +33,7 @@
                 :index="index"
                 :pageNumber="pageNumber"
                 :result="result"
+                :is-last-race="isLastRace"
               />
               <StandingsTableListItem
                 v-if="pageNumber === 0 && index === 0"
@@ -40,6 +41,7 @@
                 :index="index"
                 :pageNumber="pageNumber"
                 :result="result"
+                :is-last-race="isLastRace"
                 floating
               />
             </li>
@@ -79,6 +81,7 @@ import type { GeneralResult } from '@/types'
 const { results, title, mode } = defineProps<{
   results: GeneralResult[]
   title: string
+  isLastRace: boolean
   mode?: 'race' | 'championship'
 }>()
 

@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="[floating ? 'floating first rounded-md px-2' : '', 'flex w-full items-center flex-1']"
+    :class="[
+      floating ? `floating first ${isLastRace ? 'winner' : ''} rounded-md px-2` : '',
+      'flex w-full items-center flex-1'
+    ]"
   >
     <div class="w-12 overflow-hidden">
       <div class="slide-in">
@@ -65,6 +68,7 @@ const { isRace, index, pageNumber, result, floating } = defineProps<{
   index: number
   pageNumber: number
   result: GeneralResult
+  isLastRace: boolean
   floating?: boolean
 }>()
 const { fastestLap } = useStagesStore()
@@ -123,6 +127,10 @@ const getCarBadge = (racer: Racer) =>
   color: var(--vt-bg);
   animation: 1s slideWhite 1s ease forwards;
   clip-path: inset(0 100% 0 0);
+}
+
+.first.winner {
+  background: goldenrod;
 }
 
 .slide-in {

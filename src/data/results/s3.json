@@ -252,5 +252,32 @@
       "time": "BLOODY RAPID"
     }
   },
-  "spa": null
+  "spa": {
+    "results": {
+      "cousinbenson": "30:24.311",
+      "graeme": "16.131",
+      "kruthal": "2.480",
+      "atlas": "1.007",
+      "bigtimebosco": "2.492",
+      "michael": "0.800",
+      "xnpxbirdy": "7.790",
+      "diego": "4.349",
+      "wobbleboss": "5.697",
+      "inkubusjaymz": "2.109",
+      "snicks": "11.866",
+      "eugenegoat": "1.795",
+      "blyzr": "DNF",
+      "roberts": "-",
+      "cannonmandan": "-",
+      "happybadger": "-",
+      "adam": "-",
+      "beaverdude": "-",
+      "harpr": "-",
+      "subhaac": "-"
+    },
+    "fastestLap": {
+      "racerId": "bigtimebosco",
+      "time": "2:40.720"
+    }
+  }
 }
