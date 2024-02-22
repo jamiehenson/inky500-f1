@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      floating ? `floating first ${isLastRace ? 'winner' : ''} rounded-md px-2` : '',
+      floating ? `floating first ${isLastRace && !isRace ? 'winner' : ''} rounded-md px-2` : '',
       'flex w-full items-center flex-1'
     ]"
   >

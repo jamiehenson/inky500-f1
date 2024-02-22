@@ -138,7 +138,7 @@ const standings = computed(() => {
   })
 })
 
-const isLastRace = () => Object.keys(standingsData[season.value]).slice(-1)[0] === track.value
+const isLastRace = Object.keys(standingsData[season.value]).slice(-1)[0] === track.value
 
 const timeouts: number[] = []
 const clearTimeouts = () => {
