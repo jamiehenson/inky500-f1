@@ -1,13 +1,13 @@
 import {
   seasons,
   type GeneralResult,
-  type ModeName,
   type Racer,
   type RacerName,
   type RacerResults,
   type Racers,
   type SeasonName,
-  type TrackName
+  type TrackName,
+  type ModeName
 } from './types'
 import racersData from './data/racers.json'
 import seasonRacersData from './data/seasonRacers'
@@ -18,10 +18,15 @@ export const splitRacerName = (racer: Racer) => {
   return [split.slice(0, -1).join(' '), split.slice(-1).join(' ')]
 }
 
-export const chunkRacers = (results: GeneralResult[], pageSize: number) =>
-  Array.from({ length: Math.ceil(results.length / pageSize) }, (_, i) =>
-    results.slice(i * pageSize, i * pageSize + pageSize)
-  )
+export const chunkRacers = (results: GeneralResult[], pageSize: number) => {
+  if (results) {
+    return Array.from({ length: Math.ceil(results.length / pageSize) }, (_, i) =>
+      results.slice(i * pageSize, i * pageSize + pageSize)
+    )
+  }
+
+  return results
+}
 
 export const combinedRacer = (racer: RacerName, season: SeasonName) => {
   const racerPresent = Object.keys(seasonRacersData[season]).includes(racer)
@@ -70,11 +75,40 @@ export const idealHeight = 900
 export const idealWidth = idealHeight * (16 / 9)
 
 export const calculateScaleRatio = () => {
-  const y = (window.innerHeight - 100) / idealHeight
-  const x = window.innerWidth / idealWidth
+  if (typeof window !== 'undefined') {
+    const y = (window.innerHeight - 100) / idealHeight
+    const x = window.innerWidth / idealWidth
 
-  return Math.min(y, x)
+    return Math.min(y, x)
+  }
+
+  return 1
 }
 
-export const calculateTranslateOffset = (scaleRatio: number) =>
-  (window.innerWidth - idealWidth * scaleRatio) / 2
+export const calculateTranslateOffset = (scaleRatio: number) => {
+  if (typeof window !== 'undefined') {
+    return (window.innerWidth - idealWidth * scaleRatio) / 2
+  }
+
+  return 0
+}
+
+export const debounce = (fn: Function, ms = 300) => {
+  let timeoutId: ReturnType<typeof setTimeout>
+  return function (this: any, ...args: any[]) {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn.apply(this, args), ms)
+  }
+}
+
+export const withBase = (href = '') =>
+  import.meta.env.PROD ? `${import.meta.env.BASE_URL}${href}` : `/${href}`
+
+export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeName) => {
+  switch (mode) {
+    case 'demo':
+      return ` | ${season.toUpperCase()} ${titleize(track)}`
+    default:
+      return ` | ${season.toUpperCase()} ${titleize(track)} ${titleize(mode)}`
+  }
+}

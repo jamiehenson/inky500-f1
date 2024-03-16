@@ -1,23 +1,23 @@
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
-import { createRouter, createWebHistory } from 'vue-router'
 import RaceResults from './components/RaceResults.vue'
-import { createHead } from '@unhead/vue'
+import { ViteSSG } from 'vite-ssg'
+import { modes, seasons } from './types'
+import standings from './data/standings'
 
-const app = createApp(App)
+const route = (path: string) => ({ path, component: RaceResults })
+const routes = seasons.flatMap((season) =>
+  Object.keys(standings[season]).flatMap((race) => [
+    route(`/${season}/${race}/`),
+    ...modes.filter((mode) => mode !== 'demo').map((mode) => route(`/${season}/${race}/${mode}/`))
+  ])
+)
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [{ path: '/:season?/:track?/:mode?', component: RaceResults }]
-})
-
-const head = createHead()
-
-app.use(createPinia())
-app.use(router)
-app.use(head)
-
-router.isReady().then(() => {
-  app.mount('#app')
-})
+export const createApp: unknown = ViteSSG(
+  App,
+  { routes: [route('/'), ...routes], base: import.meta.env.BASE_URL },
+  ({ app }) => {
+    const pinia = createPinia()
+    app.use(pinia)
+  }
+)

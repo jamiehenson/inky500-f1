@@ -38,13 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref, nextTick } from 'vue'
+import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import resultsData from '../data/results'
 import standingsData from '../data/standings'
 import type { NumberObject, RacerName, TrackName, RacerResults, StandingsResults } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
-import { debounce } from 'vue-debounce'
 import SectionIntro from './SectionIntro.vue'
 import RacePodium from './RacePodium.vue'
 import StandingsTable from './StandingsTable.vue'
@@ -52,9 +51,9 @@ import {
   calculateScaleRatio,
   calculateTranslateOffset,
   combinedRacer,
-  lookupStage,
+  debounce,
   idealHeight,
-  titleize
+  titleSnippet
 } from '@/utils'
 import { useSeoMeta } from '@unhead/vue'
 
@@ -62,7 +61,7 @@ const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)
 
 const stagesStore = useStagesStore()
 const { stage, season, track, fastestLap, mode } = storeToRefs(stagesStore)
-const { advanceStage, setStage } = stagesStore
+const { advanceStage } = stagesStore
 
 const scaleRatio = ref(calculateScaleRatio())
 const translateOffset = ref(calculateTranslateOffset(scaleRatio.value))
@@ -70,10 +69,10 @@ const translateOffset = ref(calculateTranslateOffset(scaleRatio.value))
 const updateScaleRatio = debounce(() => {
   scaleRatio.value = calculateScaleRatio()
   translateOffset.value = calculateTranslateOffset(scaleRatio.value)
-}, '200ms')
+}, 200)
 
 const raceResults = computed(() => {
-  const results = (resultsData[season.value] as RacerResults)[track.value].results
+  const results = (resultsData[season.value] as RacerResults)[track.value]?.results
 
   if (results) {
     return Object.entries(results).map((entry) => ({
@@ -143,12 +142,16 @@ const standings = computed(() => {
 const isLastRace = Object.keys(standingsData[season.value]).slice(-1)[0] === track.value
 
 const timeouts: number[] = []
-const clearTimeouts = () => {
-  timeouts.forEach((timeout) => clearTimeout(timeout))
-}
 
-const title = `Inky 500 | ${season.value.toUpperCase()} ${titleize(track.value)}`
-const description = `🥇 ${raceResults.value[0].racer.name} (${raceResults.value[0].time}), 🥈 ${raceResults.value[1].racer.name} (+${raceResults.value[1].time}), 🥉 ${raceResults.value[2].racer.name} (+${raceResults.value[2].time})`
+const title = `Inky 500${titleSnippet(season.value, track.value, mode.value)}`
+const description =
+  raceResults.value.length >= 3
+    ? `
+      🥇 ${raceResults.value[0].racer.name} (${raceResults.value[0].time}),
+      🥈 ${raceResults.value[1].racer.name} (+${raceResults.value[1].time}),
+      🥉 ${raceResults.value[2].racer.name} (+${raceResults.value[2].time})
+    `
+    : 'Standings for the Inky 500 League'
 
 useSeoMeta({
   title,
@@ -165,20 +168,20 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  window.addEventListener('resize', updateScaleRatio)
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', updateScaleRatio)
+  }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateScaleRatio)
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('resize', updateScaleRatio)
+  }
 })
 
 watch(
   stage,
-  async (_, oldStage) => {
-    if (stage.value === 'noop' || oldStage === 'noop') {
-      return
-    }
-
+  () => {
     const determineDelay = () => {
       switch (stage.value) {
         case 'raceResultsOut':
@@ -204,19 +207,6 @@ watch(
   },
   { immediate: true }
 )
-
-watch(mode, () => {
-  setStage(lookupStage(mode.value))
-  clearTimeouts()
-})
-
-watch([season, track], async () => {
-  setStage(8)
-  clearTimeouts()
-  await nextTick()
-  setStage(lookupStage(mode.value))
-  clearTimeouts()
-})
 
 const animationClass = computed(() => {
   switch (stage.value) {

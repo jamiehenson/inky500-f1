@@ -5,30 +5,30 @@
 
 @layer components {
   .white-outline {
-    @apply rounded-xl outline-offset-8 outline-white/30 outline-2 outline
+    @apply rounded-xl outline-offset-8 outline-white/30 outline-2 outline;
   }
 }
 
 @font-face {
-  font-family: "Formula1";
-  src: url("Formula1-Regular-1.ttf")
+  font-family: 'Formula1';
+  src: url('Formula1-Regular-1.ttf');
 }
 
 @font-face {
-  font-family: "Formula1";
-  src: url("Formula1-Bold-4.ttf");
+  font-family: 'Formula1';
+  src: url('Formula1-Bold-4.ttf');
   font-weight: bold;
 }
 
 @font-face {
-  font-family: "Formula1";
-  src: url("Formula1-Italic.ttf");
+  font-family: 'Formula1';
+  src: url('Formula1-Italic.ttf');
   font-style: italic;
 }
 
 @font-face {
-  font-family: "Formula1Wide";
-  src: url("Formula1-Wide.ttf");
+  font-family: 'Formula1Wide';
+  src: url('Formula1-Wide.ttf');
 }
 
 /* color palette from <https://github.com/vuejs/theme> */
@@ -55,7 +55,7 @@ body {
   background: var(--vt-bg);
   line-height: 1.6;
   font-family:
-    "Formula1",
+    'Formula1',
     Inter,
     -apple-system,
     BlinkMacSystemFont,
