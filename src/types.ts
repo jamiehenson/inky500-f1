@@ -1,10 +1,10 @@
 import racersData from './data/racers.json'
 import trackData from './data/tracks.json'
 
-export const seasons = ['s1', 's2', 's3'] as const
+export const seasons = ['s1', 's2', 's3', 's4'] as const
 export type SeasonName = (typeof seasons)[number]
 
-export const modes = ['demo', 'podium', 'race', 'standings'] as const
+export const modes = ['all', 'podium', 'race', 'standings'] as const
 export type ModeName = (typeof modes)[number]
 
 export const tracks = Object.keys(trackData)

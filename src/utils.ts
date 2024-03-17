@@ -54,7 +54,7 @@ export const getLastValidTrack = (season: SeasonName) => {
 
 export const titleize = (string: string) =>
   string
-    .split(' ')
+    .split(/[ -]+/)
     .map((part) => part[0].toUpperCase() + part.slice(1))
     .join(' ')
 
@@ -66,7 +66,7 @@ export const lookupStage = (mode: ModeName) => {
       return 2
     case 'standings':
       return 5
-    case 'demo':
+    case 'all':
       return 0
   }
 }
@@ -106,9 +106,9 @@ export const withBase = (href = '') =>
 
 export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeName) => {
   switch (mode) {
-    case 'demo':
-      return ` | ${season.toUpperCase()} ${titleize(track)}`
+    case 'all':
+      return ` | ${season.toUpperCase()} ${titleize(track)} Results`
     default:
-      return ` | ${season.toUpperCase()} ${titleize(track)} ${titleize(mode)}`
+      return ` | ${season.toUpperCase()} ${titleize(track)} ${titleize(mode)} Results`
   }
 }

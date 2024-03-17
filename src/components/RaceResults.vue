@@ -201,7 +201,7 @@ watch(
 
     const delay = determineDelay()
 
-    if (mode.value === 'demo') {
+    if (mode.value === 'all') {
       timeouts.push(setTimeout(() => advanceStage(), delay))
     }
   },

@@ -1,0 +1,117 @@
+{
+  "bigtimebosco": {
+    "team": "Scuderia Prongles",
+    "teamColor": "#FE63DC",
+    "car": "bmw"
+  },
+  "eugenegoat": {
+    "team": "Eugene_Goat",
+    "teamColor": "#FB5A8C",
+    "car": "bmw"
+  },
+  "diego": {
+    "team": "Bacon",
+    "teamColor": "white",
+    "car": "bmw"
+  },
+  "inkubusjaymz": {
+    "team": "Team Inky500",
+    "teamColor": "#25C92B",
+    "car": "bmw"
+  },
+  "graeme": {
+    "team": "Listerine BTEC BMW",
+    "teamColor": "#B0FADC",
+    "car": "bmw"
+  },
+  "wobbleboss": {
+    "team": "Naoi Beatha",
+    "teamColor": "#E8F41E",
+    "car": "bmw"
+  },
+  "snicks": {
+    "team": "Kvikklunsj",
+    "teamColor": "#F43D1E",
+    "car": "bmw"
+  },
+  "kruthal": {
+    "team": "Kruthal",
+    "teamColor": "#4F4F4F",
+    "car": "bmw"
+  },
+  "atlas": {
+    "team": "Synertec RT",
+    "teamColor": "#A90061",
+    "car": "bmw"
+  },
+  "cousinbenson": {
+    "team": "Soylent Racing",
+    "teamColor": "#98CE39",
+    "car": "bmw"
+  },
+  "xnpxbirdy": {
+    "team": "NPB",
+    "teamColor": "#646464",
+    "car": "bmw"
+  },
+  "michael": {
+    "team": "Team Race Fastest",
+    "teamColor": "#33a4ff",
+    "car": "bmw"
+  },
+  "cannonmandan": {
+    "team": "Lost Wheel Nut Racing",
+    "teamColor": "cyan",
+    "car": "bmw"
+  },
+  "roberts": {
+    "team": "DCRacing2",
+    "teamColor": "black",
+    "car": "bmw"
+  },
+  "happybadger": {
+    "team": "Badgerwatch GP",
+    "teamColor": "cyan",
+    "car": "bmw"
+  },
+  "blyzr": {
+    "team": "Blyzrossi",
+    "teamColor": "white",
+    "car": "bmw"
+  },
+  "adam": {
+    "team": "Adam Goes Racing",
+    "teamColor": "green",
+    "car": "bmw"
+  },
+  "beaverdude": {
+    "team": "Beaver",
+    "teamColor": "cyan",
+    "car": "bmw"
+  },
+  "harpr": {
+    "team": "Hard Motorsport",
+    "teamColor": "#F94037",
+    "car": "bmw"
+  },
+  "subhaac": {
+    "team": "BMW M2 CS",
+    "teamColor": "white",
+    "car": "bmw"
+  },
+  "calamitysam": {
+    "team": "Calamity GP",
+    "teamColor": "black",
+    "car": "bmw"
+  },
+  "preece": {
+    "team": "BMW M2 CS",
+    "teamColor": "white",
+    "car": "bmw"
+  },
+  "unknown": {
+    "team": "Mystery Machine",
+    "teamColor": "black",
+    "car": "bmw"
+  }
+}

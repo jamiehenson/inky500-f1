@@ -9,7 +9,7 @@ const route = (path: string) => ({ path, component: RaceResults })
 const routes = seasons.flatMap((season) =>
   Object.keys(standings[season]).flatMap((race) => [
     route(`/${season}/${race}/`),
-    ...modes.filter((mode) => mode !== 'demo').map((mode) => route(`/${season}/${race}/${mode}/`))
+    ...modes.filter((mode) => mode !== 'all').map((mode) => route(`/${season}/${race}/${mode}/`))
   ])
 )
 

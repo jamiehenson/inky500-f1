@@ -59,12 +59,28 @@
     "name": "Laguna Seca",
     "countryCode": "us"
   },
-  "oultonpark": {
+  "oulton-park": {
     "name": "Oulton Park",
     "countryCode": "gb"
   },
   "snetterton": {
     "name": "Snetterton",
     "countryCode": "gb"
+  },
+  "paul-ricard": {
+    "name": "Paul Ricard",
+    "countryCode": "fr"
+  },
+  "suzuka": {
+    "name": "Suzuka",
+    "countryCode": "jp"
+  },
+  "mt-panorama": {
+    "name": "Mt. Panorama",
+    "countryCode": "au"
+  },
+  "cota": {
+    "name": "COTA",
+    "countryCode": "us"
   }
 }

@@ -33,7 +33,7 @@ export const useStagesStore = defineStore('stages', () => {
   )
   const trackName = computed(() => tracks[track.value].name)
 
-  const mode: Ref<ModeName> = ref((params.mode || 'demo') as ModeName)
+  const mode: Ref<ModeName> = ref((params.mode || 'all') as ModeName)
 
   const stageIndex = ref(lookupStage(mode.value) ?? 0)
   const stage = computed(() => stages[stageIndex.value])

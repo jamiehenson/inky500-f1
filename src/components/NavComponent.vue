@@ -22,7 +22,7 @@
               ]"
               :href="
                 withBase(
-                  `${season}/${trackDisabled(track, season) ? getLastValidTrack(season) : track}/${mode === 'demo' ? '' : `${mode}/`}`
+                  `${season}/${trackDisabled(track, season) ? getLastValidTrack(season) : track}/${mode === 'all' ? '' : `${mode}/`}`
                 )
               "
             >
@@ -48,7 +48,7 @@
                   : 'hover:bg-blue-800 transition-colors',
                 'bg-blue-900 px-3 py-1 rounded-xl whitespace-nowrap w-full my-1 flex justify-between items-center'
               ]"
-              :href="withBase(`${season}/${track}/${mode === 'demo' ? '' : `${mode}/`}`)"
+              :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
             >
               {{ trackData[track as TrackName].name
               }}<span
@@ -70,7 +70,7 @@
           <div v-for="mode in modes" :key="mode">
             <a
               class="bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 flex rounded-xl whitespace-nowrap w-full my-1 capitalize"
-              :href="withBase(`${season}/${track}/${mode === 'demo' ? '' : `${mode}/`}`)"
+              :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
             >
               {{ mode }}
             </a>
