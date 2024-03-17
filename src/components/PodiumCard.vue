@@ -1,17 +1,27 @@
 <template>
-  <div class="panel-bg p-5 flex-1 rounded-xl relative text-3xl">
+  <div class="panel-bg p-5 flex-1 sm:rounded-xl relative text-3xl">
     <div v-if="racer" class="white-outline h-full flex flex-col justify-end">
-      <div class="p-4 h-32 w-32 opacity-50 text-4xl drop-shadow-md shadow-black uppercase">
+      <div
+        class="p-4 sm:h-32 sm:w-32 opacity-50 text-xl sm:text-4xl drop-shadow-md shadow-black uppercase"
+      >
         {{ racer.team }}
       </div>
-      <div class="flex-1 flex items-center justify-center">
-        <img :src="imageUrl" class="rounded-xl w-4/5 m-3" />
+      <div class="flex sm:flex-col flex-1">
+        <div class="sm:flex-1 flex items-center justify-center mx-3 sm:mx-0 w-32 sm:w-auto">
+          <img :src="imageUrl" class="rounded-xl sm:w-4/5 sm:m-3" />
+        </div>
+        <div class="flex-1 sm:flex-none">
+          <p v-if="splitRacerName(racer)[0].length > 0" class="text-md sm:text-2xl italic px-2">
+            {{ splitRacerName(racer)[0] }}
+          </p>
+          <p class="text-md sm:text-4xl italic mb-4 px-2 uppercase font-bold">
+            {{ splitRacerName(racer)[1] }}
+          </p>
+        </div>
       </div>
-      <p v-if="splitRacerName(racer)[0].length > 0" class="text-2xl italic px-2">
-        {{ splitRacerName(racer)[0] }}
+      <p class="mt-3 sm:mt-0 text-md sm:text-6xl text-center wide">
+        {{ positionWithSuffix(position) }}
       </p>
-      <p class="text-4xl italic mb-4 px-2 uppercase font-bold">{{ splitRacerName(racer)[1] }}</p>
-      <p class="text-6xl text-center wide">{{ positionWithSuffix(position) }}</p>
     </div>
   </div>
 </template>

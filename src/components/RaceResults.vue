@@ -1,12 +1,11 @@
 <template>
-  <div v-if="dataAvailable" :style="`transform: translateX(${translateOffset}px)`">
+  <div v-if="dataAvailable" class="h-full" :style="`transform: translateX(${translateOffset}px)`">
     <div
-      class="aspect-video flex items-center object-contain p-3 overflow-x-hidden origin-top-left"
-      :style="`height: ${idealHeight}px; transform: scale(${scaleRatio})`"
+      class="h-full sm:aspect-video flex items-center object-contain sm:p-3 overflow-x-hidden origin-top-left ratio"
     >
       <div
         :class="[
-          'outer-wrapper h-full w-full white-outline select-none pointer-events-none overflow-hidden flex items-center bg-red-400',
+          'outer-wrapper h-full w-full sm:white-outline select-none pointer-events-none sm:overflow-hidden flex items-center bg-red-400',
           animationClass
         ]"
       >
@@ -70,6 +69,8 @@ const updateScaleRatio = debounce(() => {
   scaleRatio.value = calculateScaleRatio()
   translateOffset.value = calculateTranslateOffset(scaleRatio.value)
 }, 200)
+
+const idealHeightAsPx = `${idealHeight}px`
 
 const raceResults = computed(() => {
   const results = (resultsData[season.value] as RacerResults)[track.value]?.results
@@ -242,6 +243,13 @@ const animationClass = computed(() => {
 
 .outer-wrapper-outro {
   animation: 1s collapse ease forwards;
+}
+
+@media screen and (min-width: 640px) {
+  .ratio {
+    height: v-bind('idealHeightAsPx');
+    transform: scale(v-bind('scaleRatio'));
+  }
 }
 </style>
 

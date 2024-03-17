@@ -1,5 +1,8 @@
 <template>
-  <div class="fader absolute h-full top-0 left-0 rounded-xl" style="animation-delay: 0s">
+  <div
+    class="fader hidden sm:block absolute h-full top-0 left-0 rounded-xl"
+    style="animation-delay: 0s"
+  >
     <img src="../assets/gghq.png" class="fader-gghq opacity-50" />
   </div>
 </template>

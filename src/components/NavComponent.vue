@@ -1,17 +1,20 @@
 <template>
-  <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg" style="height: 60px">
+  <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg h-16 sm:h-12">
     <div class="flex-1 flex items-center p-2">
       <a :href="withBase()" class="font-bold ml-1">
         <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12" />
       </a>
       <div class="relative">
         <button
-          class="ml-3 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 rounded-xl uppercase"
+          class="ml-3 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-xl uppercase text-sm sm:text-md"
           @click="toggleSeasonState"
         >
           {{ season }} ▼
         </button>
-        <div v-if="seasonDropdownState" class="nav absolute p-3">
+        <div
+          v-if="seasonDropdownState"
+          class="nav absolute p-3 max-h-96 overflow-y-scroll rounded-xl"
+        >
           <div v-for="season in seasons" :key="season">
             <a
               :class="[
@@ -33,13 +36,16 @@
       </div>
       <div class="relative">
         <button
-          class="ml-3 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 rounded-xl"
+          class="ml-3 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-xl text-sm sm:text-md"
           @click="toggleTrackState"
         >
           {{ currentTrack.name
           }}<span :class="['fi-' + currentTrack.countryCode, 'fi rounded-sm mx-2']"></span> ▼
         </button>
-        <div v-if="trackDropdownState" class="nav absolute p-3">
+        <div
+          v-if="trackDropdownState"
+          class="nav absolute p-3 max-h-96 overflow-y-scroll rounded-xl"
+        >
           <div v-for="track in tracks" :key="trackData[track as TrackName].name">
             <a
               :class="[
@@ -61,12 +67,15 @@
 
       <div class="relative">
         <button
-          class="ml-3 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 rounded-xl capitalize"
+          class="ml-3 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-xl capitalize text-sm sm:text-md"
           @click="toggleModeState"
         >
           {{ mode }} ▼
         </button>
-        <div v-if="modeDropdownState" class="nav absolute p-3">
+        <div
+          v-if="modeDropdownState"
+          class="nav absolute p-3 max-h-96 overflow-y-scroll rounded-xl"
+        >
           <div v-for="mode in modes" :key="mode">
             <a
               class="bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 flex rounded-xl whitespace-nowrap w-full my-1 capitalize"

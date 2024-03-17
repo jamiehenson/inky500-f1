@@ -1,7 +1,9 @@
 <template>
   <div
     :class="[
-      floating ? `floating first ${isLastRace && !isRace ? 'winner' : ''} rounded-md px-2` : '',
+      floating
+        ? `floating first ${isLastRace && !isRace ? 'winner' : ''} rounded-md px-2`
+        : 'py-2 sm:p-0',
       'flex w-full items-center flex-1'
     ]"
   >
@@ -14,46 +16,62 @@
     </div>
     <div v-if="resultIsStandings(result)" class="w-10 mr-8 overflow-hidden">
       <div class="slide-in flex items-center justify-between">
-        <div :class="[deltaClass(), 'text-4xl']">{{ result.delta !== 0 ? '›' : '-' }}</div>
-        <span class="">{{ Math.abs(result.delta) }}</span>
+        <div :class="[deltaClass(), 'text-2xl sm:text-4xl']">
+          {{ result.delta !== 0 ? '›' : '-' }}
+        </div>
+        <span>{{ Math.abs(result.delta) }}</span>
       </div>
     </div>
-    <div class="flex-1 overflow-hidden">
+    <div class="flex-1 overflow-hidden flex flex-col sm:flex-row">
+      <div class="flex-1">
+        <div class="slide-in">
+          <span
+            :class="[
+              'fi-' + (result.racer.countryCode ?? 'gb'),
+              'fi w-4 sm:h-6 h-4 sm:w-6 mr-3 rounded-sm sm:-translate-y-1'
+            ]"
+          ></span
+          ><span
+            :class="[
+              isRace ? 'text-sm sm:text-xl' : 'text-md sm:text-2xl',
+              'italic  text-gray-300'
+            ]"
+            >{{ splitRacerName(result.racer)[0] }}&nbsp;</span
+          ><span
+            :class="[
+              isRace ? 'text-md sm:text-2xl' : 'text-md sm:text-3xl',
+              'italic font-bold uppercase'
+            ]"
+          >
+            {{ splitRacerName(result.racer)[1] }}</span
+          >
+        </div>
+      </div>
+      <div class="flex-1">
+        <div class="slide-in flex items-center text-red">
+          <img :src="getCarBadge(result.racer)" class="w-4 sm:h-6 h-4 sm:w-6 mr-3" /><span
+            :class="[
+              !isRace ? 'text-sm sm:text-2xl' : 'text-xs sm:text-xl',
+              'text-gray-300 uppercase'
+            ]"
+            >{{ result.racer.team }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div v-if="resultIsRace(result)" class="px-2 w-26 sm:w-40 text-center italic overflow-hidden">
       <div class="slide-in">
-        <span
-          :class="[
-            'fi-' + (result.racer.countryCode ?? 'gb'),
-            'fi mr-3 rounded-sm -translate-y-px'
-          ]"
-        ></span
-        ><span :class="[isRace ? 'text-xl' : 'text-2xl', 'italic  text-gray-300']"
-          >{{ splitRacerName(result.racer)[0] }}&nbsp;</span
-        ><span :class="[isRace ? 'text-2xl' : 'text-3xl', 'italic  font-bold uppercase']">
-          {{ splitRacerName(result.racer)[1] }}</span
-        >
+        <span class="text-gray-300 text-sm sm:text-2xl">{{ timePrefix }}{{ result.time }}</span>
       </div>
     </div>
-    <div class="flex-1 overflow-hidden">
-      <div class="slide-in flex items-center text-red">
-        <img :src="getCarBadge(result.racer)" class="h-6 w-6 mr-3" /><span
-          :class="[!isRace ? 'text-2xl' : '', 'text-gray-300 uppercase']"
-          >{{ result.racer.team }}</span
-        >
-      </div>
-    </div>
-    <div v-if="resultIsRace(result)" class="px-2 w-40 text-center italic overflow-hidden">
+    <div v-if="resultIsRace(result)" class="px-2 w-10 sm:w-24 text-right font-bold overflow-hidden">
       <div class="slide-in">
-        <span class="text-gray-300 text-2xl">{{ timePrefix }}{{ result.time }}</span>
-      </div>
-    </div>
-    <div v-if="resultIsRace(result)" class="px-2 w-24 text-right font-bold overflow-hidden">
-      <div class="slide-in">
-        <span class="text-2xl">{{ index < 10 ? '+' : '' }}{{ points }}</span>
+        <span class="text-sm sm:text-2xl">{{ index < 10 ? '+' : '' }}{{ points }}</span>
       </div>
     </div>
     <div v-if="resultIsStandings(result)" class="overflow-hidden">
       <div class="slide-in">
-        <span class="text-gray-300 text-4xl">{{ result.points }}</span>
+        <span class="text-gray-300 text-md sm:text-4xl">{{ result.points }}</span>
       </div>
     </div>
   </div>
