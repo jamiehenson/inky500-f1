@@ -27,10 +27,13 @@ export const useStagesStore = defineStore('stages', () => {
     'finished'
   ]
 
-  const season: Ref<SeasonName> = ref((params.season as SeasonName) || mostRecentSeason)
-  const track: Ref<TrackName> = ref(
-    (params.track as TrackName) || getLastValidTrack(mostRecentSeason)
-  )
+  // TODO: update to this when s4 ready
+  // const season: Ref<SeasonName> = ref((params.season as SeasonName) || mostRecentSeason)
+  // const track: Ref<TrackName> = ref(
+  //   (params.track as TrackName) || getLastValidTrack(mostRecentSeason)
+  // )
+  const season: Ref<SeasonName> = ref((params.season as SeasonName) || 's3')
+  const track: Ref<TrackName> = ref((params.track as TrackName) || getLastValidTrack('s3'))
   const trackName = computed(() => tracks[track.value].name)
 
   const mode: Ref<ModeName> = ref((params.mode || 'all') as ModeName)
