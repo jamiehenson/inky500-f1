@@ -5,7 +5,7 @@
     <div class="flex-[2_2_0%] p-3 sm:p-5 flex flex-col standing-bg w-full">
       <div class="flex justify-between">
         <h2 class="text-xl sm:text-2xl font-bold uppercase mb-3">
-          Inky 500 Season {{ season.slice(1) }} - {{ trackName }} Grand Prix
+          Inky 500 Season {{ season.slice(1) }} - {{ trackName }}
         </h2>
         <div class="hidden sm:block uppercase text-gray-300 text-right">Powered by Koozies</div>
       </div>
