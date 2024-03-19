@@ -14,7 +14,7 @@
         }}</span>
       </div>
     </div>
-    <div v-if="resultIsStandings(result)" class="w-10 mr-8 overflow-hidden">
+    <div v-if="resultIsStandings(result)" class="w-10 mr-5 sm:mr-8 overflow-hidden">
       <div class="slide-in flex items-center justify-between">
         <div :class="[deltaClass(), 'text-2xl sm:text-4xl']">
           {{ result.delta !== 0 ? '›' : '-' }}
