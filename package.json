@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "predeploy": "pnpm build && cp -r announcements dist/announcements",
-    "deploy": "gh-pages -d dist"
+    "deploy": "pnpm predeploy && gh-pages -d dist"
   },
   "dependencies": {
     "@unhead/vue": "^1.8.18",
