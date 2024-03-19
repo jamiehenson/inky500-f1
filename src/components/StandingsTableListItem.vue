@@ -124,7 +124,7 @@ const timePrefix =
     : '+'
 
 const getCarBadge = (racer: Racer) =>
-  new URL(`../assets/${racer.car ?? 'bmw'}.png`, import.meta.url).href
+  new URL(`../assets/cars/${racer.car ?? 'bmw'}.png`, import.meta.url).href
 </script>
 
 <style>
