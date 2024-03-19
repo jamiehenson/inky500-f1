@@ -1,6 +1,6 @@
 <template>
-  <div class="panel-bg p-5 flex-1 sm:rounded-xl relative text-3xl">
-    <div v-if="racer" class="white-outline h-full flex flex-col justify-end">
+  <div class="panel-bg p-5 sm:flex-1 sm:rounded-xl relative text-3xl">
+    <div v-if="racer" class="white-outline sm:h-full flex flex-col justify-end">
       <div
         class="p-4 sm:h-32 sm:w-32 opacity-50 text-xl sm:text-4xl drop-shadow-md shadow-black uppercase"
       >

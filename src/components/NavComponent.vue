@@ -1,10 +1,15 @@
 <template>
   <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg h-12">
     <div class="flex-1 flex items-center p-2">
-      <a :href="withBase()" class="font-bold ml-1 flex items-center">
-        <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
-        <span class="font-bold">Inky 500</span>
-      </a>
+      <div class="font-bold ml-1 flex items-center">
+        <a :href="withBase()">
+          <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
+        </a>
+        <span class="font-bold mr-3 sm:mr-2">Inky 500</span>
+        <span class="sm:hidden text-xs"
+          >{{ season.toUpperCase() }} / {{ trackData[track as TrackName].name }}</span
+        >
+      </div>
       <div class="flex-1 sm:flex-none"></div>
       <div
         :class="[
@@ -14,22 +19,19 @@
       >
         <div class="nav relative px-3 sm:pr-0">
           <button
-            class="w-full mb-3 sm:mb-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-xl uppercase text-sm sm:text-md"
+            class="w-full sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm uppercase text-sm sm:text-md"
             @click="toggleSeasonState"
           >
             {{ season }} ▼
           </button>
-          <div
-            v-if="seasonDropdownState"
-            class="nav sm:absolute px-2 pb-2 pt-0 sm:pt-3 max-h-96 rounded-xl"
-          >
+          <div v-if="seasonDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
             <div v-for="season in seasons" :key="season">
               <a
                 :class="[
                   seasonDisabled(season)
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-blue-800 transition-colors',
-                  'bg-blue-900 px-3 py-1 rounded-xl whitespace-nowrap w-full my-1 flex justify-between items-center uppercase'
+                  'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center uppercase'
                 ]"
                 :href="
                   withBase(
@@ -44,23 +46,20 @@
         </div>
         <div class="nav relative px-3 sm:pr-0">
           <button
-            class="w-full mb-3 sm:mb-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-xl text-sm sm:text-md"
+            class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm text-sm sm:text-md"
             @click="toggleTrackState"
           >
             {{ currentTrack.name
             }}<span :class="['fi-' + currentTrack.countryCode, 'fi rounded-sm mx-2']"></span> ▼
           </button>
-          <div
-            v-if="trackDropdownState"
-            class="nav sm:absolute px-2 pb-2 pt-0 sm:pt-3 max-h-96 rounded-xl"
-          >
+          <div v-if="trackDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
             <div v-for="track in tracks" :key="trackData[track as TrackName].name">
               <a
                 :class="[
                   trackDisabled(track as TrackName, season)
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-blue-800 transition-colors',
-                  'bg-blue-900 px-3 py-1 rounded-xl whitespace-nowrap w-full my-1 flex justify-between items-center'
+                  'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center'
                 ]"
                 :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
               >
@@ -74,18 +73,15 @@
         </div>
         <div class="nav relative px-3 sm:pr-0">
           <button
-            class="w-full mb-3 sm:mb-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-xl capitalize text-sm sm:text-md"
+            class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm capitalize text-sm sm:text-md"
             @click="toggleModeState"
           >
             {{ mode }} ▼
           </button>
-          <div
-            v-if="modeDropdownState"
-            class="nav sm:absolute px-2 pb-2 pt-0 sm:pt-3 max-h-96 rounded-xl"
-          >
+          <div v-if="modeDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
             <div v-for="mode in modes" :key="mode">
               <a
-                class="bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 flex rounded-xl whitespace-nowrap w-full my-1 capitalize"
+                class="bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 flex rounded-sm whitespace-nowrap w-full my-1 capitalize"
                 :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
               >
                 {{ mode }}

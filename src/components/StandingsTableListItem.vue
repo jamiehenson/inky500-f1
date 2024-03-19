@@ -7,7 +7,7 @@
       'flex w-full items-center flex-1'
     ]"
   >
-    <div class="w-12 overflow-hidden">
+    <div class="w-10 sm:w-12 overflow-hidden">
       <div class="slide-in">
         <span class="italic text-gray-300">{{
           resultIsRace(result) ? index + pageNumber * 5 + 1 : result.position
