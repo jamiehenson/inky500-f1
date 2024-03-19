@@ -5,7 +5,8 @@
     <div class="flex-[2_2_0%] p-3 sm:p-5 flex flex-col standing-bg w-full">
       <div class="flex justify-between">
         <h2 class="text-xl sm:text-2xl font-bold uppercase mb-3">
-          Inky 500 Season {{ season.slice(1) }} - {{ trackName }}
+          Inky 500 Season {{ season.slice(1) }} - {{ trackData[track].name }}
+          <span :class="['fi-' + trackData[track].countryCode, 'fi rounded-sm mx-2']"></span>
         </h2>
         <div class="hidden sm:block uppercase text-gray-300 text-right">Powered by Koozies</div>
       </div>
@@ -93,6 +94,7 @@ import { chunkRacers, splitRacerName } from '@/utils'
 import { ref, watch } from 'vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import type { GeneralResult } from '@/types'
+import trackData from '../data/tracks.json'
 
 const { results, title, mode } = defineProps<{
   results: GeneralResult[]
@@ -102,7 +104,7 @@ const { results, title, mode } = defineProps<{
 }>()
 
 const stagesStore = useStagesStore()
-const { season, trackName, fastestLap } = storeToRefs(stagesStore)
+const { season, track, fastestLap } = storeToRefs(stagesStore)
 const paginatedResults = chunkRacers(results, 5)
 
 const currentPage = ref(0)

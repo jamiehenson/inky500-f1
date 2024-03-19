@@ -1,10 +1,9 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import tracks from '../data/tracks.json'
 import { type SeasonName, type TrackName, type RacerResult, type ModeName } from '@/types'
 import type { Ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { getLastValidTrack, lookupStage, mostRecentSeason } from '@/utils'
+import { getLastValidTrack, lookupStage } from '@/utils'
 
 export const useStagesStore = defineStore('stages', () => {
   const route = useRoute()
@@ -34,7 +33,6 @@ export const useStagesStore = defineStore('stages', () => {
   // )
   const season: Ref<SeasonName> = ref((params.season as SeasonName) || 's3')
   const track: Ref<TrackName> = ref((params.track as TrackName) || getLastValidTrack('s3'))
-  const trackName = computed(() => tracks[track.value].name)
 
   const mode: Ref<ModeName> = ref((params.mode || 'all') as ModeName)
 
@@ -73,7 +71,6 @@ export const useStagesStore = defineStore('stages', () => {
     setStage,
     season,
     track,
-    trackName,
     fastestLap,
     bgColor,
     updateBgColor,
