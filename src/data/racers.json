@@ -1,19 +1,23 @@
 {
   "bigtimebosco": {
     "name": "Big Time Bosco",
+    "countryCode": "gb",
     "img": "bigtimebosco"
   },
   "eugenegoat": {
     "name": "Eugene Goat",
+    "countryCode": "gb",
     "img": "eugenegoat",
     "twitch": "gghqio"
   },
   "diego": {
     "name": "D. Iego",
+    "countryCode": "gb",
     "img": "diego"
   },
   "inkubusjaymz": {
     "name": "Inkubus Jaymz",
+    "countryCode": "gb",
     "img": "inkubusjaymz",
     "twitch": "inkubusjaymz"
   },
@@ -35,42 +39,51 @@
   },
   "kruthal": {
     "name": "K. Ruthal",
+    "countryCode": "gb",
     "img": "kruthal"
   },
   "atlas": {
     "name": "Joseph Atlas",
+    "countryCode": "gb",
     "img": "atlas"
   },
   "cousinbenson": {
     "name": "Cousin Bob",
+    "countryCode": "gb",
     "img": "cousinbenson"
   },
   "xnpxbirdy": {
-    "name": "N. Bird"
+    "name": "N. Bird",
+    "countryCode": "gb"
   },
   "michael": {
     "name": "Michael Smith",
+    "countryCode": "gb",
     "img": "michael"
   },
   "cannonmandan": {
     "name": "Cannon Man Dan",
+    "countryCode": "gb",
     "img": "cannonmandan"
   },
   "roberts": {
     "name": "Dan Roberts",
+    "countryCode": "gb",
     "img": "roberts"
   },
   "happybadger": {
     "name": "Happy Badger",
+    "countryCode": "gb",
     "img": "happybadger"
   },
   "blyzr": {
     "name": "Blayze Reid",
-    "img": "blyzr",
-    "countryCode": "us"
+    "countryCode": "us",
+    "img": "blyzr"
   },
   "adam": {
     "name": "Adam",
+    "countryCode": "gb",
     "img": "adam"
   },
   "beaverdude": {
@@ -87,16 +100,19 @@
   },
   "calamitysam": {
     "name": "Calamity Sam",
+    "countryCode": "gb",
     "img": "calamitysam"
   },
   "fletch": {
-    "name": "Fletch"
+    "name": "Fletch",
+    "countryCode": "gb"
   },
   "minusinferno": {
     "name": "MinusInferno"
   },
   "subbax": {
-    "name": "Subbax"
+    "name": "Subbax",
+    "countryCode": "gb"
   },
   "preece": {
     "name": "Josh Preece"

@@ -27,7 +27,7 @@
         <div class="slide-in">
           <span
             :class="[
-              'fi-' + (result.racer.countryCode ?? 'gb'),
+              'fi-' + (result.racer.countryCode ?? 'xx'),
               'fi w-4 sm:h-6 h-4 sm:w-6 mr-3 rounded-sm sm:-translate-y-1'
             ]"
           ></span
