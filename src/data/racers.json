@@ -5,7 +5,8 @@
   },
   "eugenegoat": {
     "name": "Eugene Goat",
-    "img": "eugenegoat"
+    "img": "eugenegoat",
+    "twitch": "gghqio"
   },
   "diego": {
     "name": "D. Iego",
@@ -13,12 +14,14 @@
   },
   "inkubusjaymz": {
     "name": "Inkubus Jaymz",
-    "img": "inkubusjaymz"
+    "img": "inkubusjaymz",
+    "twitch": "inkubusjaymz"
   },
   "graeme": {
     "name": "Graeme Clark",
     "countryCode": "gb-sct",
-    "img": "graeme"
+    "img": "graeme",
+    "twitch": "graemekustom"
   },
   "wobbleboss": {
     "name": "Ben Nykänen",

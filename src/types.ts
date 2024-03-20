@@ -33,6 +33,7 @@ export type Racer = {
   car: string
   img?: string
   countryCode?: string
+  twitch?: string
 }
 
 export type RacerResult = {

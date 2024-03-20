@@ -2,10 +2,10 @@
   <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg h-12">
     <div class="flex-1 flex items-center p-2">
       <div class="font-bold ml-1 flex items-center">
-        <a :href="withBase()">
+        <a :href="withBase()" class="flex items-center">
           <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
+          <span class="font-bold mr-3 sm:mr-2">Inky 500</span>
         </a>
-        <span class="font-bold mr-3 sm:mr-2">Inky 500</span>
         <span class="sm:hidden text-xs"
           >{{ season.toUpperCase() }} / {{ trackData[track as TrackName].name }}</span
         >
@@ -29,7 +29,7 @@
               <a
                 :class="[
                   seasonDisabled(season)
-                    ? 'opacity-50 cursor-not-allowed'
+                    ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
                     : 'hover:bg-blue-800 transition-colors',
                   'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center uppercase'
                 ]"
@@ -57,7 +57,7 @@
               <a
                 :class="[
                   trackDisabled(track as TrackName, season)
-                    ? 'opacity-50 cursor-not-allowed'
+                    ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
                     : 'hover:bg-blue-800 transition-colors',
                   'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center'
                 ]"
@@ -90,12 +90,12 @@
           </div>
         </div>
       </div>
-      <div
+      <button
         class="sm:hidden mr-2 bg-blue-900 hover:bg-blue-800 p-2 rounded-md cursor-pointer"
         @click="toggleMenuState"
       >
         <img src="../assets/burger.svg" class="h-6 invert" />
-      </div>
+      </button>
     </div>
     <!-- Background changer for green screen needs -->
     <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">

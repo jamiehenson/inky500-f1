@@ -10,13 +10,21 @@
         <div class="sm:flex-1 flex items-center justify-center mx-3 sm:mx-0 w-32 sm:w-auto">
           <img :src="imageUrl" class="rounded-xl sm:w-4/5 sm:m-3" />
         </div>
-        <div class="flex-1 sm:flex-none">
-          <p v-if="splitRacerName(racer)[0].length > 0" class="text-md sm:text-2xl italic px-2">
-            {{ splitRacerName(racer)[0] }}
-          </p>
-          <p class="text-md sm:text-4xl italic mb-4 px-2 uppercase font-bold">
-            {{ splitRacerName(racer)[1] }}
-          </p>
+        <div class="flex-1 sm:flex-none flex items-center">
+          <div class="">
+            <p v-if="splitRacerName(racer)[0].length > 0" class="text-md sm:text-2xl italic px-2">
+              {{ splitRacerName(racer)[0] }}
+            </p>
+            <p class="text-md sm:text-4xl italic mb-4 px-2 uppercase font-bold">
+              <span>{{ splitRacerName(racer)[1] }}</span>
+            </p>
+          </div>
+          <a v-if="racer.twitch" :href="`https://www.twitch.tv/${racer.twitch}`" target="_blank">
+            <img src="../assets/twitch.png" class="w-8 h-8 sm:w-12 sm:h-12 ml-3 -mt-3" />
+          </a>
+          <div class="flex-1 flex justify-end">
+            <img :src="getCarBadge(racer)" class="h-10 sm:h-12 w-10 sm:w-12 mr-3 -mt-3" />
+          </div>
         </div>
       </div>
       <p class="mt-3 sm:mt-0 text-md sm:text-6xl text-center wide">
@@ -28,7 +36,7 @@
 
 <script setup lang="ts">
 import type { GeneralResult } from '@/types'
-import { splitRacerName } from '@/utils'
+import { splitRacerName, getCarBadge } from '@/utils'
 
 const { position, results } = defineProps<{ position: number; results: GeneralResult[] }>()
 

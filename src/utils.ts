@@ -112,3 +112,6 @@ export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeNam
       return ` | ${season.toUpperCase()} ${titleize(track)} ${titleize(mode)} Results`
   }
 }
+
+export const getCarBadge = (racer: Racer) =>
+  new URL(`./assets/cars/${racer.car ?? 'bmw'}.png`, import.meta.url).href

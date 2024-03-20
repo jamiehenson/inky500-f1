@@ -45,6 +45,14 @@
           >
             {{ splitRacerName(result.racer)[1] }}</span
           >
+          <a
+            v-if="result.racer.twitch"
+            :href="`https://www.twitch.tv/${result.racer.twitch}`"
+            target="_blank"
+            class="inline-block ml-3 mt-3"
+          >
+            <img src="../assets/twitch.png" class="w-4 h-4 sm:w-6 sm:h-6" />
+          </a>
         </div>
       </div>
       <div class="flex-1">
@@ -79,8 +87,8 @@
 
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
-import { splitRacerName } from '@/utils'
-import type { GeneralResult, Racer, RacerResult, StandingsResult } from '@/types'
+import { splitRacerName, getCarBadge } from '@/utils'
+import type { GeneralResult, RacerResult, StandingsResult } from '@/types'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -122,9 +130,6 @@ const timePrefix =
   ((index === 0 && pageNumber === 0) || result.time === '-' || result.time === 'DNF')
     ? ''
     : '+'
-
-const getCarBadge = (racer: Racer) =>
-  new URL(`../assets/cars/${racer.car ?? 'bmw'}.png`, import.meta.url).href
 </script>
 
 <style>

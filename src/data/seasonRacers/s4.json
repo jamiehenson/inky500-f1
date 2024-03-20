@@ -1,23 +1,23 @@
 {
   "bigtimebosco": {
-    "team": "Scuderia Prongles",
+    "team": "L'Écurie Des Prongles",
     "teamColor": "#FE63DC",
-    "car": "bmw"
+    "car": "alpine"
   },
   "eugenegoat": {
     "team": "Eugene_Goat",
     "teamColor": "#FB5A8C",
-    "car": "bmw"
+    "car": "ginetta"
   },
   "diego": {
     "team": "Bacon",
     "teamColor": "white",
-    "car": "bmw"
+    "car": "mercedes"
   },
   "inkubusjaymz": {
     "team": "Team Inky500",
     "teamColor": "#25C92B",
-    "car": "bmw"
+    "car": "mclaren"
   },
   "graeme": {
     "team": "Listerine BTEC BMW",
@@ -27,17 +27,17 @@
   "wobbleboss": {
     "team": "Naoi Beatha",
     "teamColor": "#E8F41E",
-    "car": "bmw"
+    "car": "astonmartin"
   },
   "snicks": {
     "team": "Kvikklunsj",
     "teamColor": "#F43D1E",
-    "car": "bmw"
+    "car": "mclaren"
   },
   "kruthal": {
     "team": "Kruthal",
     "teamColor": "#4F4F4F",
-    "car": "bmw"
+    "car": "ginetta"
   },
   "atlas": {
     "team": "Synertec RT",
@@ -47,7 +47,7 @@
   "cousinbenson": {
     "team": "Soylent Racing",
     "teamColor": "#98CE39",
-    "car": "bmw"
+    "car": "porsche"
   },
   "xnpxbirdy": {
     "team": "NPB",
@@ -57,57 +57,27 @@
   "michael": {
     "team": "Team Race Fastest",
     "teamColor": "#33a4ff",
-    "car": "bmw"
-  },
-  "cannonmandan": {
-    "team": "Lost Wheel Nut Racing",
-    "teamColor": "cyan",
-    "car": "bmw"
+    "car": "porsche"
   },
   "roberts": {
     "team": "DCRacing2",
     "teamColor": "black",
-    "car": "bmw"
-  },
-  "happybadger": {
-    "team": "Badgerwatch GP",
-    "teamColor": "cyan",
-    "car": "bmw"
+    "car": "chevrolet"
   },
   "blyzr": {
     "team": "Blyzrossi",
     "teamColor": "white",
     "car": "bmw"
   },
-  "adam": {
-    "team": "Adam Goes Racing",
-    "teamColor": "green",
-    "car": "bmw"
-  },
-  "beaverdude": {
-    "team": "Beaver",
-    "teamColor": "cyan",
-    "car": "bmw"
-  },
-  "harpr": {
-    "team": "Hard Motorsport",
-    "teamColor": "#F94037",
-    "car": "bmw"
-  },
-  "subhaac": {
-    "team": "BMW M2 CS",
-    "teamColor": "white",
-    "car": "bmw"
-  },
   "calamitysam": {
     "team": "Calamity GP",
     "teamColor": "black",
-    "car": "bmw"
+    "car": "astonmartin"
   },
-  "preece": {
-    "team": "BMW M2 CS",
-    "teamColor": "white",
-    "car": "bmw"
+  "bouncingczech": {
+    "team": "Bouncing Czech",
+    "teamColor": "black",
+    "car": "ginetta"
   },
   "unknown": {
     "team": "Mystery Machine",

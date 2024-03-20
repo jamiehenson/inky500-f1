@@ -5,7 +5,7 @@
     >
       <div
         :class="[
-          'outer-wrapper h-full w-full sm:white-outline select-none pointer-events-none sm:overflow-hidden flex items-center bg-red-400',
+          'outer-wrapper h-full w-full sm:white-outline sm:overflow-hidden flex items-center bg-red-400',
           animationClass
         ]"
       >
