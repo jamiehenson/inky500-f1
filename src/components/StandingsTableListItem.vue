@@ -49,7 +49,7 @@
             v-if="result.racer.twitch"
             :href="`https://www.twitch.tv/${result.racer.twitch}`"
             target="_blank"
-            class="inline-block ml-3 mt-3"
+            class="inline-block ml-3"
           >
             <img src="../assets/twitch.png" class="w-4 h-4 sm:w-6 sm:h-6" />
           </a>
