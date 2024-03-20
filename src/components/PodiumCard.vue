@@ -2,7 +2,7 @@
   <div class="panel-bg p-5 sm:flex-1 sm:rounded-xl relative text-3xl">
     <div v-if="racer" class="white-outline sm:h-full flex flex-col justify-end">
       <div
-        class="p-4 sm:h-32 sm:w-32 opacity-50 text-xl sm:text-4xl drop-shadow-md shadow-black uppercase"
+        class="bg-black rounded-xl mb-3 sm:h-32 p-4 max-w-full opacity-50 text-xl sm:text-4xl drop-shadow-md shadow-black uppercase"
       >
         {{ racer.team }}
       </div>
@@ -11,7 +11,7 @@
           <img :src="imageUrl" class="rounded-xl sm:w-4/5 sm:m-3" />
         </div>
         <div class="flex-1 sm:flex-none flex items-center">
-          <div class="">
+          <div>
             <p v-if="splitRacerName(racer)[0].length > 0" class="text-md sm:text-2xl italic px-2">
               {{ splitRacerName(racer)[0] }}
             </p>

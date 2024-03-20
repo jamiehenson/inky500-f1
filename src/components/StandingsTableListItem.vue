@@ -22,7 +22,7 @@
         <span>{{ Math.abs(result.delta) }}</span>
       </div>
     </div>
-    <div class="flex-1 overflow-hidden flex flex-col sm:flex-row">
+    <div class="flex-1 overflow-hidden flex flex-col sm:flex-row items-center">
       <div class="flex-1">
         <div class="slide-in">
           <span

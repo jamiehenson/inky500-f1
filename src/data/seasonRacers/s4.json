@@ -1,52 +1,52 @@
 {
   "bigtimebosco": {
     "team": "L'Écurie Des Prongles",
-    "teamColor": "#FE63DC",
+    "teamColor": "#7bd3fb",
     "car": "alpine"
   },
   "eugenegoat": {
-    "team": "Eugene_Goat",
-    "teamColor": "#FB5A8C",
+    "team": "Goatetta",
+    "teamColor": "white",
     "car": "ginetta"
   },
   "diego": {
-    "team": "Bacon",
-    "teamColor": "white",
+    "team": "Mercedeez Nuts",
+    "teamColor": "black",
     "car": "mercedes"
   },
   "inkubusjaymz": {
-    "team": "Team Inky500",
-    "teamColor": "#25C92B",
+    "team": "McLaren Inky",
+    "teamColor": "#ff8325",
     "car": "mclaren"
   },
   "graeme": {
-    "team": "Listerine BTEC BMW",
-    "teamColor": "#B0FADC",
-    "car": "bmw"
+    "team": "We Race As Baguette Pride",
+    "teamColor": "#aaf0d1",
+    "car": "alpine"
   },
   "wobbleboss": {
-    "team": "Naoi Beatha",
-    "teamColor": "#E8F41E",
+    "team": "Lucky Best Wash",
+    "teamColor": "#bda3ce",
     "car": "astonmartin"
   },
   "snicks": {
-    "team": "Kvikklunsj",
-    "teamColor": "#F43D1E",
+    "team": "Fischer Sport",
+    "teamColor": "#fff644",
     "car": "mclaren"
   },
   "kruthal": {
-    "team": "Kruthal",
-    "teamColor": "#4F4F4F",
+    "team": "KDA",
+    "teamColor": "white",
     "car": "ginetta"
   },
   "atlas": {
-    "team": "Synertec RT",
-    "teamColor": "#A90061",
+    "team": "Atlas Performance",
+    "teamColor": "#2847ac",
     "car": "bmw"
   },
   "cousinbenson": {
-    "team": "Soylent Racing",
-    "teamColor": "#98CE39",
+    "team": "Scuderia Munchies",
+    "teamColor": "#f79524",
     "car": "porsche"
   },
   "xnpxbirdy": {
@@ -56,28 +56,28 @@
   },
   "michael": {
     "team": "Team Race Fastest",
-    "teamColor": "#33a4ff",
+    "teamColor": "white",
     "car": "porsche"
   },
   "roberts": {
-    "team": "DCRacing2",
-    "teamColor": "black",
+    "team": "DCRoberts",
+    "teamColor": "#2e0d92",
     "car": "chevrolet"
   },
-  "blyzr": {
-    "team": "Blyzrossi",
-    "teamColor": "white",
-    "car": "bmw"
-  },
   "calamitysam": {
-    "team": "Calamity GP",
-    "teamColor": "black",
+    "team": "Scuderia Greggs",
+    "teamColor": "#03639f",
     "car": "astonmartin"
   },
   "bouncingczech": {
-    "team": "Bouncing Czech",
-    "teamColor": "black",
+    "team": "Team Slow-Fi",
+    "teamColor": "#953267",
     "car": "ginetta"
+  },
+  "rafa4xx": {
+    "team": "Rafa",
+    "teamColor": "black",
+    "car": "porsche"
   },
   "unknown": {
     "team": "Mystery Machine",
