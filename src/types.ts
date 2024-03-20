@@ -63,6 +63,7 @@ export type RacerResults = {
       racerId: RacerName
       time: string
     }
+    noPoints?: boolean
   }
 }
 

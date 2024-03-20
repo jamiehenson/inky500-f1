@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { type SeasonName, type TrackName, type RacerResult, type ModeName } from '@/types'
 import type { Ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { getLastValidTrack, lookupStage } from '@/utils'
+import { getLastValidTrack, lookupStage, mostRecentSeason } from '@/utils'
 
 export const useStagesStore = defineStore('stages', () => {
   const route = useRoute()
@@ -26,13 +26,10 @@ export const useStagesStore = defineStore('stages', () => {
     'finished'
   ]
 
-  // TODO: update to this when s4 ready
-  // const season: Ref<SeasonName> = ref((params.season as SeasonName) || mostRecentSeason)
-  // const track: Ref<TrackName> = ref(
-  //   (params.track as TrackName) || getLastValidTrack(mostRecentSeason)
-  // )
-  const season: Ref<SeasonName> = ref((params.season as SeasonName) || 's3')
-  const track: Ref<TrackName> = ref((params.track as TrackName) || getLastValidTrack('s3'))
+  const season: Ref<SeasonName> = ref((params.season as SeasonName) || mostRecentSeason)
+  const track: Ref<TrackName> = ref(
+    (params.track as TrackName) || getLastValidTrack(mostRecentSeason)
+  )
 
   const mode: Ref<ModeName> = ref((params.mode || 'all') as ModeName)
 

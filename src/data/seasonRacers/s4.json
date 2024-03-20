@@ -10,7 +10,7 @@
     "car": "ginetta"
   },
   "diego": {
-    "team": "Mercedeez Nuts",
+    "team": "Mercedeez Nutz",
     "teamColor": "black",
     "car": "mercedes"
   },
@@ -30,7 +30,7 @@
     "car": "astonmartin"
   },
   "snicks": {
-    "team": "Fischer Sport",
+    "team": "FischerCross",
     "teamColor": "#fff644",
     "car": "mclaren"
   },
@@ -75,9 +75,14 @@
     "car": "ginetta"
   },
   "rafa4xx": {
-    "team": "Rafa",
+    "team": "FTW",
     "teamColor": "black",
     "car": "porsche"
+  },
+  "mcdonoli": {
+    "team": "AMR V8 Vantage GT4",
+    "teamColor": "purple",
+    "car": "astonmartin"
   },
   "unknown": {
     "team": "Mystery Machine",

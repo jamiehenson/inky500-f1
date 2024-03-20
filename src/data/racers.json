@@ -99,7 +99,7 @@
     "img": "subhaac"
   },
   "calamitysam": {
-    "name": "Calamity Sam",
+    "name": "S. Am",
     "countryCode": "gb",
     "img": "calamitysam"
   },
@@ -117,10 +117,19 @@
   "preece": {
     "name": "Josh Preece"
   },
+
+  "rafa4xx": {
+    "name": "R. Oliveira"
+  },
+  "mcdonoli": {
+    "name": "O. McDonnell",
+    "countryCode": "gb"
+  },
+  "bouncingczech": {
+    "name": "W. Masek",
+    "countryCode": "cz"
+  },
   "unknown": {
     "name": "Unknown"
-  },
-  "rafa4xx": {
-    "name": "Rafa"
   }
 }
