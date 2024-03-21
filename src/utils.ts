@@ -29,13 +29,11 @@ export const chunkRacers = (results: GeneralResult[], pageSize: number) => {
 }
 
 export const combinedRacer = (racer: RacerName, season: SeasonName) => {
-  const racerPresent = Object.keys(seasonRacersData[season]).includes(racer)
+  const racerPresent = (seasonRacersData[season] as Racers)[racer] && racersData[racer]
 
   return {
-    ...racersData[racer as RacerName],
-    ...(racerPresent
-      ? (seasonRacersData[season] as Racers)[racer as RacerName]
-      : { team: '', teamColor: '', car: '' })
+    ...racersData[racerPresent ? racer : 'unknown'],
+    ...(seasonRacersData[season] as Racers)[racerPresent ? racer : 'unknown']
   }
 }
 
