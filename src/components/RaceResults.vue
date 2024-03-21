@@ -193,7 +193,7 @@ watch(
         case 'standingsIn':
           return 3000
         case 'raceResultsPodium':
-          return 10000
+          return 5000
         case 'raceResultsClassification':
         case 'standings':
           return 10000 * Math.ceil(raceResults.value.length / 5)
