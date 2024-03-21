@@ -88,8 +88,8 @@
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
 import { splitRacerName, getCarBadge } from '@/utils'
-import type { GeneralResult, RacerResult, RacerResults, StandingsResult } from '@/types'
-import resultsData from '../data/results'
+import type { GeneralResult, RacerResult, StandingsResult, Track } from '@/types'
+import trackData from '../data/tracks.json'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -98,7 +98,7 @@ const { isRace, index, pageNumber, result, floating } = defineProps<{
   isLastRace: boolean
   floating?: boolean
 }>()
-const { fastestLap, track, season } = useStagesStore()
+const { fastestLap, track } = useStagesStore()
 const animationDelay = index / 20 + 's'
 let points = Math.max(10 - (index + pageNumber * 5), 0)
 
@@ -106,7 +106,7 @@ if (fastestLap?.racer.name === result.racer.name) {
   points++
 }
 
-if ((resultsData[season] as RacerResults)[track].noPoints) {
+if ((trackData[track] as Track).noPoints) {
   points = 0
 }
 

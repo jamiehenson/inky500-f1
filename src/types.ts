@@ -13,6 +13,16 @@ export type TrackName = keyof typeof trackData
 export const racers = Object.keys(racersData)
 export type RacerName = keyof typeof racersData
 
+export type Tracks = {
+  [key in TrackName]: Track
+}
+
+export type Track = {
+  name: TrackName
+  countryCode: string
+  noPoints?: boolean
+}
+
 export type Standings = {
   [key in SeasonName]: {
     [key in TrackName]: {
@@ -63,7 +73,6 @@ export type RacerResults = {
       racerId: RacerName
       time: string
     }
-    noPoints?: boolean
   }
 }
 

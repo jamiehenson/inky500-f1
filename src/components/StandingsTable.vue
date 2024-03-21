@@ -78,7 +78,9 @@
           {{ fastestLap.racer.team }}
         </div>
         <div class="text-center">
-          {{ fastestLap.time }}&nbsp;<span class="italic">(+1 point)</span>
+          {{ fastestLap.time }}&nbsp;<span class="italic">
+            ({{ noPoints ? '+0 points' : '+1 point' }})
+          </span>
         </div>
       </div>
     </div>
@@ -93,7 +95,7 @@ import FaderComponent from './FaderComponent.vue'
 import { chunkRacers, splitRacerName } from '@/utils'
 import { ref, watch } from 'vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
-import type { GeneralResult } from '@/types'
+import type { GeneralResult, Track } from '@/types'
 import trackData from '../data/tracks.json'
 
 const { results, title, mode } = defineProps<{
@@ -109,6 +111,8 @@ const paginatedResults = chunkRacers(results, 5)
 
 const currentPage = ref(0)
 const isRace = mode === 'race'
+
+const noPoints = (trackData[track.value] as Track).noPoints
 
 watch(
   currentPage,

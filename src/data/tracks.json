@@ -85,6 +85,7 @@
   },
   "shakedown-s4": {
     "name": "Oulton Park Shakedown",
-    "countryCode": "gb"
+    "countryCode": "gb",
+    "noPoints": true
   }
 }
