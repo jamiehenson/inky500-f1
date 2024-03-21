@@ -23,15 +23,6 @@ export type Track = {
   noPoints?: boolean
 }
 
-export type Standings = {
-  [key in SeasonName]: {
-    [key in TrackName]: {
-      name: string
-      positions: NumberObject
-    }
-  }
-}
-
 export type Racers = {
   [key in RacerName]: Racer
 }
