@@ -50,9 +50,9 @@
           ><span v-if="!entryIsRacer(result.entry)" :class="['ml-3 italic font-bold uppercase']">
             {{
               `(${Object.entries(seasonRacers[season])
-                .filter((racer) => racer[1].car === result.entry.img)
-                .map((racer) => {
-                  const splitName = racers[racer[0] as RacerName].name.split(' ')
+                .filter((driver) => driver[1].car === result.entry.img)
+                .map((driver) => {
+                  const splitName = drivers[driver[0] as RacerName].name.split(' ')
                   return `${splitName[0][0]}. ${splitName[splitName.length - 1]}`
                 })
                 .join(', ')})`
@@ -107,7 +107,7 @@ import { useStagesStore } from '@/stores/stages'
 import { splitRacerName, getCarBadge, entryIsRacer } from '@/utils'
 import type { GeneralResult, RacerName, RacerResult, StandingsResult, Track } from '@/types'
 import trackData from '../data/tracks.json'
-import racers from '../data/racers.json'
+import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean

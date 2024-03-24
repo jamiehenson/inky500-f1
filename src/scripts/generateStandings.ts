@@ -55,7 +55,7 @@ const calculateStandings = (season: SeasonName) => {
     return (racesObj[race] = points), racesObj
   }, {})
 
-  // Add the points for each racer cumulatively, and reorder
+  // Add the points for each driver cumulatively, and reorder
   const raceKeys = Object.keys(points)
 
   raceKeys.forEach((race, index) => {
@@ -66,8 +66,8 @@ const calculateStandings = (season: SeasonName) => {
     const racePoints = points[race] as GeneratedRaceStandings
     if (index > 0) {
       const previousRacePoints = points[raceKeys[index - 1]] as GeneratedRaceStandings
-      Object.keys(racePoints).forEach((racer) => {
-        racePoints[racer] += previousRacePoints[racer] ?? 0
+      Object.keys(racePoints).forEach((driver) => {
+        racePoints[driver] += previousRacePoints[driver] ?? 0
       })
     }
 
@@ -128,12 +128,12 @@ const calculateConstructors = (season: SeasonName) => {
     const racePoints = points[race] as GeneratedConstructorStandings
     if (index > 0) {
       const previousRacePoints = points[raceKeys[index - 1]] as GeneratedConstructorStandings
-      Object.keys(racePoints).forEach((racer) => {
-        racePoints[racer] = {
-          points: racePoints[racer].points + previousRacePoints[racer].points ?? 0,
+      Object.keys(racePoints).forEach((driver) => {
+        racePoints[driver] = {
+          points: racePoints[driver].points + previousRacePoints[driver].points ?? 0,
           normalisedPoints:
-            racePoints[racer].normalisedPoints + previousRacePoints[racer].normalisedPoints ?? 0,
-          driverCount: racePoints[racer].driverCount
+            racePoints[driver].normalisedPoints + previousRacePoints[driver].normalisedPoints ?? 0,
+          driverCount: racePoints[driver].driverCount
         }
       })
     }

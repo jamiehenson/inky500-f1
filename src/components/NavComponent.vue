@@ -76,7 +76,7 @@
             class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm capitalize text-sm sm:text-md"
             @click="toggleModeState"
           >
-            {{ mode }} ▼
+            {{ mode }}&nbsp;&nbsp;{{ modeEmoji(mode) }}&nbsp; ▼
           </button>
           <div v-if="modeDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
             <div v-for="mode in modes" :key="mode">
@@ -84,7 +84,10 @@
                 class="bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 flex rounded-sm whitespace-nowrap w-full my-1 capitalize"
                 :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
               >
-                {{ mode }}
+                <div class="w-full flex justify-between">
+                  <span>{{ mode }}</span>
+                  <span class="ml-3">{{ modeEmoji(mode) }}</span>
+                </div>
               </a>
             </div>
           </div>
@@ -115,7 +118,7 @@
 import { useStagesStore } from '@/stores/stages'
 import trackData from '../data/tracks.json'
 import resultsData from '../data/results'
-import type { TrackName } from '@/types'
+import type { ModeName, TrackName } from '@/types'
 import { seasons, modes } from '@/types'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -153,6 +156,21 @@ const toggleMenuState = () => {
 
 const tracks = computed(() => Object.keys(resultsData[season.value]))
 const currentTrack = computed(() => trackData[track.value])
+const modeEmoji = (mode: ModeName) => {
+  switch (mode) {
+    case 'all':
+      return '🍿'
+    case 'podium':
+      return '🍾'
+    case 'race':
+      return '🏎️'
+    case 'drivers':
+    case 'constructors':
+      return '🏆'
+    default:
+      ''
+  }
+}
 </script>
 
 <style>

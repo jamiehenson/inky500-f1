@@ -10,12 +10,12 @@ import {
   type ModeName,
   type Constructor
 } from './types'
-import racersData from './data/racers.json'
+import driversData from './data/drivers.json'
 import seasonRacersData from './data/seasonRacers'
 import resultsData from './data/results'
 
-export const splitRacerName = (racer: Racer) => {
-  const split = racer.name.split(' ')
+export const splitRacerName = (driver: Racer) => {
+  const split = driver.name.split(' ')
   return [split.slice(0, -1).join(' '), split.slice(-1).join(' ')]
 }
 
@@ -29,12 +29,12 @@ export const chunkRacers = (results: GeneralResult[], pageSize: number) => {
   return results
 }
 
-export const combinedRacer = (racer: RacerName, season: SeasonName) => {
-  const racerPresent = (seasonRacersData[season] as Racers)[racer] && racersData[racer]
+export const combinedRacer = (driver: RacerName, season: SeasonName) => {
+  const racerPresent = (seasonRacersData[season] as Racers)[driver] && driversData[driver]
 
   return {
-    ...racersData[racerPresent ? racer : 'unknown'],
-    ...(seasonRacersData[season] as Racers)[racerPresent ? racer : 'unknown']
+    ...driversData[racerPresent ? driver : 'unknown'],
+    ...(seasonRacersData[season] as Racers)[racerPresent ? driver : 'unknown']
   }
 }
 
@@ -63,7 +63,7 @@ export const lookupStage = (mode: ModeName) => {
       return 1
     case 'race':
       return 2
-    case 'standings':
+    case 'drivers':
       return 5
     case 'constructors':
       return 8
