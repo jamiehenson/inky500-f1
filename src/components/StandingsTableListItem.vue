@@ -27,27 +27,40 @@
         <div class="slide-in">
           <span
             :class="[
-              'fi-' + (result.racer.countryCode ?? 'xx'),
+              'fi-' + (result.entry.countryCode ?? 'xx'),
               'fi w-4 sm:h-6 h-4 sm:w-6 mr-3 rounded-sm sm:-translate-y-1'
             ]"
           ></span
           ><span
+            v-if="entryIsRacer(result.entry)"
             :class="[
               isRace ? 'text-sm sm:text-xl' : 'text-md sm:text-2xl',
               'italic  text-gray-300'
             ]"
-            >{{ splitRacerName(result.racer)[0] }}&nbsp;</span
+            >{{ splitRacerName(result.entry)[0] }}&nbsp;</span
           ><span
             :class="[
               isRace ? 'text-md sm:text-2xl' : 'text-md sm:text-3xl',
               'italic font-bold uppercase'
             ]"
           >
-            {{ splitRacerName(result.racer)[1] }}</span
+            {{
+              entryIsRacer(result.entry) ? splitRacerName(result.entry)[1] : result.entry.name
+            }}</span
+          ><span v-if="!entryIsRacer(result.entry)" :class="['ml-3 italic font-bold uppercase']">
+            {{
+              `(${Object.entries(seasonRacers[season])
+                .filter((racer) => racer[1].car === result.entry.img)
+                .map((racer) => {
+                  const splitName = racers[racer[0] as RacerName].name.split(' ')
+                  return `${splitName[0][0]}. ${splitName[splitName.length - 1]}`
+                })
+                .join(', ')})`
+            }}</span
           >
           <a
-            v-if="result.racer.twitch"
-            :href="`https://www.twitch.tv/${result.racer.twitch}`"
+            v-if="entryIsRacer(result.entry) && result.entry.twitch"
+            :href="`https://www.twitch.tv/${result.entry.twitch}`"
             target="_blank"
             class="inline-block ml-3"
           >
@@ -57,12 +70,16 @@
       </div>
       <div class="flex-1">
         <div class="slide-in flex items-center text-red">
-          <img :src="getCarBadge(result.racer)" class="w-4 sm:h-6 h-4 sm:w-6 mr-3" /><span
+          <img
+            :src="getCarBadge(entryIsRacer(result.entry) ? result.entry.car : result.entry.img)"
+            class="w-4 sm:h-6 h-4 sm:w-6 mr-3"
+          /><span
+            v-if="entryIsRacer(result.entry)"
             :class="[
               !isRace ? 'text-sm sm:text-2xl' : 'text-xs sm:text-xl',
               'text-gray-300 uppercase'
             ]"
-            >{{ result.racer.team }}</span
+            >{{ result.entry.team }}</span
           >
         </div>
       </div>
@@ -87,9 +104,11 @@
 
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
-import { splitRacerName, getCarBadge } from '@/utils'
-import type { GeneralResult, RacerResult, StandingsResult, Track } from '@/types'
+import { splitRacerName, getCarBadge, entryIsRacer } from '@/utils'
+import type { GeneralResult, RacerName, RacerResult, StandingsResult, Track } from '@/types'
 import trackData from '../data/tracks.json'
+import racers from '../data/racers.json'
+import seasonRacers from '../data/seasonRacers'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -98,11 +117,11 @@ const { isRace, index, pageNumber, result, floating } = defineProps<{
   isLastRace: boolean
   floating?: boolean
 }>()
-const { fastestLap, track } = useStagesStore()
+const { fastestLap, track, season } = useStagesStore()
 const animationDelay = index / 20 + 's'
 let points = Math.max(10 - (index + pageNumber * 5), 0)
 
-if (fastestLap?.racer.name === result.racer.name) {
+if (fastestLap?.entry.name === result.entry.name) {
   points++
 }
 

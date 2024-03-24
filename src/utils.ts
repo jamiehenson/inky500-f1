@@ -7,7 +7,8 @@ import {
   type Racers,
   type SeasonName,
   type TrackName,
-  type ModeName
+  type ModeName,
+  type Constructor
 } from './types'
 import racersData from './data/racers.json'
 import seasonRacersData from './data/seasonRacers'
@@ -64,6 +65,8 @@ export const lookupStage = (mode: ModeName) => {
       return 2
     case 'standings':
       return 5
+    case 'constructors':
+      return 8
     case 'all':
       return 0
   }
@@ -111,5 +114,9 @@ export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeNam
   }
 }
 
-export const getCarBadge = (racer: Racer) =>
-  new URL(`./assets/cars/${racer.car ?? 'bmw'}.png`, import.meta.url).href
+export const getCarBadge = (car: string) =>
+  new URL(`./assets/cars/${car ?? 'bmw'}.png`, import.meta.url).href
+
+export const entryIsRacer = (entry: Racer | Constructor): entry is Racer => {
+  return (entry as Racer).team !== undefined
+}

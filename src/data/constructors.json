@@ -1,0 +1,47 @@
+{
+  "alpine": {
+    "name": "Alpine",
+    "countryCode": "fr",
+    "img": "alpine"
+  },
+  "astonmartin": {
+    "name": "Aston Martin",
+    "countryCode": "gb",
+    "img": "astonmartin"
+  },
+  "bmw": {
+    "name": "BMW",
+    "countryCode": "de",
+    "img": "bmw"
+  },
+  "chevrolet": {
+    "name": "Chevrolet",
+    "countryCode": "us",
+    "img": "chevrolet"
+  },
+  "ginetta": {
+    "name": "Ginetta",
+    "countryCode": "gb",
+    "img": "ginetta"
+  },
+  "mercedes": {
+    "name": "Mercedes",
+    "countryCode": "de",
+    "img": "mercedes"
+  },
+  "mclaren": {
+    "name": "McLaren",
+    "countryCode": "gb",
+    "img": "mclaren"
+  },
+  "porsche": {
+    "name": "Porsche",
+    "countryCode": "de",
+    "img": "porsche"
+  },
+  "renault": {
+    "name": "Renault",
+    "countryCode": "fr",
+    "img": "renault"
+  }
+}

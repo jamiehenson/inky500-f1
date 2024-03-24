@@ -23,7 +23,7 @@
         <div
           class="hidden sm:block w-24 text-center uppercase text-gray-300 font-bold text-sm sm:text-md"
         >
-          Points
+          {{ entryIsRacer(results[0].entry) ? 'Points' : 'Adjusted Points' }}
         </div>
         <div
           class="sm:hidden w-14 sm:w-24 text-center uppercase text-gray-300 font-bold text-sm sm:text-md"
@@ -40,7 +40,7 @@
           <ul class="grid grid-rows-5 h-full" v-if="pageNumber === currentPage">
             <li
               v-for="(result, index) in page"
-              :key="result.racer.name"
+              :key="result.entry.name"
               class="px-2 rounded-sm text-lg relative flex"
             >
               <StandingsTableListItem
@@ -70,12 +70,12 @@
         <div class="flex-1 flex flex-col sm:flex-row">
           <span class="uppercase text-purple-600 mr-3">Fastest Lap</span>
           <div>
-            <span class="text-gray-300">{{ splitRacerName(fastestLap.racer)[0] }}&nbsp;</span
-            ><span class="font-bold uppercase"> {{ splitRacerName(fastestLap.racer)[1] }}</span>
+            <span class="text-gray-300">{{ splitRacerName(fastestLap.entry)[0] }}&nbsp;</span
+            ><span class="font-bold uppercase"> {{ splitRacerName(fastestLap.entry)[1] }}</span>
           </div>
         </div>
         <div class="flex-1 uppercase">
-          {{ fastestLap.racer.team }}
+          {{ fastestLap.entry.team }}
         </div>
         <div class="text-center">
           {{ fastestLap.time }}&nbsp;<span class="italic">
@@ -92,7 +92,7 @@ import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
 import PodiumCard from './PodiumCard.vue'
 import FaderComponent from './FaderComponent.vue'
-import { chunkRacers, splitRacerName } from '@/utils'
+import { chunkRacers, splitRacerName, entryIsRacer } from '@/utils'
 import { ref, watch } from 'vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import type { GeneralResult, Track } from '@/types'

@@ -23,7 +23,7 @@
             <img src="../assets/twitch.png" class="w-8 h-8 sm:w-12 sm:h-12 ml-3 -mt-3" />
           </a>
           <div class="flex-1 flex justify-end">
-            <img :src="getCarBadge(racer)" class="h-10 sm:h-12 w-10 sm:w-12 mr-3 -mt-3" />
+            <img :src="getCarBadge(racer.car)" class="h-10 sm:h-12 w-10 sm:w-12 mr-3 -mt-3" />
           </div>
         </div>
       </div>
@@ -35,12 +35,12 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralResult } from '@/types'
+import type { GeneralResult, Racer } from '@/types'
 import { splitRacerName, getCarBadge } from '@/utils'
 
 const { position, results } = defineProps<{ position: number; results: GeneralResult[] }>()
 
-const racer = results[position - 1]?.racer
+const racer = results[position - 1]?.entry as Racer
 const teamColor = racer.teamColor
 const imageUrl = new URL(`../assets/discord/${racer.img ?? 'unknown'}.webp`, import.meta.url).href
 

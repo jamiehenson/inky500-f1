@@ -23,6 +23,9 @@ export const useStagesStore = defineStore('stages', () => {
     'standingsIn',
     'standings',
     'standingsOut',
+    'constructorsIn',
+    'constructors',
+    'constructorsOut',
     'finished'
   ]
 

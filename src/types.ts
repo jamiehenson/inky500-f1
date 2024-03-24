@@ -1,10 +1,11 @@
 import racersData from './data/racers.json'
 import trackData from './data/tracks.json'
+import constructorsData from './data/constructors.json'
 
 export const seasons = ['s1', 's2', 's3', 's4'] as const
 export type SeasonName = (typeof seasons)[number]
 
-export const modes = ['all', 'podium', 'race', 'standings'] as const
+export const modes = ['all', 'podium', 'race', 'standings', 'constructors'] as const
 export type ModeName = (typeof modes)[number]
 
 export const tracks = Object.keys(trackData)
@@ -12,6 +13,9 @@ export type TrackName = keyof typeof trackData
 
 export const racers = Object.keys(racersData)
 export type RacerName = keyof typeof racersData
+
+export const constructors = Object.keys(constructorsData)
+export type ConstructorName = keyof typeof constructorsData
 
 export type Tracks = {
   [key in TrackName]: Track
@@ -38,12 +42,22 @@ export type Racer = {
 }
 
 export type RacerResult = {
-  racer: Racer
+  entry: Racer
   time: string
 }
 
+export type SeasonRacer = {
+  team: string
+  teamColor: string
+  car: string
+}
+
+export type SeasonRacers = {
+  [key in RacerName]: SeasonRacer
+}
+
 export type StandingsResult = {
-  racer: Racer
+  entry: Racer | Constructor
   points: number
   position: number
   delta: number
@@ -71,4 +85,24 @@ export type StandingsResults = {
   [index in TrackName]: {
     [index in RacerName]: number
   }
+}
+
+export type Constructor = {
+  name: string
+  countryCode: string
+  img: string
+}
+
+export type ConstructorResult = {
+  points: number
+  normalisedPoints: number
+  driverCount: number
+}
+
+export type ConstructorResults = {
+  [index in ConstructorName]: ConstructorResult
+}
+
+export type ConstructorsResults = {
+  [index in TrackName]: ConstructorResults
 }

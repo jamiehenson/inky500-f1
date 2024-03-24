@@ -30,6 +30,13 @@
           :results="standings"
           :isLastRace="isLastRace"
         />
+        <StandingsTable
+          v-else-if="stage === 'constructors' || stage === 'constructorsOut'"
+          title="Constructors' Championship"
+          mode="championship"
+          :results="constructors"
+          :isLastRace="isLastRace"
+        />
       </div>
     </div>
   </div>
@@ -40,7 +47,18 @@
 import { computed, watch, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import resultsData from '../data/results'
 import standingsData from '../data/standings'
-import type { NumberObject, RacerName, TrackName, RacerResults, StandingsResults } from '@/types'
+import constructorsData from '../data/constructors/index'
+import constructorData from '../data/constructors.json'
+import type {
+  NumberObject,
+  RacerName,
+  TrackName,
+  RacerResults,
+  StandingsResults,
+  ConstructorName,
+  ConstructorResults,
+  ConstructorsResults
+} from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
 import SectionIntro from './SectionIntro.vue'
@@ -55,6 +73,7 @@ import {
   titleSnippet
 } from '@/utils'
 import { useSeoMeta } from '@unhead/vue'
+import seasonRacers from '@/data/seasonRacers'
 
 const dataAvailable = computed(() => (resultsData[season.value] as RacerResults)[track.value])
 
@@ -77,7 +96,7 @@ const raceResults = computed(() => {
 
   if (results) {
     return Object.entries(results).map((entry) => ({
-      racer: combinedRacer(entry[0] as RacerName, season.value),
+      entry: combinedRacer(entry[0] as RacerName, season.value),
       time: entry[1]
     }))
   } else {
@@ -85,7 +104,7 @@ const raceResults = computed(() => {
   }
 })
 
-const sortAndFormatStandings = (data: NumberObject) => {
+const sortAndFormatStandings = (data: NumberObject, isConstructor?: boolean) => {
   let previousPoints = 0
   let tieCount = 0
 
@@ -106,12 +125,16 @@ const sortAndFormatStandings = (data: NumberObject) => {
       }
 
       return {
-        racer: combinedRacer(entry[0] as RacerName, season.value),
+        entry: isConstructor
+          ? constructorData[entry[0] as ConstructorName]
+          : combinedRacer(entry[0] as RacerName, season.value),
         points: entry[1],
         position
       }
     })
 }
+
+const sortAndFormatConstructors = (data: NumberObject) => sortAndFormatStandings(data, true)
 
 const standings = computed(() => {
   const raceKeys = Object.keys(standingsData[season.value])
@@ -130,7 +153,42 @@ const standings = computed(() => {
 
   return currentStandings.map((standing) => {
     const previousPosition = previousStandings.find(
-      (prev) => prev.racer.name === standing.racer.name
+      (prev) => prev.entry.name === standing.entry.name
+    )
+
+    return {
+      ...standing,
+      delta: previousPosition ? previousPosition.position - standing.position : 0
+    }
+  })
+})
+
+const constructors = computed(() => {
+  const raceKeys = Object.keys(constructorsData[season.value])
+  const firstRace = raceKeys.indexOf(track.value) === 0
+
+  const currentData = (constructorsData[season.value] as ConstructorsResults)[track.value]
+
+  const mapData = (data: ConstructorResults) =>
+    Object.entries(data).reduce((obj: NumberObject, item) => {
+      return (obj[item[0]] = item[1].normalisedPoints), obj
+    }, {})
+
+  const currentStandings = sortAndFormatConstructors(mapData(currentData))
+
+  const previousStandings = firstRace
+    ? currentStandings
+    : sortAndFormatConstructors(
+        mapData(
+          (constructorsData[season.value] as ConstructorsResults)[
+            raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName
+          ]
+        )
+      )
+
+  return currentStandings.map((standing) => {
+    const previousPosition = previousStandings.find(
+      (prev) => prev.entry.name === standing.entry.name
     )
 
     return {
@@ -148,9 +206,9 @@ const title = `Inky 500${titleSnippet(season.value, track.value, mode.value)}`
 const description =
   raceResults.value.length >= 3
     ? `
-      🥇 ${raceResults.value[0].racer.name} (${raceResults.value[0].time}),
-      🥈 ${raceResults.value[1].racer.name} (+${raceResults.value[1].time}),
-      🥉 ${raceResults.value[2].racer.name} (+${raceResults.value[2].time})
+      🥇 ${raceResults.value[0].entry.name} (${raceResults.value[0].time}),
+      🥈 ${raceResults.value[1].entry.name} (+${raceResults.value[1].time}),
+      🥉 ${raceResults.value[2].entry.name} (+${raceResults.value[2].time})
     `
     : 'Standings for the Inky 500 League'
 
@@ -165,7 +223,7 @@ useSeoMeta({
 
 onBeforeMount(() => {
   const { racerId, time } = (resultsData[season.value] as RacerResults)[track.value].fastestLap
-  fastestLap.value = { racer: combinedRacer(racerId as RacerName, season.value), time }
+  fastestLap.value = { entry: combinedRacer(racerId as RacerName, season.value), time }
 })
 
 onMounted(() => {
@@ -187,23 +245,33 @@ watch(
       switch (stage.value) {
         case 'raceResultsOut':
         case 'standingsOut':
+        case 'constructorsOut':
         case 'finished':
           return 1000
         case 'raceResultsIn':
         case 'standingsIn':
+        case 'constructorsIn':
           return 3000
         case 'raceResultsPodium':
           return 5000
         case 'raceResultsClassification':
         case 'standings':
-          return 10000 * Math.ceil(raceResults.value.length / 5)
+          return 5000 * Math.ceil(raceResults.value.length / 5)
+        case 'constructors':
+          return (
+            5000 *
+            Math.ceil(
+              Array.from(new Set(Object.values(seasonRacers[season.value]).map(({ car }) => car)))
+                .length / 5
+            )
+          )
       }
     }
 
     const delay = determineDelay()
 
     if (mode.value === 'all') {
-      timeouts.push(setTimeout(() => advanceStage(), delay))
+      timeouts.push(window.setTimeout(() => advanceStage(), delay))
     }
   },
   { immediate: true }
@@ -213,9 +281,11 @@ const animationClass = computed(() => {
   switch (stage.value) {
     case 'raceResultsIn':
     case 'standingsIn':
+    case 'constructorsIn':
       return 'outer-wrapper-intro'
     case 'raceResultsOut':
     case 'standingsOut':
+    case 'constructorsOut':
       return 'outer-wrapper-outro'
     case 'finished':
       return 'finished'

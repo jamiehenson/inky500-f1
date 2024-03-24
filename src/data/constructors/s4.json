@@ -1,0 +1,27 @@
+{
+  "shakedown-s4": {
+    "bmw": { "points": 57, "normalisedPoints": 57, "driverCount": 2 },
+    "mercedes": { "points": 19, "normalisedPoints": 38, "driverCount": 1 },
+    "chevrolet": { "points": 17, "normalisedPoints": 34, "driverCount": 1 },
+    "alpine": { "points": 33, "normalisedPoints": 33, "driverCount": 2 },
+    "porsche": { "points": 48, "normalisedPoints": 32, "driverCount": 3 },
+    "ginetta": { "points": 36, "normalisedPoints": 24, "driverCount": 3 },
+    "mclaren": { "points": 16, "normalisedPoints": 16, "driverCount": 2 },
+    "astonmartin": { "points": 20, "normalisedPoints": 13, "driverCount": 3 }
+  },
+  "oulton-park": null,
+  "monza": null,
+  "lagunaseca": null,
+  "nurburgring": null,
+  "paul-ricard": null,
+  "brands": null,
+  "barcelona": null,
+  "spa": null,
+  "hungaroring": null,
+  "silverstone": null,
+  "zolder": null,
+  "suzuka": null,
+  "mt-panorama": null,
+  "donington": null,
+  "cota": null
+}

@@ -34,6 +34,11 @@
     "teamColor": "#fff644",
     "car": "mclaren"
   },
+  "xnpxbirdy": {
+    "team": "NPB",
+    "teamColor": "#646464",
+    "car": "bmw"
+  },
   "kruthal": {
     "team": "KDA",
     "teamColor": "white",
@@ -48,11 +53,6 @@
     "team": "Scuderia Munchies",
     "teamColor": "#f79524",
     "car": "porsche"
-  },
-  "xnpxbirdy": {
-    "team": "NPB",
-    "teamColor": "#646464",
-    "car": "bmw"
   },
   "michael": {
     "team": "Team Race Fastest",
@@ -87,6 +87,6 @@
   "unknown": {
     "team": "Mystery Machine",
     "teamColor": "black",
-    "car": "bmw"
+    "car": "renault"
   }
 }
