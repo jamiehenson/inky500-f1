@@ -28,7 +28,7 @@
             <div v-for="season in seasons" :key="season">
               <a
                 :class="[
-                  seasonDisabled(season)
+                  seasonDisabled(season) || constructorsDisabled(season, mode)
                     ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
                     : 'hover:bg-blue-800 transition-colors',
                   'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center uppercase'
@@ -81,7 +81,12 @@
           <div v-if="modeDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
             <div v-for="mode in modes" :key="mode">
               <a
-                class="bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-1 flex rounded-sm whitespace-nowrap w-full my-1 capitalize"
+                :class="[
+                  constructorsDisabled(season, mode)
+                    ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
+                    : 'hover:bg-blue-800 transition-colors',
+                  'bg-blue-900 px-3 py-1 flex rounded-sm whitespace-nowrap w-full my-1 capitalize'
+                ]"
                 :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
               >
                 <div class="w-full flex justify-between">
@@ -118,7 +123,7 @@
 import { useStagesStore } from '@/stores/stages'
 import trackData from '../data/tracks.json'
 import resultsData from '../data/results'
-import type { ModeName, TrackName } from '@/types'
+import type { ModeName, SeasonName, TrackName } from '@/types'
 import { seasons, modes } from '@/types'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -156,6 +161,9 @@ const toggleMenuState = () => {
 
 const tracks = computed(() => Object.keys(resultsData[season.value]))
 const currentTrack = computed(() => trackData[track.value])
+const constructorsDisabled = (season: SeasonName, mode: ModeName) =>
+  mode === 'constructors' && season !== 's4'
+
 const modeEmoji = (mode: ModeName) => {
   switch (mode) {
     case 'all':
