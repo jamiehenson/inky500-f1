@@ -23,7 +23,7 @@
         <div
           class="hidden sm:block w-24 text-center uppercase text-gray-300 font-bold text-sm sm:text-md"
         >
-          {{ entryIsRacer(results[0].entry) ? 'Points' : 'Adjusted Points' }}
+          {{ entryIsRacer(results[0]?.entry || {}) ? 'Points' : 'Adjusted Points' }}
         </div>
         <div
           class="sm:hidden w-14 sm:w-24 text-center uppercase text-gray-300 font-bold text-sm sm:text-md"

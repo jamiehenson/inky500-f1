@@ -168,6 +168,9 @@ const constructors = computed(() => {
   const firstRace = raceKeys.indexOf(track.value) === 0
 
   const currentData = (constructorsData[season.value] as ConstructorsResults)[track.value]
+  if (!currentData) {
+    return []
+  }
 
   const mapData = (data: ConstructorResults) =>
     Object.entries(data).reduce((obj: NumberObject, item) => {
@@ -176,15 +179,13 @@ const constructors = computed(() => {
 
   const currentStandings = sortAndFormatConstructors(mapData(currentData))
 
+  const previousData = (constructorsData[season.value] as ConstructorsResults)[
+    raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName
+  ]
+
   const previousStandings = firstRace
     ? currentStandings
-    : sortAndFormatConstructors(
-        mapData(
-          (constructorsData[season.value] as ConstructorsResults)[
-            raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName
-          ]
-        )
-      )
+    : sortAndFormatConstructors(mapData(previousData))
 
   return currentStandings.map((standing) => {
     const previousPosition = previousStandings.find(
@@ -270,7 +271,7 @@ watch(
 
     const delay = determineDelay()
 
-    if (mode.value === 'all') {
+    if (typeof window !== 'undefined' && mode.value === 'all') {
       timeouts.push(window.setTimeout(() => advanceStage(), delay))
     }
   },
