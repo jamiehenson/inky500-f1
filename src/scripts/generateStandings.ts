@@ -12,7 +12,7 @@ import {
   type RacerName,
   type ConstructorResult
 } from '../types'
-import { pointsScheme } from '@/utils'
+import { pointsScheme } from '../utils'
 
 type GeneratedConstructorStandings = {
   [index: string]: ConstructorResult
