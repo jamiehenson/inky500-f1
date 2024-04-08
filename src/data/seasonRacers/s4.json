@@ -72,7 +72,7 @@
   "bouncingczech": {
     "team": "Team Slow-Fi",
     "teamColor": "#953267",
-    "car": "ginetta"
+    "car": "mercedes"
   },
   "rafa4xx": {
     "team": "FTW",
@@ -83,6 +83,21 @@
     "team": "AMR V8 Vantage GT4",
     "teamColor": "purple",
     "car": "astonmartin"
+  },
+  "cannonmandan": {
+    "team": "Mercedes AMG GT4",
+    "teamColor": "cyan",
+    "car": "mercedes"
+  },
+  "subhaac": {
+    "team": "Porsche 718 Cayman GT4",
+    "teamColor": "white",
+    "car": "porsche"
+  },
+  "preece": {
+    "team": "McLaren 570S GT4",
+    "teamColor": "white",
+    "car": "mclaren"
   },
   "unknown": {
     "team": "Mystery Machine",

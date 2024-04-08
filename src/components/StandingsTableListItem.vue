@@ -109,6 +109,7 @@ import type { GeneralResult, RacerName, RacerResult, StandingsResult, Track } fr
 import trackData from '../data/tracks.json'
 import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'
+import { pointsScheme } from '@/scripts/generateStandings'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -119,7 +120,7 @@ const { isRace, index, pageNumber, result, floating } = defineProps<{
 }>()
 const { fastestLap, track, season } = useStagesStore()
 const animationDelay = index / 20 + 's'
-let points = Math.max(10 - (index + pageNumber * 5), 0)
+let points = pointsScheme[season][index + pageNumber * 5]
 
 if (fastestLap?.entry.name === result.entry.name) {
   points++

@@ -120,3 +120,22 @@ export const getCarBadge = (car: string) =>
 export const entryIsRacer = (entry: Racer | Constructor): entry is Racer => {
   return (entry as Racer).team !== undefined
 }
+
+export const timeGrabber = () => {
+  const table = document.querySelector('table')
+
+  if (table) {
+    const times = Array.from(table.querySelectorAll('tr'))
+      .map((row) => {
+        const cell = row.querySelectorAll('td')[3]
+        return cell && cell.innerHTML
+      })
+      .filter((val) => val)
+
+    return times.map((time, index) =>
+      index > 0
+        ? (Date.parse(`01/01/2000 ${time}`) - Date.parse(`01/01/2000 ${times[index - 1]}`)) / 1000
+        : time
+    )
+  }
+}

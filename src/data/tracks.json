@@ -82,9 +82,5 @@
   "cota": {
     "name": "COTA",
     "countryCode": "us"
-  },
-  "shakedown-s4": {
-    "name": "Oulton Park Shakedown",
-    "countryCode": "gb"
   }
 }
