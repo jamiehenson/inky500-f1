@@ -104,12 +104,11 @@
 
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
-import { splitRacerName, getCarBadge, entryIsRacer } from '@/utils'
+import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme } from '@/utils'
 import type { GeneralResult, RacerName, RacerResult, StandingsResult, Track } from '@/types'
 import trackData from '../data/tracks.json'
 import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'
-import { pointsScheme } from '@/scripts/generateStandings'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
