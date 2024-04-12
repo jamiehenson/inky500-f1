@@ -50,6 +50,7 @@ export type SeasonRacer = {
   team: string
   teamColor: string
   car: string
+  otherCars?: { [index: string]: string }
 }
 
 export type SeasonRacers = {

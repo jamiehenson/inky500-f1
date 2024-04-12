@@ -25,7 +25,7 @@
     <div class="flex-1 overflow-hidden flex flex-col sm:flex-row sm:items-center">
       <div class="flex-1">
         <div class="slide-in">
-          <div>
+          <div :class="[entryIsRacer(result.entry) ? 'inline-block' : '']">
             <span
               :class="[
                 'fi-' + (result.entry.countryCode ?? 'xx'),
@@ -56,7 +56,11 @@
           >
             {{
               Object.entries(seasonRacers[season])
-                .filter((driver) => driver[1].car === result.entry.img)
+                .filter(
+                  (driver) =>
+                    ((driver[1] as SeasonRacer).otherCars?.[track] ?? driver[1].car) ===
+                    result.entry.img
+                )
                 .map((driver) => {
                   const splitName = drivers[driver[0] as RacerName].name.split(' ')
                   return `${splitName[0][0]}. ${splitName[splitName.length - 1]}`
@@ -111,7 +115,14 @@
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
 import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme } from '@/utils'
-import type { GeneralResult, RacerName, RacerResult, StandingsResult, Track } from '@/types'
+import type {
+  GeneralResult,
+  RacerName,
+  RacerResult,
+  SeasonRacer,
+  StandingsResult,
+  Track
+} from '@/types'
 import trackData from '../data/tracks.json'
 import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'

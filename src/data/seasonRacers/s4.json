@@ -15,9 +15,12 @@
     "car": "mercedes"
   },
   "inkubusjaymz": {
-    "team": "McLaren Inky",
-    "teamColor": "#ff8325",
-    "car": "mclaren"
+    "team": "Dorr Motorsports",
+    "teamColor": "#2e4c46",
+    "car": "astonmartin",
+    "otherCars": {
+      "oulton-park": "mclaren"
+    }
   },
   "graeme": {
     "team": "We Race As Baguette Pride",

@@ -96,7 +96,7 @@ const raceResults = computed(() => {
 
   if (results) {
     return Object.entries(results).map((entry) => ({
-      entry: combinedRacer(entry[0] as RacerName, season.value),
+      entry: combinedRacer(entry[0] as RacerName, season.value, track.value),
       time: entry[1]
     }))
   } else {
@@ -127,7 +127,7 @@ const sortAndFormatStandings = (data: NumberObject, isConstructor?: boolean) => 
       return {
         entry: isConstructor
           ? constructorData[entry[0] as ConstructorName]
-          : combinedRacer(entry[0] as RacerName, season.value),
+          : combinedRacer(entry[0] as RacerName, season.value, track.value),
         points: entry[1],
         position
       }
@@ -224,7 +224,7 @@ useSeoMeta({
 
 onBeforeMount(() => {
   const { racerId, time } = (resultsData[season.value] as RacerResults)[track.value].fastestLap
-  fastestLap.value = { entry: combinedRacer(racerId as RacerName, season.value), time }
+  fastestLap.value = { entry: combinedRacer(racerId as RacerName, season.value, track.value), time }
 })
 
 onMounted(() => {

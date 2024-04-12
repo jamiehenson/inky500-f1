@@ -168,9 +168,10 @@ const calculateConstructors = (season: SeasonName) => {
 
     const points = standings
       ? Object.entries(standings).reduce((obj: GeneratedConstructorStandings, standing) => {
-          const car = (seasonRacersData[season as SeasonName] as SeasonRacers)[
+          const seasonRacer = (seasonRacersData[season as SeasonName] as SeasonRacers)[
             standing[0] as RacerName
-          ].car
+          ]
+          const car = seasonRacer.otherCars?.[race] ?? seasonRacer.car
 
           const driverCount = (obj[car]?.driverCount ?? 0) + 1
           const standardPoints = (obj[car]?.points ?? 0) + standing[1]

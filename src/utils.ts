@@ -8,7 +8,8 @@ import {
   type SeasonName,
   type TrackName,
   type ModeName,
-  type Constructor
+  type Constructor,
+  type SeasonRacers
 } from './types'
 import driversData from './data/drivers.json'
 import seasonRacersData from './data/seasonRacers'
@@ -29,12 +30,20 @@ export const chunkRacers = (results: GeneralResult[], pageSize: number) => {
   return results
 }
 
-export const combinedRacer = (driver: RacerName, season: SeasonName) => {
-  const racerPresent = (seasonRacersData[season] as Racers)[driver] && driversData[driver]
+export const combinedRacer = (driver: RacerName, season: SeasonName, track: TrackName) => {
+  const racerPresent = seasonRacersData[season] && driversData[driver]
+  const seasonRacer = (seasonRacersData[season] as SeasonRacers)[racerPresent ? driver : 'unknown']
+
+  console.log({
+    ...driversData[racerPresent ? driver : 'unknown'],
+    ...(seasonRacersData[season] as Racers)[racerPresent ? driver : 'unknown'],
+    car: seasonRacer.otherCars?.[track] ?? seasonRacer.car
+  })
 
   return {
     ...driversData[racerPresent ? driver : 'unknown'],
-    ...(seasonRacersData[season] as Racers)[racerPresent ? driver : 'unknown']
+    ...(seasonRacersData[season] as Racers)[racerPresent ? driver : 'unknown'],
+    car: seasonRacer.otherCars?.[track] ?? seasonRacer.car
   }
 }
 
