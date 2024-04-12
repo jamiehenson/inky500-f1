@@ -25,37 +25,43 @@
     <div class="flex-1 overflow-hidden flex flex-col sm:flex-row sm:items-center">
       <div class="flex-1">
         <div class="slide-in">
+          <div>
+            <span
+              :class="[
+                'fi-' + (result.entry.countryCode ?? 'xx'),
+                'fi w-4 sm:h-6 h-4 sm:w-6 mr-3 rounded-sm sm:-translate-y-1'
+              ]"
+            ></span
+            ><span
+              v-if="entryIsRacer(result.entry)"
+              :class="[
+                isRace ? 'text-sm sm:text-xl' : 'text-md sm:text-2xl',
+                'italic  text-gray-300'
+              ]"
+              >{{ splitRacerName(result.entry)[0] }}&nbsp;</span
+            ><span
+              :class="[
+                isRace ? 'text-md sm:text-2xl' : 'text-md sm:text-3xl',
+                'italic font-bold uppercase'
+              ]"
+            >
+              {{
+                entryIsRacer(result.entry) ? splitRacerName(result.entry)[1] : result.entry.name
+              }}</span
+            >
+          </div>
           <span
-            :class="[
-              'fi-' + (result.entry.countryCode ?? 'xx'),
-              'fi w-4 sm:h-6 h-4 sm:w-6 mr-3 rounded-sm sm:-translate-y-1'
-            ]"
-          ></span
-          ><span
-            v-if="entryIsRacer(result.entry)"
-            :class="[
-              isRace ? 'text-sm sm:text-xl' : 'text-md sm:text-2xl',
-              'italic  text-gray-300'
-            ]"
-            >{{ splitRacerName(result.entry)[0] }}&nbsp;</span
-          ><span
-            :class="[
-              isRace ? 'text-md sm:text-2xl' : 'text-md sm:text-3xl',
-              'italic font-bold uppercase'
-            ]"
+            v-if="!entryIsRacer(result.entry)"
+            :class="['text-sm italic font-bold uppercase text-neutral-300']"
           >
             {{
-              entryIsRacer(result.entry) ? splitRacerName(result.entry)[1] : result.entry.name
-            }}</span
-          ><span v-if="!entryIsRacer(result.entry)" :class="['ml-3 italic font-bold uppercase']">
-            {{
-              `(${Object.entries(seasonRacers[season])
+              Object.entries(seasonRacers[season])
                 .filter((driver) => driver[1].car === result.entry.img)
                 .map((driver) => {
                   const splitName = drivers[driver[0] as RacerName].name.split(' ')
                   return `${splitName[0][0]}. ${splitName[splitName.length - 1]}`
                 })
-                .join(', ')})`
+                .join(', ')
             }}</span
           >
           <a
