@@ -34,12 +34,6 @@ export const combinedRacer = (driver: RacerName, season: SeasonName, track: Trac
   const racerPresent = seasonRacersData[season] && driversData[driver]
   const seasonRacer = (seasonRacersData[season] as SeasonRacers)[racerPresent ? driver : 'unknown']
 
-  console.log({
-    ...driversData[racerPresent ? driver : 'unknown'],
-    ...(seasonRacersData[season] as Racers)[racerPresent ? driver : 'unknown'],
-    car: seasonRacer.otherCars?.[track] ?? seasonRacer.car
-  })
-
   return {
     ...driversData[racerPresent ? driver : 'unknown'],
     ...(seasonRacersData[season] as Racers)[racerPresent ? driver : 'unknown'],
