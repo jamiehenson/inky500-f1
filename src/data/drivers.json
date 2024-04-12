@@ -2,74 +2,88 @@
   "bigtimebosco": {
     "name": "Big Time Bosco",
     "countryCode": "gb",
-    "img": "bigtimebosco"
+    "img": "bigtimebosco",
+    "tableName": "BigTime B"
   },
   "eugenegoat": {
     "name": "Eugene Goat",
     "countryCode": "gb",
     "img": "eugenegoat",
-    "twitch": "gghqio"
+    "twitch": "gghqio",
+    "tableName": "Eugene G"
   },
   "diego": {
     "name": "D. Iego",
     "countryCode": "gb",
-    "img": "diego"
+    "img": "diego",
+    "tableName": "D i"
   },
   "inkubusjaymz": {
     "name": "Inkubus Jaymz",
     "countryCode": "gb",
     "img": "inkubusjaymz",
-    "twitch": "inkubusjaymz"
+    "twitch": "inkubusjaymz",
+    "tableName": "Inkubus J"
   },
   "graeme": {
     "name": "Graeme Clark",
     "countryCode": "gb-sct",
     "img": "graeme",
-    "twitch": "graemekustom"
+    "twitch": "graemekustom",
+    "tableName": "Graeme C"
   },
   "wobbleboss": {
     "name": "Ben Nykänen",
     "countryCode": "gb-sct",
-    "img": "wobbleboss"
+    "img": "wobbleboss",
+    "tableName": "Ben N"
   },
   "snicks": {
     "name": "K. Snicks",
     "countryCode": "no",
-    "img": "snicks"
+    "img": "snicks",
+    "tableName": "K S"
   },
   "kruthal": {
     "name": "K. Ruthal",
     "countryCode": "gb",
-    "img": "kruthal"
+    "img": "kruthal",
+    "tableName": "K r"
   },
   "atlas": {
     "name": "Joseph Atlas",
     "countryCode": "gb",
-    "img": "atlas"
+    "img": "atlas",
+    "tableName": "Joseph A"
   },
   "cousinbenson": {
     "name": "Cousin Bob",
     "countryCode": "gb",
-    "img": "cousinbenson"
+    "img": "cousinbenson",
+    "tableName": "cousin b"
   },
   "xnpxbirdy": {
     "name": "N. Bird",
-    "countryCode": "gb"
+    "countryCode": "gb",
+    "tableName": "N. B"
   },
   "michael": {
     "name": "Michael Smith",
     "countryCode": "gb",
-    "img": "michael"
+    "img": "michael",
+    "tableName": "Michael S"
   },
   "cannonmandan": {
     "name": "Cannon Man Dan",
     "countryCode": "gb",
-    "img": "cannonmandan"
+    "img": "cannonmandan",
+    "tableName": "  C"
   },
   "roberts": {
     "name": "Dan Roberts",
     "countryCode": "gb",
-    "img": "roberts"
+    "img": "roberts",
+    "tableName": "Dan R"
   },
   "happybadger": {
     "name": "Happy Badger",
@@ -79,7 +93,8 @@
   "blyzr": {
     "name": "Blayze Reid",
     "countryCode": "us",
-    "img": "blyzr"
+    "img": "blyzr",
+    "tableName": "Blayze R"
   },
   "adam": {
     "name": "Adam",
@@ -96,12 +111,14 @@
   },
   "subhaac": {
     "name": "Subhaa Arumugam",
-    "img": "subhaac"
+    "img": "subhaac",
+    "tableName": "Subhaa Chandar S"
   },
   "calamitysam": {
     "name": "S. Am",
     "countryCode": "gb",
-    "img": "calamitysam"
+    "img": "calamitysam",
+    "tableName": "S a"
   },
   "fletch": {
     "name": "Fletch",
@@ -115,20 +132,23 @@
     "countryCode": "gb"
   },
   "preece": {
-    "name": "Josh Preece"
+    "name": "Josh Preece",
+    "tableName": "Josh P"
   },
-
   "rafa4xx": {
     "name": "R. Oliveira",
-    "countryCode": "pt"
+    "countryCode": "pt",
+    "tableName": "Rafael O"
   },
   "mcdonoli": {
     "name": "O. McDonnell",
-    "countryCode": "gb"
+    "countryCode": "gb",
+    "tableName": "Oliver M"
   },
   "bouncingczech": {
     "name": "W. Masek",
-    "countryCode": "cz"
+    "countryCode": "cz",
+    "tableName": "Bouncing C"
   },
   "unknown": {
     "name": "Unknown"

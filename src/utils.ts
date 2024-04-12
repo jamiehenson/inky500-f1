@@ -121,25 +121,6 @@ export const entryIsRacer = (entry: Racer | Constructor): entry is Racer => {
   return (entry as Racer).team !== undefined
 }
 
-export const timeGrabber = () => {
-  const table = document.querySelector('table')
-
-  if (table) {
-    const times = Array.from(table.querySelectorAll('tr'))
-      .map((row) => {
-        const cell = row.querySelectorAll('td')[3]
-        return cell && cell.innerHTML
-      })
-      .filter((val) => val)
-
-    return times.map((time, index) =>
-      index > 0
-        ? (Date.parse(`01/01/2000 ${time}`) - Date.parse(`01/01/2000 ${times[index - 1]}`)) / 1000
-        : time
-    )
-  }
-}
-
 const topTenPoints = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 const topTwentyPoints = [35, 29, 24, 21, 19, 17, 15, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 export const pointsScheme = {
