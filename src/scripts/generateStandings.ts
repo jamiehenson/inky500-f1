@@ -119,13 +119,14 @@ const calculateStandings = (season: SeasonName) => {
     const noPointsRace = (trackData as Tracks)[race as TrackName].noPoints
 
     const points = raceResults
-      ? Object.keys(raceResults.results).reduce(
-          (obj: GeneratedRaceStandings, item: string, currentIndex) => {
+      ? Object.entries(raceResults.results).reduce(
+          (obj: GeneratedRaceStandings, item: [string, string], currentIndex) => {
+            const dnf = item[1] === 'DNF'
             const cumulativePoints =
               (pointsScheme[season][currentIndex] ?? 0) +
-              (raceResults.fastestLap.racerId === item ? 1 : 0)
+              (raceResults.fastestLap.racerId === item[0] ? 1 : 0)
 
-            return (obj[item] = noPointsRace ? 0 : cumulativePoints), obj
+            return (obj[item[0]] = noPointsRace || dnf ? 0 : cumulativePoints), obj
           },
           {}
         )
