@@ -90,7 +90,14 @@
     </div>
     <div v-if="resultIsRace(result)" class="px-2 w-26 sm:w-40 text-center italic overflow-hidden">
       <div class="slide-in">
-        <span class="text-gray-300 text-sm sm:text-2xl">{{ timePrefix }}{{ result.time }}</span>
+        <span class="text-gray-300 text-sm sm:text-2xl flex items-center"
+          >{{ timePrefix }}{{ result.time
+          }}<span
+            v-if="penalty"
+            className="rounded-sm bg-red-600 text-white text-sm font-bold py-1 px-2 ml-2 not-italic"
+            >P</span
+          ></span
+        >
       </div>
     </div>
     <div v-if="resultIsRace(result)" class="px-2 w-10 sm:w-24 text-right font-bold overflow-hidden">
@@ -111,6 +118,7 @@ import { useStagesStore } from '@/stores/stages'
 import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme } from '@/utils'
 import type {
   GeneralResult,
+  Penalties,
   RacerName,
   RacerResult,
   RacerResults,
@@ -123,6 +131,7 @@ import trackData from '../data/tracks.json'
 import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'
 import resultsData from '../data/results'
+import penaltiesData from '../data/penalties'
 import { computed } from 'vue'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
@@ -187,6 +196,9 @@ const timePrefix =
   ((index === 0 && pageNumber === 0) || result.time === '-' || result.time === 'DNF')
     ? ''
     : '+'
+
+const penalty =
+  resultIsRace(result) && (penaltiesData[season] as Penalties)[track][result.entry.id ?? '']
 </script>
 
 <style>

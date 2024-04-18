@@ -39,6 +39,7 @@ export type Racer = {
   img?: string
   countryCode?: string
   twitch?: string
+  id?: string
 }
 
 export type RacerResult = {
@@ -107,3 +108,5 @@ export type ConstructorResults = {
 export type ConstructorsResults = {
   [index in TrackName]: ConstructorResults
 }
+
+export type Penalties = Record<string, Record<string, number>>
