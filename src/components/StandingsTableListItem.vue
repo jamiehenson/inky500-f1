@@ -52,22 +52,16 @@
           </div>
           <span
             v-if="!entryIsRacer(result.entry)"
-            :class="['text-sm italic font-bold uppercase text-neutral-300']"
+            :class="['text-sm italic uppercase text-neutral-500']"
           >
-            {{
-              Object.entries(seasonRacers[season])
-                .filter(
-                  (driver) =>
-                    ((driver[1] as SeasonRacer).otherCars?.[track] ?? driver[1].car) ===
-                    result.entry.img
-                )
-                .map((driver) => {
-                  const splitName = drivers[driver[0] as RacerName].name.split(' ')
-                  return `${splitName[0][0]}. ${splitName[splitName.length - 1]}`
-                })
-                .join(', ')
-            }}</span
-          >
+            <span
+              v-for="driver in teamDrivers"
+              :class="[driver[1] ? 'font-bold text-white' : '', 'mr-2']"
+              :key="`${driver[0]}`"
+            >
+              {{ driver[0] }}
+            </span>
+          </span>
           <a
             v-if="entryIsRacer(result.entry) && result.entry.twitch"
             :href="`https://www.twitch.tv/${result.entry.twitch}`"
@@ -119,13 +113,17 @@ import type {
   GeneralResult,
   RacerName,
   RacerResult,
+  RacerResults,
   SeasonRacer,
   StandingsResult,
-  Track
+  Track,
+  TrackName
 } from '@/types'
 import trackData from '../data/tracks.json'
 import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'
+import resultsData from '../data/results'
+import { computed } from 'vue'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -145,6 +143,24 @@ if (fastestLap?.entry.name === result.entry.name) {
 if ((trackData[track] as Track).noPoints) {
   points = 0
 }
+
+const teamDrivers = computed(() =>
+  Object.entries(seasonRacers[season])
+    .filter(
+      (driver) =>
+        ((driver[1] as SeasonRacer).otherCars?.[track] ?? driver[1].car) === result.entry.img
+    )
+    .map((driver) => {
+      const splitName = drivers[driver[0] as RacerName].name.split(' ')
+
+      return [
+        `${splitName[0][0]}. ${splitName[splitName.length - 1]} `,
+        Object.keys((resultsData[season] as RacerResults)[track as TrackName].results).includes(
+          driver[0]
+        )
+      ]
+    })
+)
 
 const deltaClass = () => {
   if (resultIsStandings(result)) {

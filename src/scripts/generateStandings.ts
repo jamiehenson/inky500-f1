@@ -1,7 +1,6 @@
 import fs from 'fs'
 import { JSDOM } from 'jsdom'
 import resultsData from '../data/results'
-import standingsData from '../data/standings'
 import seasonRacersData from '../data/seasonRacers'
 import trackData from '../data/tracks.json'
 import driversData from '../data/drivers.json'
@@ -47,6 +46,7 @@ const timeGrabber = async (link: string) => {
     racerId: 'unknown',
     time: '23:59:999'
   }
+  let highestLapCount = 0
 
   if (table) {
     const times = Array.from(table.querySelectorAll('tr'))
@@ -54,13 +54,15 @@ const timeGrabber = async (link: string) => {
         const cells = row.querySelectorAll('td')
         const driver = cells[1]
         const totalTime = cells[3]
+        const numLaps = cells[4]
         const bestLap = cells[5]
 
-        if (driver && totalTime && bestLap) {
+        if (driver && totalTime && bestLap && numLaps) {
           return [
             driver.innerHTML.split('\n')[0],
             totalTime.innerHTML,
-            bestLap.innerHTML.split('<')[0]
+            bestLap.innerHTML.split('<')[0],
+            numLaps.innerHTML.split('lap')[0]
           ]
         }
 
@@ -79,20 +81,27 @@ const timeGrabber = async (link: string) => {
 
       let parsedTime = time[1].split(':').slice(1).join(':')
 
-      if (index > 0) {
-        parsedTime = (
-          (Date.parse(`01/01/2000 ${time[1]}`) - Date.parse(`01/01/2000 ${times[index - 1][1]}`)) /
-          1000
-        )
-          .toFixed(3)
-          .toString()
-      }
+      if (Number(time[3]) > highestLapCount) {
+        highestLapCount = Number(time[3])
+      } else if (Number(time[3]) <= highestLapCount - 5) {
+        parsedTime = 'DNF'
+      } else {
+        if (index > 0) {
+          parsedTime = (
+            (Date.parse(`01/01/2000 ${time[1]}`) -
+              Date.parse(`01/01/2000 ${times[index - 1][1]}`)) /
+            1000
+          )
+            .toFixed(3)
+            .toString()
+        }
 
-      if (parsedTime.startsWith('-')) {
-        lapCounter++
-        parsedTime = `${lapCounter} lap${lapCounter === 1 ? '' : 's'}`
-      } else if (lapCounter > 0) {
-        parsedTime = `${lapCounter} lap${lapCounter === 1 ? '' : 's'}`
+        if (parsedTime.startsWith('-')) {
+          lapCounter++
+          parsedTime = `${lapCounter} lap${lapCounter === 1 ? '' : 's'}`
+        } else if (lapCounter > 0) {
+          parsedTime = `${lapCounter} lap${lapCounter === 1 ? '' : 's'}`
+        }
       }
 
       results[name] = parsedTime
@@ -112,6 +121,10 @@ const timeGrabber = async (link: string) => {
 
 const calculateStandings = (season: SeasonName) => {
   const seasonRaces = Object.keys(resultsData[season])
+  const constructorPoints: Record<
+    string,
+    Record<string, { points: number; normalisedPoints: number; driverCount: number }>
+  > = {}
 
   // Compile initial race scores into standings objects
   const points = seasonRaces.reduce((racesObj: GeneratedStandings, race: string) => {
@@ -135,7 +148,7 @@ const calculateStandings = (season: SeasonName) => {
     return (racesObj[race] = points), racesObj
   }, {})
 
-  // Add the points for each driver cumulatively, and reorder
+  // Add the points for each driver and team cumulatively, and reorder
   const raceKeys = Object.keys(points)
 
   raceKeys.forEach((race, index) => {
@@ -144,11 +157,47 @@ const calculateStandings = (season: SeasonName) => {
     }
 
     const racePoints = points[race] as GeneratedRaceStandings
-    if (index > 0) {
-      const previousRacePoints = points[raceKeys[index - 1]] as GeneratedRaceStandings
-      Object.keys(racePoints).forEach((driver) => {
+    const previousRacePoints = points[raceKeys[index - 1]] as GeneratedRaceStandings
+    Object.keys(racePoints).forEach((driver) => {
+      const seasonRacer = (seasonRacersData[season as SeasonName] as SeasonRacers)[
+        driver as RacerName
+      ]
+      const car = seasonRacer.otherCars?.[race] ?? seasonRacer.car
+
+      constructorPoints[race] = {
+        ...constructorPoints[race],
+        [car]: {
+          points: (constructorPoints[race]?.[car]?.points ?? 0) + racePoints[driver],
+          normalisedPoints: (constructorPoints[race]?.[car]?.points ?? 0) + racePoints[driver],
+          driverCount: (constructorPoints[race]?.[car]?.driverCount ?? 0) + 1
+        }
+      }
+
+      if (index > 0) {
         racePoints[driver] += previousRacePoints[driver] ?? 0
+      }
+    })
+
+    if (constructorPoints[race]) {
+      Object.entries(constructorPoints[race]).map((constructor) => {
+        constructorPoints[race][constructor[0]].normalisedPoints = Math.round(
+          constructor[1].points * (standardDriverCount / constructor[1].driverCount)
+        )
       })
+
+      constructorPoints[race] = Object.entries(constructorPoints[race])
+        .map((raceConstructors) => {
+          if (index > 0) {
+            raceConstructors[1].points +=
+              constructorPoints[raceKeys[index - 1]][raceConstructors[0]].points
+            raceConstructors[1].normalisedPoints +=
+              constructorPoints[raceKeys[index - 1]][raceConstructors[0]].normalisedPoints
+          }
+
+          return raceConstructors
+        })
+        .sort(([, a], [, b]) => b.normalisedPoints - a.normalisedPoints)
+        .reduce((r, [k, v]) => ({ ...r, [k]: v }), {})
     }
 
     points[race] = Object.entries(racePoints)
@@ -156,75 +205,7 @@ const calculateStandings = (season: SeasonName) => {
       .reduce((r, [k, v]) => ({ ...r, [k]: v }), {})
   })
 
-  return points
-}
-
-const calculateConstructors = (season: SeasonName) => {
-  const seasonRaces = Object.keys(standingsData[season])
-
-  // Compile initial race scores into standings objects
-  const points = seasonRaces.reduce((racesObj: GeneratedStandings, race: string) => {
-    const standings = (standingsData[season] as GeneratedRaceStandings)[race as TrackName]
-    const noPointsRace = (trackData as Tracks)[race as TrackName].noPoints
-
-    const points = standings
-      ? Object.entries(standings).reduce((obj: GeneratedConstructorStandings, standing) => {
-          const seasonRacer = (seasonRacersData[season as SeasonName] as SeasonRacers)[
-            standing[0] as RacerName
-          ]
-          const car = seasonRacer.otherCars?.[race] ?? seasonRacer.car
-
-          const driverCount = (obj[car]?.driverCount ?? 0) + 1
-          const standardPoints = (obj[car]?.points ?? 0) + standing[1]
-
-          return (
-            (obj[car] = {
-              points: noPointsRace ? 0 : standardPoints,
-              normalisedPoints: noPointsRace ? 0 : standardPoints,
-              driverCount
-            }),
-            obj
-          )
-        }, {})
-      : null
-
-    if (points) {
-      Object.entries(points).map((constructor) => {
-        points[constructor[0]].normalisedPoints = Math.round(
-          constructor[1].points * (standardDriverCount / constructor[1].driverCount)
-        )
-      })
-    }
-
-    return (racesObj[race] = points), racesObj
-  }, {})
-
-  const raceKeys = Object.keys(points)
-
-  raceKeys.forEach((race, index) => {
-    if (points[race] === null) {
-      return
-    }
-
-    const racePoints = points[race] as GeneratedConstructorStandings
-    if (index > 0) {
-      const previousRacePoints = points[raceKeys[index - 1]] as GeneratedConstructorStandings
-      Object.keys(racePoints).forEach((driver) => {
-        racePoints[driver] = {
-          points: racePoints[driver].points + previousRacePoints[driver].points ?? 0,
-          normalisedPoints:
-            racePoints[driver].normalisedPoints + previousRacePoints[driver].normalisedPoints,
-          driverCount: racePoints[driver].driverCount
-        }
-      })
-    }
-
-    points[race] = Object.entries(racePoints)
-      .sort(([, a], [, b]) => b.normalisedPoints - a.normalisedPoints)
-      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {})
-  })
-
-  return points
+  return [points, constructorPoints]
 }
 
 const generateStandings = () => {
@@ -240,7 +221,9 @@ const generateStandings = () => {
       fs.writeFileSync(resultsPath, JSON.stringify(resultsFile), { flag: 'w' })
     }
 
-    const standings = JSON.stringify(calculateStandings(season as SeasonName))
+    const standingsResults = calculateStandings(season as SeasonName)
+
+    const standings = JSON.stringify(standingsResults[0])
     const standingsPath = `src/data/standings/${season}.json`
 
     try {
@@ -250,7 +233,7 @@ const generateStandings = () => {
       console.error('Error writing JSON data to file:', error)
     }
 
-    const constructors = JSON.stringify(calculateConstructors(season as SeasonName))
+    const constructors = JSON.stringify(standingsResults[1])
     const constructorsPath = `src/data/constructors/${season}.json`
 
     try {
