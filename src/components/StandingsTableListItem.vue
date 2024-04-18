@@ -140,7 +140,15 @@ if (fastestLap?.entry.name === result.entry.name) {
   points++
 }
 
-if ((trackData[track] as Track).noPoints) {
+const resultIsRace = (result: GeneralResult): result is RacerResult => {
+  return isRace && (result as RacerResult).time !== undefined
+}
+
+const resultIsStandings = (result: GeneralResult): result is StandingsResult => {
+  return !isRace && (result as StandingsResult).position !== undefined
+}
+
+if ((trackData[track] as Track).noPoints || (resultIsRace(result) && result.time === 'DNF')) {
   points = 0
 }
 
@@ -172,14 +180,6 @@ const deltaClass = () => {
   } else {
     return ''
   }
-}
-
-const resultIsRace = (result: GeneralResult): result is RacerResult => {
-  return isRace && (result as RacerResult).time !== undefined
-}
-
-const resultIsStandings = (result: GeneralResult): result is StandingsResult => {
-  return !isRace && (result as StandingsResult).position !== undefined
 }
 
 const timePrefix =
