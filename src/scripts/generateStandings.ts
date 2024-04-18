@@ -131,7 +131,7 @@ const calculateStandings = (season: SeasonName) => {
     const raceResults = (resultsData[season] as RacerResults)[race as TrackName]
     const noPointsRace = (trackData as Tracks)[race as TrackName].noPoints
 
-    const points = raceResults
+    const pts = raceResults
       ? Object.entries(raceResults.results).reduce(
           (obj: GeneratedRaceStandings, item: [string, string], currentIndex) => {
             const dnf = item[1] === 'DNF'
@@ -145,7 +145,7 @@ const calculateStandings = (season: SeasonName) => {
         )
       : null
 
-    return (racesObj[race] = points), racesObj
+    return (racesObj[race] = pts), racesObj
   }, {})
 
   // Add the points for each driver and team cumulatively, and reorder
@@ -158,7 +158,8 @@ const calculateStandings = (season: SeasonName) => {
 
     const racePoints = points[race] as GeneratedRaceStandings
     const previousRacePoints = points[raceKeys[index - 1]] as GeneratedRaceStandings
-    Object.keys(racePoints).forEach((driver) => {
+    const racePointsKeys = Object.keys(racePoints)
+    racePointsKeys.forEach((driver) => {
       const seasonRacer = (seasonRacersData[season as SeasonName] as SeasonRacers)[
         driver as RacerName
       ]
@@ -177,6 +178,15 @@ const calculateStandings = (season: SeasonName) => {
         racePoints[driver] += previousRacePoints[driver] ?? 0
       }
     })
+
+    // Fill in other drivers in the standings who didn't compete in a given race
+    if (index > 0) {
+      Object.keys(seasonRacersData[season]).forEach((driver) => {
+        if (!racePointsKeys.includes(driver)) {
+          racePoints[driver] = previousRacePoints[driver]
+        }
+      })
+    }
 
     if (constructorPoints[race]) {
       Object.entries(constructorPoints[race]).map((constructor) => {
