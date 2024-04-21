@@ -198,7 +198,7 @@ const timePrefix =
     : '+'
 
 const penalty =
-  resultIsRace(result) && (penaltiesData[season] as Penalties)[track][result.entry.id ?? '']
+  resultIsRace(result) && (penaltiesData[season] as Penalties)?.[track]?.[result.entry.id ?? '']
 </script>
 
 <style>
