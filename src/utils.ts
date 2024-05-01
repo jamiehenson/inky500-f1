@@ -12,6 +12,7 @@ import {
   type SeasonRacers
 } from './types'
 import driversData from './data/drivers.json'
+import trackData from './data/tracks.json'
 import seasonRacersData from './data/seasonRacers'
 import resultsData from './data/results'
 
@@ -112,9 +113,9 @@ export const withBase = (href = '') =>
 export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeName) => {
   switch (mode) {
     case 'all':
-      return ` | ${season.toUpperCase()} ${titleize(track)} Results`
+      return ` | ${season.toUpperCase()} ${trackData[track].name} Results`
     default:
-      return ` | ${season.toUpperCase()} ${titleize(track)} ${titleize(mode)} Results`
+      return ` | ${season.toUpperCase()} ${trackData[track].name} ${titleize(mode)} Results`
   }
 }
 

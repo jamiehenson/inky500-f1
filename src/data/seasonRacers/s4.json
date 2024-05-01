@@ -85,7 +85,11 @@
   "mcdonoli": {
     "team": "AMR V8 Vantage GT4",
     "teamColor": "purple",
-    "car": "astonmartin"
+    "car": "mercedes",
+    "otherCars": {
+      "oulton-park": "astonmartin",
+      "monza": "astonmartin"
+    }
   },
   "cannonmandan": {
     "team": "Mercedes AMG GT4",
@@ -99,10 +103,6 @@
   "preece": {
     "team": "McLaren 570S GT4",
     "car": "mclaren"
-  },
-  "blyzr": {
-    "team": "Blyzrossi",
-    "car": "astonmartin"
   },
   "unknown": {
     "team": "Mystery Machine",
