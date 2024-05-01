@@ -102,6 +102,11 @@
     "teamColor": "white",
     "car": "mclaren"
   },
+  "blyzr": {
+    "team": "Blyzrossi",
+    "teamColor": "white",
+    "car": "astonmartin"
+  },
   "unknown": {
     "team": "Mystery Machine",
     "teamColor": "black",
