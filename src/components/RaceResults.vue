@@ -57,8 +57,7 @@ import type {
   StandingsResults,
   ConstructorName,
   ConstructorResults,
-  ConstructorsResults,
-  SeasonName
+  ConstructorsResults
 } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
