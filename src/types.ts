@@ -34,8 +34,8 @@ export type Racers = {
 export type Racer = {
   name: string
   team: string
-  teamColor: string
   car: string
+  teamColor?: string
   img?: string
   countryCode?: string
   twitch?: string
@@ -49,8 +49,8 @@ export type RacerResult = {
 
 export type SeasonRacer = {
   team: string
-  teamColor: string
   car: string
+  teamColor?: string
   otherCars?: { [index: string]: string }
 }
 

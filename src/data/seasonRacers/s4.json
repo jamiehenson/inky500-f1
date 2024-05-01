@@ -94,22 +94,18 @@
   },
   "subhaac": {
     "team": "Porsche 718 Cayman GT4",
-    "teamColor": "white",
     "car": "porsche"
   },
   "preece": {
     "team": "McLaren 570S GT4",
-    "teamColor": "white",
     "car": "mclaren"
   },
   "blyzr": {
     "team": "Blyzrossi",
-    "teamColor": "white",
     "car": "astonmartin"
   },
   "unknown": {
     "team": "Mystery Machine",
-    "teamColor": "black",
     "car": "renault"
   }
 }

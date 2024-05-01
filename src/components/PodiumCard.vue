@@ -41,7 +41,7 @@ import { splitRacerName, getCarBadge } from '@/utils'
 const { position, results } = defineProps<{ position: number; results: GeneralResult[] }>()
 
 const driver = results[position - 1]?.entry as Racer
-const teamColor = driver.teamColor
+const teamColor = driver.teamColor ?? 'black'
 const imageUrl = new URL(`../assets/discord/${driver.img ?? 'unknown'}.webp`, import.meta.url).href
 
 const positionWithSuffix = (position: number) => {
