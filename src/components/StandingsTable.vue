@@ -121,7 +121,7 @@ watch(
       currentPage.value < paginatedResults.length - 1
         ? currentPage.value++
         : (currentPage.value = 0)
-    }, 5000)
+    }, 10000)
   },
   { immediate: true }
 )

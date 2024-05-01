@@ -57,7 +57,8 @@ import type {
   StandingsResults,
   ConstructorName,
   ConstructorResults,
-  ConstructorsResults
+  ConstructorsResults,
+  SeasonName
 } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
@@ -257,7 +258,7 @@ watch(
           return 5000
         case 'raceResultsClassification':
         case 'standings':
-          return 5000 * Math.ceil(raceResults.value.length / 5)
+          return 5000 * Math.ceil(Object.keys(seasonRacers[season.value]).length / 5)
         case 'constructors':
           return (
             5000 *
