@@ -110,3 +110,10 @@ export type ConstructorsResults = {
 }
 
 export type Penalties = Record<string, Record<string, number>>
+
+export type LiveDrivers = Record<
+  string,
+  { model: number; team: string; nationality: string; driver: string }
+>
+
+export type LiveRace = Record<string, { pos: number; lap: number }>

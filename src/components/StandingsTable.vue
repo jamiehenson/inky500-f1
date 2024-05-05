@@ -127,7 +127,7 @@ watch(
 )
 </script>
 
-<style scoped>
+<style>
 .standing-bg {
   background-image: url(../assets/gghq-tile.png);
   animation: 10s backgroundTile linear infinite;

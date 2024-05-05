@@ -10,103 +10,107 @@
           >{{ season.toUpperCase() }} / {{ trackData[track as TrackName].name }}</span
         >
       </div>
-      <div class="flex-1 sm:flex-none"></div>
-      <div
-        :class="[
-          !menuDropdownState ? 'hidden' : '',
-          'nav fixed h-screen sm:h-auto sm:static inset-0 top-12 overflow-y-scroll sm:overflow-y-visible flex-1 sm:flex pt-2 sm:pt-0'
-        ]"
-      >
-        <div class="nav relative px-3 sm:pr-0">
-          <button
-            class="w-full sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm uppercase text-sm sm:text-md"
-            @click="toggleSeasonState"
-          >
-            {{ season }} ▼
-          </button>
-          <div v-if="seasonDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
-            <div v-for="season in seasons" :key="season">
-              <a
-                :class="[
-                  seasonDisabled(season) || constructorsDisabled(season, mode)
-                    ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
-                    : 'hover:bg-blue-800 transition-colors',
-                  'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center uppercase'
-                ]"
-                :href="
-                  withBase(
-                    `${season}/${trackDisabled(track, season) ? getLastValidTrack(season) : track}/${mode === 'all' ? '' : `${mode}/`}`
-                  )
-                "
-              >
-                {{ season }}
-              </a>
+      <div v-if="showControls">
+        <div class="flex-1 sm:flex-none"></div>
+        <div
+          :class="[
+            !menuDropdownState ? 'hidden' : '',
+            'nav fixed h-screen sm:h-auto sm:static inset-0 top-12 overflow-y-scroll sm:overflow-y-visible flex-1 sm:flex pt-2 sm:pt-0'
+          ]"
+        >
+          <div class="nav relative px-3 sm:pr-0">
+            <button
+              class="w-full sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm uppercase text-sm sm:text-md"
+              @click="toggleSeasonState"
+            >
+              {{ season }} ▼
+            </button>
+            <div v-if="seasonDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
+              <div v-for="season in seasons" :key="season">
+                <a
+                  :class="[
+                    seasonDisabled(season) || constructorsDisabled(season, mode)
+                      ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
+                      : 'hover:bg-blue-800 transition-colors',
+                    'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center uppercase'
+                  ]"
+                  :href="
+                    withBase(
+                      `${season}/${trackDisabled(track, season) ? getLastValidTrack(season) : track}/${mode === 'all' ? '' : `${mode}/`}`
+                    )
+                  "
+                >
+                  {{ season }}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="nav relative px-3 sm:pr-0">
+            <button
+              class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm text-sm sm:text-md"
+              @click="toggleTrackState"
+            >
+              {{ currentTrack.name
+              }}<span :class="['fi-' + currentTrack.countryCode, 'fi rounded-sm mx-2']"></span> ▼
+            </button>
+            <div v-if="trackDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
+              <div v-for="track in tracks" :key="trackData[track as TrackName].name">
+                <a
+                  :class="[
+                    trackDisabled(track as TrackName, season)
+                      ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
+                      : 'hover:bg-blue-800 transition-colors',
+                    'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center'
+                  ]"
+                  :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
+                >
+                  {{ trackData[track as TrackName].name
+                  }}<span
+                    :class="[
+                      'fi-' + trackData[track as TrackName].countryCode,
+                      'fi rounded-sm ml-2'
+                    ]"
+                  ></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="nav relative px-3 sm:pr-0">
+            <button
+              class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm capitalize text-sm sm:text-md"
+              @click="toggleModeState"
+            >
+              {{ mode }}&nbsp;&nbsp;{{ modeEmoji(mode) }}&nbsp; ▼
+            </button>
+            <div v-if="modeDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
+              <div v-for="mode in modes" :key="mode">
+                <a
+                  :class="[
+                    constructorsDisabled(season, mode)
+                      ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
+                      : 'hover:bg-blue-800 transition-colors',
+                    'bg-blue-900 px-3 py-1 flex rounded-sm whitespace-nowrap w-full my-1 capitalize'
+                  ]"
+                  :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
+                >
+                  <div class="w-full flex justify-between">
+                    <span>{{ mode }}</span>
+                    <span class="ml-3">{{ modeEmoji(mode) }}</span>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="nav relative px-3 sm:pr-0">
-          <button
-            class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm text-sm sm:text-md"
-            @click="toggleTrackState"
-          >
-            {{ currentTrack.name
-            }}<span :class="['fi-' + currentTrack.countryCode, 'fi rounded-sm mx-2']"></span> ▼
-          </button>
-          <div v-if="trackDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
-            <div v-for="track in tracks" :key="trackData[track as TrackName].name">
-              <a
-                :class="[
-                  trackDisabled(track as TrackName, season)
-                    ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
-                    : 'hover:bg-blue-800 transition-colors',
-                  'bg-blue-900 px-3 py-1 rounded-sm whitespace-nowrap w-full my-1 flex justify-between items-center'
-                ]"
-                :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
-              >
-                {{ trackData[track as TrackName].name
-                }}<span
-                  :class="['fi-' + trackData[track as TrackName].countryCode, 'fi rounded-sm ml-2']"
-                ></span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="nav relative px-3 sm:pr-0">
-          <button
-            class="w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm capitalize text-sm sm:text-md"
-            @click="toggleModeState"
-          >
-            {{ mode }}&nbsp;&nbsp;{{ modeEmoji(mode) }}&nbsp; ▼
-          </button>
-          <div v-if="modeDropdownState" class="nav sm:absolute p-2 rounded-sm bg-blue-700">
-            <div v-for="mode in modes" :key="mode">
-              <a
-                :class="[
-                  constructorsDisabled(season, mode)
-                    ? 'opacity-50 cursor-not-allowed pointer-events-none select-none'
-                    : 'hover:bg-blue-800 transition-colors',
-                  'bg-blue-900 px-3 py-1 flex rounded-sm whitespace-nowrap w-full my-1 capitalize'
-                ]"
-                :href="withBase(`${season}/${track}/${mode === 'all' ? '' : `${mode}/`}`)"
-              >
-                <div class="w-full flex justify-between">
-                  <span>{{ mode }}</span>
-                  <span class="ml-3">{{ modeEmoji(mode) }}</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+        <button
+          class="sm:hidden mr-2 bg-blue-900 hover:bg-blue-800 p-2 rounded-md cursor-pointer"
+          @click="toggleMenuState"
+        >
+          <img src="../assets/burger.svg" class="h-6 invert" />
+        </button>
       </div>
-      <button
-        class="sm:hidden mr-2 bg-blue-900 hover:bg-blue-800 p-2 rounded-md cursor-pointer"
-        @click="toggleMenuState"
-      >
-        <img src="../assets/burger.svg" class="h-6 invert" />
-      </button>
-    </div>
-    <!-- Background changer for green screen needs -->
-    <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">
+      <!-- Background changer for green screen needs -->
+      <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">
       <button
         class="rounded-full navy-toggle w-10 h-10 mr-3 border"
         @click="updateBgColor('blue')"
@@ -116,6 +120,7 @@
         @click="updateBgColor('green')"
       ></button>
     </div> -->
+    </div>
   </div>
 </template>
 
@@ -128,7 +133,9 @@ import { seasons, modes } from '@/types'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { trackDisabled, seasonDisabled, getLastValidTrack, withBase } from '@/utils'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const stagesStore = useStagesStore()
 const { track, season, mode } = storeToRefs(stagesStore)
 
@@ -179,6 +186,8 @@ const modeEmoji = (mode: ModeName) => {
       ''
   }
 }
+
+const showControls = computed(() => route.path !== '/live')
 </script>
 
 <style>
