@@ -109,6 +109,7 @@
           <img src="../assets/burger.svg" class="h-6 invert" />
         </button>
       </div>
+      <div v-else><span class="px-3">LIVE</span></div>
       <!-- Background changer for green screen needs -->
       <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">
       <button

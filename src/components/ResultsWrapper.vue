@@ -13,12 +13,24 @@
       </div>
     </div>
   </div>
-  <div v-else>No data</div>
+  <div v-else class="h-full flex items-center justify-center">
+    <div>
+      <h2 class="font-bold">Waiting for data...</h2>
+      <div class="loader h-[160px] flex flex-col items-center justify-center">
+        <div class="ball-triangle-path h-12">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { calculateScaleRatio, calculateTranslateOffset, debounce, idealHeight } from '../utils'
+import 'loaders.css/loaders.min.css'
 
 const { dataAvailable, animationClass } = defineProps<{
   dataAvailable?: boolean

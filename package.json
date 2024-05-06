@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@unhead/vue": "^1.8.18",
+    "ably": "^2.0.4",
     "flag-icons": "^7.1.0",
+    "loaders.css": "^0.1.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.15",
     "vue-router": "4"
