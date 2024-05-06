@@ -134,3 +134,13 @@ export const pointsScheme = {
   s3: topTenPoints,
   s4: topTwentyPoints
 }
+
+export const msToTime = (duration: number) => {
+  const s = (duration / 1000) % 60,
+    m = Math.floor((duration / (1000 * 60)) % 60)
+
+  const minutes = m < 10 ? '0' + m : m
+  const seconds = s < 10 ? '0' + s.toFixed(3) : s.toFixed(3)
+
+  return minutes + ':' + seconds
+}

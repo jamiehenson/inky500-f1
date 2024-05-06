@@ -6,7 +6,7 @@
           <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
           <span class="font-bold mr-3 sm:mr-2">Inky 500</span>
         </a>
-        <span class="sm:hidden text-xs"
+        <span v-if="showControls" class="sm:hidden text-xs"
           >{{ season.toUpperCase() }} / {{ trackData[track as TrackName].name }}</span
         >
       </div>
