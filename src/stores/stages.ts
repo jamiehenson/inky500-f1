@@ -1,8 +1,9 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { type SeasonName, type TrackName, type RacerResult, type ModeName } from '@/types'
 import type { Ref } from 'vue'
 import { useRoute } from 'vue-router'
+import * as Ably from 'ably'
+import { type SeasonName, type TrackName, type RacerResult, type ModeName } from '@/types'
 import { getLastValidTrack, lookupStage, mostRecentSeason } from '@/utils'
 
 export const useStagesStore = defineStore('stages', () => {
@@ -63,6 +64,12 @@ export const useStagesStore = defineStore('stages', () => {
     }
   }
 
+  const ably = new Ably.Realtime('lTQPrA.-iRpAQ:aLBd5k5RozpsMLTn2mgk1MwPBE3yn6hP8H5Y5ZR65wk')
+  const ablyConnected = ref(false)
+  ably.connection.once('connected', () => {
+    ablyConnected.value = true
+  })
+
   return {
     stages,
     stageIndex,
@@ -74,6 +81,8 @@ export const useStagesStore = defineStore('stages', () => {
     fastestLap,
     bgColor,
     updateBgColor,
-    mode
+    mode,
+    ably,
+    ablyConnected
   }
 })

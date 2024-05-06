@@ -24,31 +24,36 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import * as Ably from 'ably'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import ResultsWrapper from './ResultsWrapper.vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import FaderComponent from './FaderComponent.vue'
 import { sampleRace, sampleDrivers, nationalityLookup, carLookup } from '../liveUtils'
 import type { RacerResult } from '@/types'
+import { useStagesStore } from '@/stores/stages'
 
-const drivers = ref(sampleDrivers)
-const race = ref(sampleRace)
+const drivers = ref({})
+const race = ref({})
 const connected = ref(false)
+const { ably } = useStagesStore()
 
 onMounted(async () => {
-  // const ably = new Ably.Realtime('lTQPrA.-iRpAQ:aLBd5k5RozpsMLTn2mgk1MwPBE3yn6hP8H5Y5ZR65wk')
-  // ably.connection.once('connected', () => {
-  //   connected.value = true
-  //   console.log('Connected to Ably!')
-  // })
-  // const channel = ably.channels.get('acc')
-  // await channel.subscribe('drivers', (message) => {
-  //   console.log('Message received: ' + message.data)
-  // })
-  // await channel.subscribe('race', (message) => {
-  //   console.log('Message received: ' + message.data)
-  // })
+  const channel = ably.channels.get('acc')
+  await channel.subscribe('drivers', (message) => {
+    console.log('Message received: ' + message.data)
+    drivers.value = message.data
+  })
+  await channel.subscribe('race', (message) => {
+    console.log('Message received: ' + message.data)
+    race.value = message.data
+  })
+})
+
+onUnmounted(async () => {
+  ably.connection.close()
+  await ably.connection.once('closed', function () {
+    console.log('Closed the connection to Ably.')
+  })
 })
 
 const entries = computed(() => {
