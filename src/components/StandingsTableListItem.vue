@@ -8,14 +8,14 @@
     ]"
   >
     <div class="w-10 sm:w-12 overflow-hidden">
-      <div class="slide-in">
+      <div :class="slideIn">
         <span class="italic text-gray-300">{{
           resultIsRace(result) ? index + pageNumber * 5 + 1 : result.position
         }}</span>
       </div>
     </div>
     <div v-if="resultIsStandings(result)" class="w-10 mr-5 sm:mr-8 overflow-hidden">
-      <div class="slide-in flex items-center justify-between">
+      <div :class="[slideIn, 'flex items-center justify-between']">
         <div :class="[deltaClass(), 'text-2xl sm:text-4xl']">
           {{ result.delta !== 0 ? '›' : '-' }}
         </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="flex-1 overflow-hidden flex flex-col sm:flex-row sm:items-center">
       <div class="flex-1">
-        <div class="slide-in">
+        <div :class="slideIn">
           <div :class="[entryIsRacer(result.entry) ? 'inline-block' : '']">
             <span
               :class="[
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="flex-1">
-        <div class="slide-in flex items-center text-red">
+        <div :class="[slideIn, 'flex items-center text-red']">
           <img
             :src="getCarBadge(entryIsRacer(result.entry) ? result.entry.car : result.entry.img)"
             class="w-4 sm:h-6 h-4 sm:w-6 mr-3"
@@ -89,7 +89,7 @@
       </div>
     </div>
     <div v-if="resultIsRace(result)" class="px-2 w-26 sm:w-40 text-center italic overflow-hidden">
-      <div class="slide-in">
+      <div :class="slideIn">
         <span class="text-gray-300 text-sm sm:text-2xl flex items-center"
           >{{ timePrefix }}{{ result.time
           }}<span
@@ -104,12 +104,12 @@
       v-if="resultIsRace(result) && isNotLive()"
       class="px-2 w-10 sm:w-24 text-right font-bold overflow-hidden"
     >
-      <div class="slide-in">
+      <div :class="slideIn">
         <span class="text-sm sm:text-2xl">{{ index < 10 ? '+' : '' }}{{ points }}</span>
       </div>
     </div>
     <div v-if="resultIsStandings(result) && isNotLive()" class="overflow-hidden">
-      <div class="slide-in">
+      <div :class="slideIn">
         <span class="text-gray-300 text-md sm:text-4xl">{{ result.points }}</span>
       </div>
     </div>
@@ -200,12 +200,17 @@ const deltaClass = () => {
 
 const timePrefix =
   resultIsRace(result) &&
-  ((index === 0 && pageNumber === 0) || result.time === '-' || result.time === 'DNF')
+  (!isNotLive() ||
+    (index === 0 && pageNumber === 0) ||
+    result.time === '-' ||
+    result.time === 'DNF')
     ? ''
     : '+'
 
 const penalty =
   resultIsRace(result) && (penaltiesData[season] as Penalties)?.[track]?.[result.entry.id ?? '']
+
+const slideIn = computed(() => (isNotLive() ? 'slide-in' : ''))
 </script>
 
 <style>

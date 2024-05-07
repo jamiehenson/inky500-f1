@@ -116,4 +116,8 @@ export type LiveDrivers = Record<
   { model: number; team: string; nationality: string; driver: string }
 >
 
-export type LiveRace = Record<string, { pos: number; lap: number }>
+type LiveRaceInner = { pos: number; lap: number; laps: number; spline: number }
+
+export type LiveRace = Record<string, LiveRaceInner>
+
+export type LiveRaceEntries = [string, LiveRaceInner]

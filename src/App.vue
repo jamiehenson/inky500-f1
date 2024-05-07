@@ -11,7 +11,7 @@ const { bgColor } = storeToRefs(useStagesStore())
   <header><Nav /></header>
   <main>
     <div
-      class="app transition-colors mx-auto h-screen overflow-scroll sm:overflow-hidden pt-12 sm:pt-16"
+      class="app transition-colors mx-auto h-full sm:h-screen overflow-scroll sm:overflow-hidden pt-12 sm:pt-16"
     >
       <RouterView :key="$route.fullPath" />
     </div>

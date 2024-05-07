@@ -1,18 +1,18 @@
 <template>
   <ResultsWrapper :dataAvailable="entries.length > 0">
     <FaderComponent />
-    <div class="flex-[2_2_0%] p-3 sm:p-5 flex flex-col standing-bg w-full relative">
-      <div class="flex items-end mb-6">
+    <div class="p-3 sm:p-5 flex flex-col standing-bg w-full h-full relative">
+      <div class="flex items-end sm:mb-6">
         <h1 class="hidden sm:block text-5xl uppercase font-bold text-gray-300 mr-3">
           LIVE RESULTS
         </h1>
         <h2 class="text-xl uppercase">{{ sessionName }}</h2>
       </div>
-      <div class="h-[900px] sm:h-[768px] relative">
+      <div class="h-[900px] flex flex-col relative">
         <div
           v-for="(result, index) in entries"
           :key="result.entry.name"
-          class="absolute h-[48px] w-full transition-all"
+          class="absolute w-full transition-all flex-1 duration-500"
           :style="`top: ${index * 48}px`"
         >
           <StandingsTableListItem
@@ -34,7 +34,7 @@ import ResultsWrapper from './ResultsWrapper.vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import FaderComponent from './FaderComponent.vue'
 import { nationalityLookup, carLookup } from '../liveUtils'
-import type { LiveDrivers, LiveRace, RacerResult } from '@/types'
+import type { LiveDrivers, LiveRace, LiveRaceEntries, RacerResult } from '@/types'
 import { useStagesStore } from '@/stores/stages'
 import { storeToRefs } from 'pinia'
 import { msToTime } from '@/utils'
@@ -74,15 +74,32 @@ const entries = computed(() => {
     return []
   }
 
-  const sortedRace = Object.entries(liveData.value).sort((a, b) => a[1].pos - b[1].pos)
+  let lapObj = Object.entries(liveData.value).reduce(
+    (obj: Record<number, LiveRaceEntries[]>, item) => {
+      return (obj[item[1].laps] = [...(obj[item[1].laps] ?? []), item]), obj
+    },
+    {}
+  )
 
-  const results: RacerResult[] = sortedRace
+  const laps = Object.values(lapObj)
+    .reverse()
+    .flatMap((set) => set.sort((a, b) => b[1].spline - a[1].spline))
+
+  const results: RacerResult[] = laps
     .map((racer, index) => {
       const driver = driverData.value[racer[0]]
-      const split =
-        index > 0
-          ? ((sortedRace[index - 1][1].lap - racer[1].lap) / 1000).toFixed(3)
-          : msToTime(totalTime.value)
+      let split = msToTime(totalTime.value)
+
+      if (index > 0) {
+        const diff = laps[index - 1][1].lap - racer[1].lap
+
+        if (diff <= -60) {
+          const lapDiff = Math.max(laps[index - 1][1].laps - racer[1].laps, 1)
+          split = `+${lapDiff} lap${lapDiff === 1 ? '' : 's'}`
+        } else {
+          split = `+${(diff / 1000).toFixed(3)}`
+        }
+      }
 
       return {
         entry: {
@@ -94,7 +111,7 @@ const entries = computed(() => {
         time: split
       }
     })
-    .slice(0, 16)
+    .slice(0, 20)
 
   return results
 })
