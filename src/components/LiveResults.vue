@@ -42,6 +42,7 @@ import { msToTime } from '@/utils'
 const driverData = ref<LiveDrivers>({})
 const liveData = ref<LiveRace>({})
 const totalTime = ref(0)
+const trackLength = ref(0)
 const sessionName = ref('')
 const store = useStagesStore()
 const { ably } = store
@@ -50,11 +51,12 @@ const { ablyConnected } = storeToRefs(store)
 onMounted(async () => {
   const channel = ably.channels.get('acc')
   await channel.subscribe('race', (message) => {
-    const { live, drivers, time, name } = JSON.parse(message.data)
+    const { live, drivers, time, name, track } = JSON.parse(message.data)
     liveData.value = live
     driverData.value = drivers
     totalTime.value = time
     sessionName.value = name
+    trackLength.value = track
   })
 })
 
@@ -76,7 +78,7 @@ const entries = computed(() => {
 
   let lapObj = Object.entries(liveData.value).reduce(
     (obj: Record<number, LiveRaceEntries[]>, item) => {
-      return (obj[item[1].laps] = [...(obj[item[1].laps] ?? []), item]), obj
+      return (obj[item[1].lap] = [...(obj[item[1].lap] ?? []), item]), obj
     },
     {}
   )
@@ -91,13 +93,18 @@ const entries = computed(() => {
       let split = msToTime(totalTime.value)
 
       if (index > 0) {
-        const diff = laps[index - 1][1].lap - racer[1].lap
+        const ahead = laps[index - 1][1]
+        const current = racer[1]
 
-        if (diff <= -60) {
-          const lapDiff = Math.max(laps[index - 1][1].laps - racer[1].laps, 1)
+        const distanceInM = (ahead.spline - current.spline) * trackLength.value
+        const avgSpeedInMS = (((ahead.kmh + current.kmh) / 2) * 1000) / 3600
+        const diff = distanceInM / avgSpeedInMS
+        const lapDiff = ahead.lap - current.lap
+
+        if (lapDiff > 0) {
           split = `+${lapDiff} lap${lapDiff === 1 ? '' : 's'}`
         } else {
-          split = `+${(diff / 1000).toFixed(3)}`
+          split = `+${diff.toFixed(3)}`
         }
       }
 
