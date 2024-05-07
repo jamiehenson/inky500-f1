@@ -104,7 +104,7 @@
           <div class="nav relative px-3 sm:pr-0">
             <a
               class="mt-3 sm:mt-0 flex justify-center bg-green-900 hover:bg-green-800 transition-colors px-3 py-3 sm:py-1 rounded-sm uppercase text-sm sm:text-md"
-              href="/live"
+              :href="withBase('live')"
             >
               Live
             </a>
