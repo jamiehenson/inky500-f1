@@ -1,7 +1,7 @@
 <template>
   <div class="nav flex fixed left-0 top-0 w-full z-10 drop-shadow-lg h-12">
     <div class="flex-1 flex items-center p-2">
-      <div class="font-bold ml-1 flex items-center">
+      <div class="font-bold ml-1 flex items-center flex-1 sm:flex-none">
         <a :href="withBase()" class="flex items-center">
           <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
           <span class="font-bold mr-3 sm:mr-2">Inky 500</span>
@@ -100,6 +100,14 @@
                 </a>
               </div>
             </div>
+          </div>
+          <div class="nav relative px-3 sm:pr-0">
+            <a
+              class="mt-3 sm:mt-0 flex justify-center bg-green-900 hover:bg-green-800 transition-colors px-3 py-3 sm:py-1 rounded-sm uppercase text-sm sm:text-md"
+              href="/live"
+            >
+              Live
+            </a>
           </div>
         </div>
         <button
