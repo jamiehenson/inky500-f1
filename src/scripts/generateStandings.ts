@@ -77,8 +77,8 @@ const timeGrabber = async (season: string, race: string, link: string) => {
     times.forEach((time, index) => {
       const tableName = time[0]
       const name =
-        Object.entries(driversData).find(
-          (driver) => (driver[1] as { tableName: string }).tableName === tableName
+        Object.entries(driversData).find((driver) =>
+          (driver[1] as { tableNames: string[] }).tableNames?.includes(tableName)
         )?.[0] ?? tableName
 
       let parsedTime = time[1].split(':').slice(1).join(':')
@@ -213,17 +213,33 @@ const calculateStandings = (season: SeasonName) => {
         )
       })
 
-      constructorPoints[race] = Object.entries(constructorPoints[race])
-        .map((raceConstructors) => {
-          if (index > 0) {
-            raceConstructors[1].points +=
-              constructorPoints[raceKeys[index - 1]][raceConstructors[0]].points
-            raceConstructors[1].normalisedPoints +=
-              constructorPoints[raceKeys[index - 1]][raceConstructors[0]].normalisedPoints
-          }
+      const cumulativePoints = Object.entries(constructorPoints[race]).map((raceConstructors) => {
+        if (index > 0) {
+          raceConstructors[1].points +=
+            constructorPoints[raceKeys[index - 1]][raceConstructors[0]].points
+          raceConstructors[1].normalisedPoints +=
+            constructorPoints[raceKeys[index - 1]][raceConstructors[0]].normalisedPoints
+        }
 
-          return raceConstructors
-        })
+        return raceConstructors
+      })
+
+      if (index > 0) {
+        const missed = Object.keys(constructorPoints[raceKeys[index - 1]]).filter(
+          (constructor) => !cumulativePoints.map((a) => a[0]).includes(constructor)
+        )
+
+        if (missed.length > 0) {
+          missed.forEach((constructor) => {
+            cumulativePoints.push([
+              constructor,
+              constructorPoints[raceKeys[index - 1]][constructor]
+            ])
+          })
+        }
+      }
+
+      constructorPoints[race] = cumulativePoints
         .sort(([, a], [, b]) => b.normalisedPoints - a.normalisedPoints)
         .reduce((r, [k, v]) => ({ ...r, [k]: v }), {})
     }

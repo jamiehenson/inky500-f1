@@ -36,7 +36,7 @@
               v-if="entryIsRacer(result.entry)"
               :class="[
                 isRace ? 'text-sm sm:text-xl' : 'text-md sm:text-2xl',
-                'italic  text-gray-300'
+                'italic text-gray-300'
               ]"
               >{{ splitRacerName(result.entry)[0] }}&nbsp;</span
             ><span
@@ -54,13 +54,16 @@
             v-if="!entryIsRacer(result.entry)"
             :class="['text-sm italic uppercase text-neutral-500']"
           >
-            <span
-              v-for="driver in teamDrivers"
-              :class="[driver[1] ? 'font-bold text-white' : '', 'mr-2']"
-              :key="`${driver[0]}`"
-            >
-              {{ driver[0] }}
-            </span>
+            <div v-if="teamDrivers.length > 0">
+              <span
+                v-for="driver in teamDrivers"
+                :class="[driver[1] ? 'font-bold text-white' : '', 'mr-2']"
+                :key="`${driver[0]}`"
+              >
+                {{ driver[0] }}
+              </span>
+            </div>
+            <div v-else>☠️</div>
           </span>
           <a
             v-if="entryIsRacer(result.entry) && result.entry.twitch"

@@ -15,7 +15,7 @@
     "car": "mercedes"
   },
   "inkubusjaymz": {
-    "team": "Dorr Motorsports",
+    "team": "Dörr Motorsports",
     "teamColor": "#2e4c46",
     "car": "astonmartin",
     "otherCars": {
@@ -65,7 +65,13 @@
   "roberts": {
     "team": "DCRoberts",
     "teamColor": "#2e0d92",
-    "car": "chevrolet"
+    "car": "astonmartin",
+    "otherCars": {
+      "oulton-park": "chevrolet",
+      "monza": "chevrolet",
+      "laguna-seca": "chevrolet",
+      "nurburgring": "chevrolet"
+    }
   },
   "calamitysam": {
     "team": "Scuderia Greggs",
@@ -73,8 +79,8 @@
     "car": "astonmartin"
   },
   "bouncingczech": {
-    "team": "Team Slow-Fi",
-    "teamColor": "#953267",
+    "team": "Crypto Bros",
+    "teamColor": "#FFD700",
     "car": "mercedes"
   },
   "rafa4xx": {
@@ -83,7 +89,7 @@
     "car": "porsche"
   },
   "mcdonoli": {
-    "team": "AMR V8 Vantage GT4",
+    "team": "Ya BOIIIIII",
     "teamColor": "purple",
     "car": "mercedes",
     "otherCars": {
