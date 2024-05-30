@@ -111,7 +111,7 @@
         <span class="text-sm sm:text-2xl">{{ index < 10 ? '+' : '' }}{{ points }}</span>
       </div>
     </div>
-    <div v-if="resultIsStandings(result) && isNotLive()" class="overflow-hidden text-right w-24">
+    <div v-if="resultIsStandings(result) && isNotLive()" class="overflow-hidden text-right sm:w-24">
       <div class="slideIn">
         <span class="text-gray-300 text-md sm:text-4xl">{{ result.points }}</span>
       </div>

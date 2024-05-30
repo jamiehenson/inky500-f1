@@ -21,6 +21,11 @@
       :results="standings"
       :isLastRace="isLastRace"
     />
+    <SectionIntro
+      v-else-if="stage === 'constructorsIn'"
+      heading="Constructors'"
+      sub-heading="Championship"
+    />
     <StandingsTable
       v-else-if="stage === 'constructors' || stage === 'constructorsOut'"
       title="Constructors' Championship"
