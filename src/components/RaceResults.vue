@@ -225,7 +225,7 @@ watch(
           return 5000 * Math.ceil(Object.keys(seasonRacers[season.value]).length / 5)
         case 'constructors':
           return (
-            5000 *
+            10000 *
             Math.ceil(
               Array.from(new Set(Object.values(seasonRacers[season.value]).map(({ car }) => car)))
                 .length / 5
@@ -233,6 +233,13 @@ watch(
           )
       }
     }
+
+    console.log(
+      Math.ceil(
+        Array.from(new Set(Object.values(seasonRacers[season.value]).map(({ car }) => car)))
+          .length / 5
+      )
+    )
 
     const delay = determineDelay()
 
