@@ -234,13 +234,6 @@ watch(
       }
     }
 
-    console.log(
-      Math.ceil(
-        Array.from(new Set(Object.values(seasonRacers[season.value]).map(({ car }) => car)))
-          .length / 5
-      )
-    )
-
     const delay = determineDelay()
 
     if (typeof window !== 'undefined' && mode.value === 'all') {
