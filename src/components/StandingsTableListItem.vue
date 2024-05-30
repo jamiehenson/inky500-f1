@@ -107,12 +107,12 @@
       v-if="resultIsRace(result) && isNotLive()"
       class="px-2 w-10 sm:w-24 text-right font-bold overflow-hidden"
     >
-      <div :class="slideIn">
+      <div class="slideIn">
         <span class="text-sm sm:text-2xl">{{ index < 10 ? '+' : '' }}{{ points }}</span>
       </div>
     </div>
-    <div v-if="resultIsStandings(result) && isNotLive()" class="overflow-hidden">
-      <div :class="slideIn">
+    <div v-if="resultIsStandings(result) && isNotLive()" class="overflow-hidden text-right w-24">
+      <div class="slideIn">
         <span class="text-gray-300 text-md sm:text-4xl">{{ result.points }}</span>
       </div>
     </div>
