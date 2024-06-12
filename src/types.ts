@@ -80,6 +80,7 @@ export type RacerResults = {
       racerId: RacerName
       time: string
     }
+    data: string
   }
 }
 

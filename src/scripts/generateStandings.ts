@@ -134,7 +134,7 @@ const timeGrabber = async (season: string, race: string, link: string) => {
     return (obj[item] = results[item]), obj
   }, {})
 
-  return { results: orderedResults, fastestLap }
+  return { results: orderedResults, fastestLap, data: link }
 }
 
 const calculateStandings = (season: SeasonName) => {
