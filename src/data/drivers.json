@@ -74,7 +74,8 @@
     "name": "Michael Smith",
     "countryCode": "gb",
     "img": "michael",
-    "tableNames": ["Michael S"]
+    "tableNames": ["Michael S"],
+    "youtube": "MichaelSmithRaces"
   },
   "cannonmandan": {
     "name": "Cannon Man Dan",
@@ -86,7 +87,8 @@
     "name": "Dan Roberts",
     "countryCode": "gb",
     "img": "roberts",
-    "tableNames": ["Dan R"]
+    "tableNames": ["Dan R"],
+    "youtube": "DCOnTrack"
   },
   "happybadger": {
     "name": "Happy Badger",

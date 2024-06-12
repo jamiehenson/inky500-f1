@@ -73,6 +73,14 @@
           >
             <img src="../assets/twitch.png" class="w-4 h-4 sm:w-6 sm:h-6" />
           </a>
+          <a
+            v-if="entryIsRacer(result.entry) && result.entry.youtube"
+            :href="`https://www.youtube.com/@${result.entry.youtube}`"
+            target="_blank"
+            class="inline-block ml-3"
+          >
+            <img src="../assets/youtube.svg" class="w-4 h-4 sm:w-6 sm:h-6" />
+          </a>
         </div>
       </div>
       <div class="flex-1">

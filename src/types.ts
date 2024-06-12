@@ -39,6 +39,7 @@ export type Racer = {
   img?: string
   countryCode?: string
   twitch?: string
+  youtube?: string
   id?: string
 }
 
