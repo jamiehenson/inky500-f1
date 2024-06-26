@@ -50,7 +50,7 @@
     "name": "K. Ruthal",
     "countryCode": "gb",
     "img": "kruthal",
-    "tableNames": ["K r"]
+    "tableNames": ["K r", "  K"]
   },
   "atlas": {
     "name": "Joseph Atlas",
@@ -154,6 +154,10 @@
     "name": "W. Masek",
     "countryCode": "cz",
     "tableNames": ["Bouncing C"]
+  },
+  "blex": {
+    "name": "Blex",
+    "tableNames": ["Naomi H"]
   },
   "unknown": {
     "name": "Unknown"

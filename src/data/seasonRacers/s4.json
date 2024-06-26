@@ -110,6 +110,10 @@
     "team": "McLaren 570S GT4",
     "car": "mclaren"
   },
+  "blex": {
+    "team": "Chevrolet",
+    "car": "chevrolet"
+  },
   "unknown": {
     "team": "Mystery Machine",
     "car": "renault"
