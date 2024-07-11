@@ -101,14 +101,6 @@
               </div>
             </div>
           </div>
-          <div class="nav relative px-3 sm:pr-0">
-            <a
-              class="mt-3 sm:mt-0 flex justify-center bg-green-900 hover:bg-green-800 transition-colors px-3 py-3 sm:py-1 rounded-sm uppercase text-sm sm:text-md"
-              :href="withBase('live')"
-            >
-              Live
-            </a>
-          </div>
         </div>
         <button
           class="sm:hidden mr-2 bg-blue-900 hover:bg-blue-800 p-2 rounded-md cursor-pointer"

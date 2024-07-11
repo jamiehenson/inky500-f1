@@ -7,7 +7,7 @@ import { modes, seasons } from './types'
 import standings from './data/standings'
 
 const route = (path: string) => ({ path, component: RaceResults })
-const staticRoutes = [route('/'), { path: '/live', component: LiveResults }]
+const staticRoutes = [route('/')]
 const routes = seasons.flatMap((season) =>
   Object.keys(standings[season]).flatMap((race) => [
     route(`/${season}/${race}/`),
