@@ -129,7 +129,7 @@
 
 <script setup lang="ts">
 import { useStagesStore } from '@/stores/stages'
-import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme } from '@/utils'
+import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme, pointslessResults } from '@/utils'
 import type {
   GeneralResult,
   Penalties,
@@ -175,7 +175,10 @@ const resultIsStandings = (result: GeneralResult): result is StandingsResult => 
   return !isRace && (result as StandingsResult).position !== undefined
 }
 
-if ((trackData[track] as Track).noPoints || (resultIsRace(result) && result.time === 'DNF')) {
+if (
+  (trackData[track] as Track).noPoints ||
+  (resultIsRace(result) && pointslessResults.includes(result.time))
+) {
   points = 0
 }
 
@@ -214,7 +217,7 @@ const timePrefix =
   (!isNotLive() ||
     (index === 0 && pageNumber === 0) ||
     result.time === '-' ||
-    result.time === 'DNF')
+    pointslessResults.includes(result.time))
     ? ''
     : '+'
 

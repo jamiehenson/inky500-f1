@@ -144,3 +144,5 @@ export const msToTime = (duration: number) => {
 
   return minutes + ':' + seconds
 }
+
+export const pointslessResults = ['DNF', 'DSQ']

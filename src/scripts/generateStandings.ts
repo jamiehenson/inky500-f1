@@ -15,7 +15,7 @@ import {
   type ConstructorResult,
   type Penalties
 } from '../types'
-import { pointsScheme } from '../utils'
+import { pointsScheme, pointslessResults } from '../utils'
 
 type GeneratedConstructorStandings = {
   [index: string]: ConstructorResult
@@ -152,7 +152,7 @@ const calculateStandings = (season: SeasonName) => {
     const pts = raceResults
       ? Object.entries(raceResults.results).reduce(
           (obj: GeneratedRaceStandings, item: [string, string], currentIndex) => {
-            const dnf = item[1] === 'DNF'
+            const dnf = pointslessResults.includes(item[1])
             const cumulativePoints =
               (pointsScheme[season][currentIndex] ?? 0) +
               (raceResults.fastestLap.racerId === item[0] ? 1 : 0)
