@@ -2,7 +2,6 @@ import { createPinia } from 'pinia'
 import { ViteSSG } from 'vite-ssg'
 import App from './App.vue'
 import RaceResults from './components/RaceResults.vue'
-import LiveResults from './components/LiveResults.vue'
 import { modes, seasons } from './types'
 import standings from './data/standings'
 
