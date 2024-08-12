@@ -5,6 +5,9 @@ export default {
   s4: {
     monza: {
       bouncingczech: 1
+    },
+    silverstone: {
+      wobbleboss: -3
     }
   }
 }

@@ -102,12 +102,7 @@
     <div v-if="resultIsRace(result)" class="px-2 w-26 sm:w-40 text-center italic overflow-hidden">
       <div :class="slideIn">
         <span class="text-gray-300 text-sm sm:text-2xl flex items-center"
-          >{{ timePrefix }}{{ result.time
-          }}<span
-            v-if="penalty"
-            className="rounded-sm bg-red-600 text-white text-sm font-bold py-1 px-2 ml-2 not-italic"
-            >P</span
-          ></span
+          >{{ timePrefix }}{{ result.time }}</span
         >
       </div>
     </div>
