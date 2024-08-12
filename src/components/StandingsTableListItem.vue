@@ -127,7 +127,6 @@ import { useStagesStore } from '@/stores/stages'
 import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme, pointslessResults } from '@/utils'
 import type {
   GeneralResult,
-  Penalties,
   RacerName,
   RacerResult,
   RacerResults,
@@ -140,7 +139,6 @@ import trackData from '../data/tracks.json'
 import drivers from '../data/drivers.json'
 import seasonRacers from '../data/seasonRacers'
 import resultsData from '../data/results'
-import penaltiesData from '../data/penalties'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
@@ -215,9 +213,6 @@ const timePrefix =
     pointslessResults.includes(result.time))
     ? ''
     : '+'
-
-const penalty =
-  resultIsRace(result) && (penaltiesData[season] as Penalties)?.[track]?.[result.entry.id ?? '']
 
 const slideIn = computed(() => (isNotLive() ? 'slide-in' : ''))
 </script>
