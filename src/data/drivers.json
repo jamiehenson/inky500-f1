@@ -81,12 +81,11 @@
     "name": "Cannon Man Dan",
     "countryCode": "gb",
     "img": "cannonmandan",
-    "tableNames": ["  C"]
+    "tableNames": ["  C", " CannonMan D"]
   },
   "roberts": {
     "name": "Dan Roberts",
     "countryCode": "gb",
-    "img": "roberts",
     "tableNames": ["Dan R"],
     "youtube": "DCOnTrack"
   },
