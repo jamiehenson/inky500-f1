@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+// vue-chartjs is naffed for TS
+// @ts-nocheck
 import { storeToRefs } from 'pinia'
 import {
   Chart as ChartJS,
@@ -53,7 +55,7 @@ ChartJS.defaults.font.family = 'Formula1, sans'
 ChartJS.defaults.font.size = 12
 ChartJS.defaults.color = '#ddd'
 
-const { labels, standingsDataset, constructorsDataset } = getChartData(season)
+const { labels, standingsDataset, constructorsDataset } = getChartData(season.value)
 
 const standingsChartData = {
   labels,
@@ -79,8 +81,7 @@ const chartOptions = {
   scales: {
     y: {
       ticks: {
-        // Include a dollar sign in the ticks
-        callback: function (value, index, ticks) {
+        callback: function (value: string) {
           return '  ' + value
         }
       }

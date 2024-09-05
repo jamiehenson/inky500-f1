@@ -9,10 +9,11 @@ import {
   type TrackName,
   type ModeName,
   type Constructor,
-  type SeasonRacers
+  type SeasonRacers,
+  type ConstructorName
 } from './types'
 import driversData from './data/drivers.json'
-import tracksData from './data/tracks.json'
+import trackData from './data/tracks.json'
 import constructorData from './data/constructors.json'
 import constructorsData from './data/constructors/index'
 import seasonRacersData from './data/seasonRacers'
@@ -150,27 +151,31 @@ export const msToTime = (duration: number) => {
 
 export const pointslessResults = ['DNF', 'DSQ']
 
-export const getChartData = (season) => {
-  const standings = standingsData[season.value]
-  const constructors = constructorsData[season.value]
+type ChartSet = { label: string; data: number[] }
 
-  const labels = []
-  const standingsSet = {}
-  const constructorsSet = {}
+export const getChartData = (season: SeasonName) => {
+  const standings = standingsData[season]
+  const constructors = constructorsData[season]
+
+  const labels: string[] = []
+  const standingsSet: Record<string, ChartSet> = {}
+  const constructorsSet: Record<string, ChartSet> = {}
 
   Object.entries(standings).forEach(([track, set]) => {
-    if (!set) return
+    if (!set) {
+      return
+    }
 
-    labels.push(tracksData[track].name)
+    labels.push(trackData[track as TrackName].name)
 
     Object.entries(set).forEach(([key, value]) => {
       if (!standingsSet[key]) {
         standingsSet[key] = {
-          label: driversData[key].name,
+          label: driversData[key as RacerName].name,
           data: []
         }
       }
-      standingsSet[key].data.push(value)
+      standingsSet[key].data.push(value as number)
     })
   })
 
@@ -180,7 +185,7 @@ export const getChartData = (season) => {
     Object.entries(set).forEach(([key, value]) => {
       if (!constructorsSet[key]) {
         constructorsSet[key] = {
-          label: constructorData[key].name,
+          label: constructorData[key as ConstructorName].name,
           data: []
         }
       }
@@ -190,8 +195,10 @@ export const getChartData = (season) => {
 
   return {
     labels,
-    standingsDataset: Object.values(standingsSet).sort((a, b) => a.label.localeCompare(b.label)),
-    constructorsDataset: Object.values(constructorsSet).sort((a, b) =>
+    standingsDataset: Object.values(standingsSet).sort((a: ChartSet, b: ChartSet) =>
+      a.label.localeCompare(b.label)
+    ),
+    constructorsDataset: Object.values(constructorsSet).sort((a: ChartSet, b: ChartSet) =>
       a.label.localeCompare(b.label)
     )
   }
