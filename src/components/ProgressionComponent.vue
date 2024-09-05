@@ -33,11 +33,10 @@ import {
 import { Line } from 'vue-chartjs'
 import { useStagesStore } from '@/stores/stages'
 import ResultsWrapper from './ResultsWrapper.vue'
-
 import { getChartData } from '../utils'
 
 const stagesStore = useStagesStore()
-const { stage, season, track, fastestLap, mode } = storeToRefs(stagesStore)
+const { season } = storeToRefs(stagesStore)
 
 ChartJS.register(
   CategoryScale,
