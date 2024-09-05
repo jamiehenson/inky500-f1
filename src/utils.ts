@@ -12,8 +12,11 @@ import {
   type SeasonRacers
 } from './types'
 import driversData from './data/drivers.json'
-import trackData from './data/tracks.json'
+import tracksData from './data/tracks.json'
+import constructorData from './data/constructors.json'
+import constructorsData from './data/constructors/index'
 import seasonRacersData from './data/seasonRacers'
+import standingsData from './data/standings'
 import resultsData from './data/results'
 
 export const splitRacerName = (driver: Racer) => {
@@ -146,3 +149,50 @@ export const msToTime = (duration: number) => {
 }
 
 export const pointslessResults = ['DNF', 'DSQ']
+
+export const getChartData = (season) => {
+  const standings = standingsData[season.value]
+  const constructors = constructorsData[season.value]
+
+  const labels = []
+  const standingsSet = {}
+  const constructorsSet = {}
+
+  Object.entries(standings).forEach(([track, set]) => {
+    if (!set) return
+
+    labels.push(tracksData[track].name)
+
+    Object.entries(set).forEach(([key, value]) => {
+      if (!standingsSet[key]) {
+        standingsSet[key] = {
+          label: driversData[key].name,
+          data: []
+        }
+      }
+      standingsSet[key].data.push(value)
+    })
+  })
+
+  Object.values(constructors).forEach((set) => {
+    if (!set) return
+
+    Object.entries(set).forEach(([key, value]) => {
+      if (!constructorsSet[key]) {
+        constructorsSet[key] = {
+          label: constructorData[key].name,
+          data: []
+        }
+      }
+      constructorsSet[key].data.push(value.normalisedPoints)
+    })
+  })
+
+  return {
+    labels,
+    standingsDataset: Object.values(standingsSet).sort((a, b) => a.label.localeCompare(b.label)),
+    constructorsDataset: Object.values(constructorsSet).sort((a, b) =>
+      a.label.localeCompare(b.label)
+    )
+  }
+}

@@ -101,6 +101,14 @@
               </div>
             </div>
           </div>
+          <div class="nav relative px-3 sm:pr-0">
+            <a
+              class="block w-full mt-3 sm:mt-0 bg-blue-900 hover:bg-blue-800 transition-colors px-3 py-3 sm:py-1 rounded-sm capitalize text-sm sm:text-md"
+              :href="withBase(`${season}/progression`)"
+            >
+              📈
+            </a>
+          </div>
         </div>
         <button
           class="sm:hidden mr-2 bg-blue-900 hover:bg-blue-800 p-2 rounded-md cursor-pointer"
