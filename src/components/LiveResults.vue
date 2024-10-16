@@ -29,14 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import ResultsWrapper from './ResultsWrapper.vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import FaderComponent from './FaderComponent.vue'
 import { nationalityLookup, carLookup } from '../liveUtils'
 import type { LiveDrivers, LiveRace, LiveRaceEntries, RacerResult } from '@/types'
-import { useStagesStore } from '@/stores/stages'
-import { storeToRefs } from 'pinia'
 import { msToTime } from '@/utils'
 
 const driverData = ref<LiveDrivers>({})
@@ -44,35 +42,9 @@ const liveData = ref<LiveRace>({})
 const totalTime = ref(0)
 const trackLength = ref(0)
 const sessionName = ref('')
-const store = useStagesStore()
-const { ably } = store
-const { ablyConnected } = storeToRefs(store)
-
-onMounted(async () => {
-  const channel = ably.channels.get('acc')
-  await channel.subscribe('race', (message) => {
-    const { live, drivers, time, name, track } = JSON.parse(message.data)
-    liveData.value = live
-    driverData.value = drivers
-    totalTime.value = time
-    sessionName.value = name
-    trackLength.value = track
-  })
-})
-
-onUnmounted(async () => {
-  ably.connection.close()
-  await ably.connection.once('closed', function () {
-    console.log('Closed the connection to Ably.')
-  })
-})
 
 const entries = computed(() => {
-  if (
-    !ablyConnected.value ||
-    Object.keys(driverData.value).length === 0 ||
-    Object.keys(liveData.value).length === 0
-  ) {
+  if (Object.keys(driverData.value).length === 0 || Object.keys(liveData.value).length === 0) {
     return []
   }
 

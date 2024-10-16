@@ -117,12 +117,6 @@
           <img src="../assets/burger.svg" class="h-6 invert" />
         </button>
       </div>
-      <div v-else class="flex items-center">
-        <span v-if="ablyConnected" class="bg-green-500 rounded-md py-2 px-3 ml-2 text-xs"
-          >Connected: <strong>{{ ablyConnections }}</strong></span
-        >
-        <span v-else class="bg-red-500 rounded-md py-2 px-3 ml-2 text-xs">Not connected</span>
-      </div>
       <!-- Background changer for green screen needs -->
       <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">
       <button
@@ -144,21 +138,19 @@ import trackData from '../data/tracks.json'
 import resultsData from '../data/results'
 import type { ModeName, SeasonName, TrackName } from '@/types'
 import { seasons, modes } from '@/types'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { trackDisabled, seasonDisabled, getLastValidTrack, withBase } from '@/utils'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const stagesStore = useStagesStore()
-const { ably } = stagesStore
-const { track, season, mode, ablyConnected } = storeToRefs(stagesStore)
+const { track, season, mode } = storeToRefs(stagesStore)
 
 const seasonDropdownState = ref(false)
 const trackDropdownState = ref(false)
 const modeDropdownState = ref(false)
 const menuDropdownState = ref(false)
-const ablyConnections = ref(0)
 
 const toggleSeasonState = () => {
   seasonDropdownState.value = !seasonDropdownState.value
@@ -204,13 +196,6 @@ const modeEmoji = (mode: ModeName) => {
 }
 
 const showControls = computed(() => route.path !== '/live')
-
-onMounted(async () => {
-  const channel = ably.channels.get('acc', { params: { occupancy: 'metrics' } })
-  await channel.subscribe('[meta]occupancy', (message) => {
-    ablyConnections.value = message?.data?.metrics?.connections ?? 1
-  })
-})
 </script>
 
 <style>

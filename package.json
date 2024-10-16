@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@unhead/vue": "^1.8.18",
-    "ably": "^2.0.4",
     "chart.js": "^4.4.4",
     "flag-icons": "^7.1.0",
     "loaders.css": "^0.1.2",
