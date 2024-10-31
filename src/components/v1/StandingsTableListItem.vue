@@ -71,7 +71,7 @@
             target="_blank"
             class="inline-block ml-3"
           >
-            <img src="../assets/twitch.png" class="w-4 h-4 sm:w-6 sm:h-6" />
+            <img src="/src/assets/twitch.png" class="w-4 h-4 sm:w-6 sm:h-6" />
           </a>
           <a
             v-if="entryIsRacer(result.entry) && result.entry.youtube"
@@ -79,7 +79,6 @@
             target="_blank"
             class="inline-block ml-3"
           >
-            <img src="../assets/youtube.svg" class="w-4 h-4 sm:w-6 sm:h-6" />
           </a>
         </div>
       </div>
@@ -106,15 +105,12 @@
         >
       </div>
     </div>
-    <div
-      v-if="resultIsRace(result) && isNotLive()"
-      class="px-2 w-10 sm:w-24 text-right font-bold overflow-hidden"
-    >
+    <div v-if="resultIsRace(result)" class="px-2 w-10 sm:w-24 text-right font-bold overflow-hidden">
       <div class="slideIn">
         <span class="text-sm sm:text-2xl">{{ index < 10 ? '+' : '' }}{{ points }}</span>
       </div>
     </div>
-    <div v-if="resultIsStandings(result) && isNotLive()" class="overflow-hidden text-right sm:w-24">
+    <div v-if="resultIsStandings(result)" class="overflow-hidden text-right sm:w-24">
       <div class="slideIn">
         <span class="text-gray-300 text-md sm:text-4xl">{{ result.points }}</span>
       </div>
@@ -123,8 +119,14 @@
 </template>
 
 <script setup lang="ts">
-import { useStagesStore } from '@/stores/stages'
-import { splitRacerName, getCarBadge, entryIsRacer, pointsScheme, pointslessResults } from '@/utils'
+import { useStagesStore } from '../../stores/stages'
+import {
+  splitRacerName,
+  getCarBadge,
+  entryIsRacer,
+  pointsScheme,
+  pointslessResults
+} from '../../utils'
 import type {
   GeneralResult,
   RacerName,
@@ -134,13 +136,12 @@ import type {
   StandingsResult,
   Track,
   TrackName
-} from '@/types'
-import trackData from '../data/tracks.json'
-import drivers from '../data/drivers.json'
-import seasonRacers from '../data/seasonRacers'
-import resultsData from '../data/results'
+} from '../../types'
+import trackData from '../../data/tracks.json'
+import drivers from '../../data/drivers.json'
+import seasonRacers from '../../data/seasonRacers'
+import resultsData from '../../data/results'
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
 const { isRace, index, pageNumber, result, floating } = defineProps<{
   isRace: boolean
   index: number
@@ -151,14 +152,11 @@ const { isRace, index, pageNumber, result, floating } = defineProps<{
 }>()
 const { fastestLap, track, season } = useStagesStore()
 const animationDelay = index / 20 + 's'
-const route = useRoute()
 let points = pointsScheme[season][index + pageNumber * 5]
 
 if (fastestLap?.entry.name === result.entry.name) {
   points++
 }
-
-const isNotLive = () => route.path !== '/live'
 
 const resultIsRace = (result: GeneralResult): result is RacerResult => {
   return isRace && (result as RacerResult).time !== undefined
@@ -207,14 +205,13 @@ const deltaClass = () => {
 
 const timePrefix =
   resultIsRace(result) &&
-  (!isNotLive() ||
-    (index === 0 && pageNumber === 0) ||
+  ((index === 0 && pageNumber === 0) ||
     result.time === '-' ||
     pointslessResults.includes(result.time))
     ? ''
     : '+'
 
-const slideIn = computed(() => (isNotLive() ? 'slide-in' : ''))
+const slideIn = 'slide-in'
 </script>
 
 <style>

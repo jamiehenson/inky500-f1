@@ -1,0 +1,57 @@
+---
+import standings from '../../data/standings'
+import { modes, seasons, type ModeName, type SeasonName, type TrackName } from '../../types'
+import V1App from '../../components/v1/App.vue'
+import { titleSnippet } from '../../utils'
+import { mostRecentSeason, getLastValidTrack } from '../../utils'
+
+export const getStaticPaths = () => [
+  { params: { path: '/' } },
+  ...seasons.flatMap((seasonVal) =>
+    Object.keys(standings[seasonVal]).flatMap((trackVal) => [
+      {
+        params: { path: `${seasonVal}/${trackVal}` }
+      },
+      ...modes
+        .filter((modeVal) => modeVal !== 'all')
+        .map((modeVal) => ({
+          params: {
+            path: `${seasonVal}/${trackVal}/${modeVal}`
+          }
+        }))
+    ])
+  )
+]
+
+const params = (Astro.params.path ?? '').split('/')
+const season = (params[0] ?? mostRecentSeason) as SeasonName
+const track = (params[1] ?? getLastValidTrack(season)) as TrackName
+const mode = (params[2] ?? 'all') as ModeName
+const title = `Inky 500${titleSnippet(season, track, mode)}`
+const description = 'Standings for the Inky 500 League'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jamiehenson.com/inky500" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://jamiehenson.com/inky500/gghq.png" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="https://jamiehenson.com/inky500" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://jamiehenson.com/inky500/gghq.png" />
+    <title>Inky 500</title>
+  </head>
+  <body>
+    <V1App season={season} track={track} mode={mode} client:load />
+  </body>
+</html>

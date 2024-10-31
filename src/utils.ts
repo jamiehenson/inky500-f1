@@ -112,7 +112,7 @@ export const debounce = (fn: Function, ms = 300) => {
 }
 
 export const withBase = (href = '') =>
-  import.meta.env.PROD ? `${import.meta.env.BASE_URL}${href}` : `/${href}`
+  import.meta.env.PROD ? `${import.meta.env.BASE_URL}v1/${href}` : `/v1/${href}`
 
 export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeName) => {
   switch (mode) {
@@ -123,8 +123,7 @@ export const titleSnippet = (season: SeasonName, track: TrackName, mode: ModeNam
   }
 }
 
-export const getCarBadge = (car: string) =>
-  new URL(`./assets/cars/${car ?? 'bmw'}.png`, import.meta.url).href
+export const getCarBadge = (car: string) => `/src/assets/cars/${car ?? 'bmw'}.png`
 
 export const entryIsRacer = (entry: Racer | Constructor): entry is Racer => {
   return (entry as Racer).team !== undefined

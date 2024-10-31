@@ -20,14 +20,13 @@
             </p>
           </div>
           <a v-if="driver.twitch" :href="`https://www.twitch.tv/${driver.twitch}`" target="_blank">
-            <img src="../assets/twitch.png" class="w-8 h-8 sm:w-12 sm:h-12 ml-3 -mt-3" />
+            <img src="/src/assets/twitch.png" class="w-8 h-8 sm:w-12 sm:h-12 ml-3 -mt-3" />
           </a>
           <a
             v-if="driver.youtube"
             :href="`https://www.youtube.com/@${driver.youtube}`"
             target="_blank"
           >
-            <img src="../assets/youtube.svg" class="w-8 h-8 sm:w-12 sm:h-12 ml-3 -mt-3" />
           </a>
           <div class="flex-1 flex justify-end">
             <img :src="getCarBadge(driver.car)" class="h-10 sm:h-12 w-10 sm:w-12 mr-3 -mt-3" />
@@ -42,14 +41,14 @@
 </template>
 
 <script setup lang="ts">
-import type { GeneralResult, Racer } from '@/types'
-import { splitRacerName, getCarBadge } from '@/utils'
+import type { GeneralResult, Racer } from '../../types'
+import { splitRacerName, getCarBadge } from '../../utils'
 
 const { position, results } = defineProps<{ position: number; results: GeneralResult[] }>()
 
 const driver = results[position - 1]?.entry as Racer
 const teamColor = driver.teamColor ?? 'black'
-const imageUrl = new URL(`../assets/discord/${driver.img ?? 'unknown'}.webp`, import.meta.url).href
+const imageUrl = `/src/assets/v1/discord/${driver.img ?? 'unknown'}.webp`
 
 const positionWithSuffix = (position: number) => {
   switch (position) {

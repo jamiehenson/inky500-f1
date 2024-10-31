@@ -41,10 +41,10 @@ import { computed, watch, onBeforeMount } from 'vue'
 import { useSeoMeta } from '@unhead/vue'
 import { storeToRefs } from 'pinia'
 import ResultsWrapper from './ResultsWrapper.vue'
-import resultsData from '../data/results'
-import standingsData from '../data/standings'
-import constructorsData from '../data/constructors/index'
-import constructorData from '../data/constructors.json'
+import resultsData from '../../data/results'
+import standingsData from '../../data/standings'
+import constructorsData from '../../data/constructors/index'
+import constructorData from '../../data/constructors.json'
 import type {
   NumberObject,
   RacerName,
@@ -53,27 +53,35 @@ import type {
   StandingsResults,
   ConstructorName,
   ConstructorResults,
-  ConstructorsResults
-} from '@/types'
-import { useStagesStore } from '@/stores/stages'
+  ConstructorsResults,
+  ModeName,
+  SeasonName
+} from '../../types'
+import { useStagesStore } from '../../stores/stages'
 import SectionIntro from './SectionIntro.vue'
 import RacePodium from './RacePodium.vue'
 import StandingsTable from './StandingsTable.vue'
-import { combinedRacer, titleSnippet } from '@/utils'
-import seasonRacers from '@/data/seasonRacers'
+import { combinedRacer, titleSnippet } from '../../utils'
+import seasonRacers from '../../data/seasonRacers'
 
-const dataAvailable = computed(() => !!(resultsData[season.value] as RacerResults)[track.value])
+const { season, track, mode } = defineProps<{
+  season: SeasonName
+  track: TrackName
+  mode: ModeName
+}>()
 
-const stagesStore = useStagesStore()
-const { stage, season, track, fastestLap, mode } = storeToRefs(stagesStore)
+const dataAvailable = computed(() => !!(resultsData[season] as RacerResults)[track])
+
+const stagesStore = useStagesStore({ season, track, mode })
+const { stage, fastestLap } = storeToRefs(stagesStore)
 const { advanceStage } = stagesStore
 
 const raceResults = computed(() => {
-  const results = (resultsData[season.value] as RacerResults)[track.value]?.results
+  const results = (resultsData[season] as RacerResults)[track]?.results
 
   if (results) {
     return Object.entries(results).map((entry) => ({
-      entry: combinedRacer(entry[0] as RacerName, season.value, track.value),
+      entry: combinedRacer(entry[0] as RacerName, season, track),
       time: entry[1]
     }))
   } else {
@@ -104,7 +112,7 @@ const sortAndFormatStandings = (data: NumberObject, isConstructor?: boolean) => 
       return {
         entry: isConstructor
           ? constructorData[entry[0] as ConstructorName]
-          : combinedRacer(entry[0] as RacerName, season.value, track.value),
+          : combinedRacer(entry[0] as RacerName, season, track),
         points: entry[1],
         position
       }
@@ -114,17 +122,17 @@ const sortAndFormatStandings = (data: NumberObject, isConstructor?: boolean) => 
 const sortAndFormatConstructors = (data: NumberObject) => sortAndFormatStandings(data, true)
 
 const standings = computed(() => {
-  const raceKeys = Object.keys(standingsData[season.value])
-  const firstRace = raceKeys.indexOf(track.value) === 0
+  const raceKeys = Object.keys(standingsData[season])
+  const firstRace = raceKeys.indexOf(track) === 0
 
   const currentStandings = sortAndFormatStandings(
-    (standingsData[season.value] as StandingsResults)[track.value]
+    (standingsData[season] as StandingsResults)[track]
   )
   const previousStandings = firstRace
     ? currentStandings
     : sortAndFormatStandings(
-        (standingsData[season.value] as StandingsResults)[
-          raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName
+        (standingsData[season] as StandingsResults)[
+          raceKeys[raceKeys.indexOf(track) - 1] as TrackName
         ]
       )
 
@@ -141,10 +149,10 @@ const standings = computed(() => {
 })
 
 const constructors = computed(() => {
-  const raceKeys = Object.keys(constructorsData[season.value])
-  const firstRace = raceKeys.indexOf(track.value) === 0
+  const raceKeys = Object.keys(constructorsData[season])
+  const firstRace = raceKeys.indexOf(track) === 0
 
-  const currentData = (constructorsData[season.value] as ConstructorsResults)[track.value]
+  const currentData = (constructorsData[season] as ConstructorsResults)[track]
   if (!currentData) {
     return []
   }
@@ -156,8 +164,8 @@ const constructors = computed(() => {
 
   const currentStandings = sortAndFormatConstructors(mapData(currentData))
 
-  const previousData = (constructorsData[season.value] as ConstructorsResults)[
-    raceKeys[raceKeys.indexOf(track.value) - 1] as TrackName
+  const previousData = (constructorsData[season] as ConstructorsResults)[
+    raceKeys[raceKeys.indexOf(track) - 1] as TrackName
   ]
 
   const previousStandings = firstRace
@@ -176,11 +184,11 @@ const constructors = computed(() => {
   })
 })
 
-const isLastRace = Object.keys(standingsData[season.value]).slice(-1)[0] === track.value
+const isLastRace = Object.keys(standingsData[season]).slice(-1)[0] === track
 
 const timeouts: number[] = []
 
-const title = `Inky 500${titleSnippet(season.value, track.value, mode.value)}`
+const title = `Inky 500${titleSnippet(season, track, mode)}`
 const description =
   raceResults.value.length >= 3
     ? `
@@ -200,8 +208,8 @@ useSeoMeta({
 })
 
 onBeforeMount(() => {
-  const { racerId, time } = (resultsData[season.value] as RacerResults)[track.value].fastestLap
-  fastestLap.value = { entry: combinedRacer(racerId as RacerName, season.value, track.value), time }
+  const { racerId, time } = (resultsData[season] as RacerResults)[track].fastestLap
+  fastestLap.value = { entry: combinedRacer(racerId as RacerName, season, track), time }
 })
 
 watch(
@@ -222,12 +230,12 @@ watch(
           return 5000
         case 'raceResultsClassification':
         case 'standings':
-          return 5000 * Math.ceil(Object.keys(seasonRacers[season.value]).length / 5)
+          return 5000 * Math.ceil(Object.keys(seasonRacers[season]).length / 5)
         case 'constructors':
           return (
             10000 *
             Math.ceil(
-              Array.from(new Set(Object.values(seasonRacers[season.value]).map(({ car }) => car)))
+              Array.from(new Set(Object.values(seasonRacers[season]).map(({ car }) => car)))
                 .length / 5
             )
           )
@@ -236,7 +244,7 @@ watch(
 
     const delay = determineDelay()
 
-    if (typeof window !== 'undefined' && mode.value === 'all') {
+    if (typeof window !== 'undefined' && mode === 'all') {
       timeouts.push(window.setTimeout(() => advanceStage(), delay))
     }
   },

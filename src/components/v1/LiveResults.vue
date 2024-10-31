@@ -33,9 +33,9 @@ import { computed, ref } from 'vue'
 import ResultsWrapper from './ResultsWrapper.vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
 import FaderComponent from './FaderComponent.vue'
-import { nationalityLookup, carLookup } from '../liveUtils'
-import type { LiveDrivers, LiveRace, LiveRaceEntries, RacerResult } from '@/types'
-import { msToTime } from '@/utils'
+import { nationalityLookup, carLookup } from '../../liveUtils'
+import type { LiveDrivers, LiveRace, LiveRaceEntries, RacerResult } from '../../types'
+import { msToTime } from '../../utils'
 
 const driverData = ref<LiveDrivers>({})
 const liveData = ref<LiveRace>({})

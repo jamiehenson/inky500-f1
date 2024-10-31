@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { calculateScaleRatio, calculateTranslateOffset, debounce, idealHeight } from '../utils'
+import { calculateScaleRatio, calculateTranslateOffset, debounce, idealHeight } from '../../utils'
 import 'loaders.css/loaders.min.css'
 
 const { dataAvailable, animationClass } = defineProps<{

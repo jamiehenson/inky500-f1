@@ -88,15 +88,15 @@
 </template>
 
 <script setup lang="ts">
-import { useStagesStore } from '@/stores/stages'
+import { useStagesStore } from '../../stores/stages'
 import { storeToRefs } from 'pinia'
 import PodiumCard from './PodiumCard.vue'
 import FaderComponent from './FaderComponent.vue'
-import { chunkRacers, splitRacerName, entryIsRacer } from '@/utils'
+import { chunkRacers, splitRacerName, entryIsRacer } from '../../utils'
 import { ref, watch } from 'vue'
 import StandingsTableListItem from './StandingsTableListItem.vue'
-import type { GeneralResult, Track } from '@/types'
-import trackData from '../data/tracks.json'
+import type { GeneralResult, Track } from '../../types'
+import trackData from '../../data/tracks.json'
 
 const { results, title, mode } = defineProps<{
   results: GeneralResult[]
@@ -129,7 +129,7 @@ watch(
 
 <style>
 .standing-bg {
-  background-image: url(../assets/gghq-tile.png);
+  background-image: url(../../assets/gghq-tile.png);
   animation: 10s backgroundTile linear infinite;
   box-shadow: inset 0 0 0 1000px rgba(28, 30, 41, 0.9);
 }

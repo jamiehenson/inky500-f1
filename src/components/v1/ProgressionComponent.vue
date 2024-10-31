@@ -33,9 +33,9 @@ import {
   Colors
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import { useStagesStore } from '@/stores/stages'
+import { useStagesStore } from '../../stores/stages'
 import ResultsWrapper from './ResultsWrapper.vue'
-import { getChartData } from '../utils'
+import { getChartData } from '../../utils'
 
 const stagesStore = useStagesStore()
 const { season } = storeToRefs(stagesStore)

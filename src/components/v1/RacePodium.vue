@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RacerResult } from '@/types'
+import type { RacerResult } from '../../types'
 import FaderComponent from './FaderComponent.vue'
 import PodiumCard from './PodiumCard.vue'
 

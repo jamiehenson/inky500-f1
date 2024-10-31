@@ -3,14 +3,14 @@
     <div class="flex-1 flex items-center p-2">
       <div class="font-bold ml-1 flex items-center flex-1 sm:flex-none">
         <a :href="withBase()" class="flex items-center">
-          <img src="../assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
+          <img src="/src/assets/gghq-tile.png" alt="GGHQ" class="h-12 mr-2" />
           <span class="font-bold mr-3 sm:mr-2">Inky 500</span>
         </a>
-        <span v-if="showControls" class="sm:hidden text-xs"
+        <span class="sm:hidden text-xs"
           >{{ season.toUpperCase() }} / {{ trackData[track as TrackName].name }}</span
         >
       </div>
-      <div v-if="showControls">
+      <div>
         <div class="flex-1 sm:flex-none"></div>
         <div
           :class="[
@@ -114,36 +114,23 @@
           class="sm:hidden mr-2 bg-blue-900 hover:bg-blue-800 p-2 rounded-md cursor-pointer"
           @click="toggleMenuState"
         >
-          <img src="../assets/burger.svg" class="h-6 invert" />
+          <img src="../../assets/v1/burger.svg" class="h-6 invert" />
         </button>
       </div>
-      <!-- Background changer for green screen needs -->
-      <!-- <div class="flex items-center p-2 border-l-2 border-gray-600">
-      <button
-        class="rounded-full navy-toggle w-10 h-10 mr-3 border"
-        @click="updateBgColor('blue')"
-      ></button>
-      <button
-        class="rounded-full green-toggle w-10 h-10 border"
-        @click="updateBgColor('green')"
-      ></button>
-    </div> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useStagesStore } from '@/stores/stages'
-import trackData from '../data/tracks.json'
-import resultsData from '../data/results'
-import type { ModeName, SeasonName, TrackName } from '@/types'
-import { seasons, modes } from '@/types'
+import { useStagesStore } from '../../stores/stages'
+import trackData from '../../data/tracks.json'
+import resultsData from '../../data/results'
+import type { ModeName, SeasonName, TrackName } from '../../types'
+import { seasons, modes } from '../../types'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { trackDisabled, seasonDisabled, getLastValidTrack, withBase } from '@/utils'
-import { useRoute } from 'vue-router'
+import { trackDisabled, seasonDisabled, getLastValidTrack, withBase } from '../../utils'
 
-const route = useRoute()
 const stagesStore = useStagesStore()
 const { track, season, mode } = storeToRefs(stagesStore)
 
@@ -194,8 +181,6 @@ const modeEmoji = (mode: ModeName) => {
       ''
   }
 }
-
-const showControls = computed(() => route.path !== '/live')
 </script>
 
 <style>
