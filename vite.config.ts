@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 
 export default ({ mode }: { mode: string }) => ({
-  base: mode === 'development' ? '/' : '/inky500/',
+  base: mode === 'development' ? '/' : '/inky500-f1/',
   plugins: [vue()],
   resolve: {
     alias: {
@@ -10,6 +10,6 @@ export default ({ mode }: { mode: string }) => ({
     }
   },
   ssgOptions: {
-    base: mode === 'development' ? '/' : '/inky500/'
+    base: mode === 'development' ? '/' : '/inky500-f1/'
   }
 })
