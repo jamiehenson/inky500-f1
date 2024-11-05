@@ -1,6 +1,8 @@
 # Inky 500 Standings
 
-Nice lil scoreboard for capture the course of champions (and Bosco)
+### **THIS PROJECT IS NO LONGER MAINTAINED, NEW EFFORTS ARE GOING INTO [THIS](https://github.com/jamiehenson/inky500) REPO**
+
+Nice lil scoreboard for capture the course of champions (and Bosco).
 
 - Install packages with `pnpm i`
 - Run with `pnpm dev`
